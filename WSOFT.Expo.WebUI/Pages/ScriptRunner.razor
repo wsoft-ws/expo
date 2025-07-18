@@ -11,16 +11,16 @@
 <PageTitle>AliceScript WebRunner</PageTitle>
 
 <div class="script-runner-container">
-    <div class="row h-100">
-        <div class="col-lg-4 col-md-6">
+    <div class="upper-section">
+        <div class="editor-section">
             <ScriptEditor @ref="scriptEditor" OnExecuteScript="ExecuteScript" />
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="canvas-section">
             <CanvasPanel />
         </div>
-        <div class="col-lg-4 col-md-12">
-            <ConsolePanel />
-        </div>
+    </div>
+    <div class="console-section">
+        <ConsolePanel />
     </div>
 </div>
 

@@ -245,9 +245,37 @@ body {
 
 /* スクリプトランナーコンテナ */
 .script-runner-container {
-    height: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
     padding: 0;
     margin: 0;
+}
+
+.upper-section {
+    height: 66.67%;
+    /* 上2/3 */
+    display: flex;
+    flex-direction: row;
+}
+
+.editor-section {
+    width: 50%;
+    /* 左半分 */
+    height: 100%;
+    border-right: 1px solid #3e3e42;
+}
+
+.canvas-section {
+    width: 50%;
+    /* 右半分 */
+    height: 100%;
+}
+
+.console-section {
+    height: 33.33%;
+    /* 下1/3 */
+    border-top: 1px solid #3e3e42;
 }
 
 .script-runner-container .row {
@@ -305,18 +333,31 @@ body {
 
 /* レスポンシブ対応 */
 @media (max-width: 992px) {
-    .script-runner-container .col-lg-4 {
-        height: 33.33vh;
-        margin-bottom: 0;
+    .upper-section {
+        flex-direction: column;
+        height: 66.67%;
+    }
+
+    .editor-section {
+        width: 100%;
+        height: 50%;
+        border-right: none;
+        border-bottom: 1px solid #3e3e42;
+    }
+
+    .canvas-section {
+        width: 100%;
+        height: 50%;
     }
 }
 
 @media (max-width: 768px) {
+    .upper-section {
+        height: 60%;
+    }
 
-    .script-runner-container .col-md-6,
-    .script-runner-container .col-md-12 {
-        height: 33.33vh;
-        margin-bottom: 0;
+    .console-section {
+        height: 40%;
     }
 
     .canvas-container {
