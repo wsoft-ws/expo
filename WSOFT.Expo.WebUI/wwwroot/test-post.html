@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AliceScript コード送信テスト</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            font-family: 'Courier New', monospace;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>AliceScript WebRunner - コード送信テスト</h1>
+    
+    <div class="container">
+        <h2>1. PostMessage経由でコードを送信</h2>
+        <textarea id="postMessageCode" placeholder="送信するAliceScriptコードを入力してください...">print("Hello from PostMessage!");
+print("現在の時刻: " + DateTime.Now);</textarea>
+        <br>
+        <input type="text" id="postMessageFilename" placeholder="ファイル名 (オプション)" value="test.alice">
+        <br>
+        <button onclick="sendViaPostMessage()">PostMessageで送信</button>
+    </div>
+
+    <div class="container">
+        <h2>2. URLパラメーターでコードを送信</h2>
+        <textarea id="urlCode" placeholder="URLパラメーターとして送信するコードを入力してください...">print("Hello from URL!");
+print("このコードはURLパラメーターから読み込まれました");</textarea>
+        <br>
+        <button onclick="sendViaUrl()">URLパラメーターで送信</button>
+        <button onclick="sendViaUrlBase64()">URLパラメーター（Base64）で送信</button>
+    </div>
+
+    <div class="container">
+        <h2>3. WebRunnerを開く</h2>
+        <button onclick="openWebRunner()">新しいタブでWebRunnerを開く</button>
+    </div>
+
+    <script>
+        function sendViaPostMessage() {
+            const code = document.getElementById('postMessageCode').value;
+            const filename = document.getElementById('postMessageFilename').value;
+            
+            // 新しいウィンドウでWebRunnerを開く
+            const webRunnerWindow = window.open('/script-runner', 'webrunner');
+            
+            // ウィンドウが読み込まれた後にメッセージを送信
+            setTimeout(() => {
+                webRunnerWindow.postMessage({
+                    type: 'loadScript',
+                    code: code,
+                    filename: filename
+                }, '*');
+            }, 2000); // 2秒待ってからメッセージを送信
+        }
+
+        function sendViaUrl() {
+            const code = document.getElementById('urlCode').value;
+            const encodedCode = encodeURIComponent(code);
+            const url = `/script-runner?code=${encodedCode}`;
+            window.open(url, '_blank');
+        }
+
+        function sendViaUrlBase64() {
+            const code = document.getElementById('urlCode').value;
+            const base64Code = btoa(unescape(encodeURIComponent(code)));
+            const url = `/script-runner?code=${base64Code}`;
+            window.open(url, '_blank');
+        }
+
+        function openWebRunner() {
+            window.open('/script-runner', '_blank');
+        }
+
+        // 現在のページがWebRunnerの場合、テスト用の関数を追加
+        if (window.location.pathname === '/script-runner' || window.location.pathname === '/') {
+            // テスト用の関数をウィンドウに追加
+            window.testLoadScript = function(code, filename = 'test.alice') {
+                if (window.simulatePostRequest) {
+                    window.simulatePostRequest(code, filename);
+                }
+            };
+        }
+    </script>
+
+    <div class="container">
+        <h2>使用方法</h2>
+        <p><strong>PostMessage:</strong> 他のWebページからAliceScript WebRunnerにコードを送信する場合に使用します。</p>
+        <p><strong>URLパラメーター:</strong> URLにコードを含めてWebRunnerを開く場合に使用します。</p>
+        <p><strong>使用例:</strong></p>
+        <ul>
+            <li><code>https://yoursite.com/script-runner?code=print("Hello!");</code></li>
+            <li>Base64エンコード: <code>https://yoursite.com/script-runner?code=cHJpbnQoIkhlbGxvISIpOw==</code></li>
+        </ul>
+    </div>
+</body>
+</html>

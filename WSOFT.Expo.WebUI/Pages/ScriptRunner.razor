@@ -4,6 +4,7 @@
 @using WSOFT.Expo.WebUI.Services
 @inject ScriptService ScriptService
 @inject EditorStateService EditorStateService
+@inject IJSRuntime JSRuntime
 @implements IDisposable
 
 <PageTitle>AliceScript WebRunner</PageTitle>
@@ -21,12 +22,42 @@
 
 @code {
     private ScriptEditor? scriptEditor;
+    private DotNetObjectReference<ScriptRunner>? objRef;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            objRef = DotNetObjectReference.Create(this);
+            await JSRuntime.InvokeVoidAsync("window.setDotNetReference", objRef);
+        }
+    }
 
     protected override void OnInitialized()
     {
         EditorStateService.OnNewScript += HandleNewScript;
         EditorStateService.OnLoadScript += HandleLoadScript;
         EditorStateService.OnGetCurrentScript += HandleGetCurrentScript;
+    }
+
+    [JSInvokable]
+    public async Task LoadScriptFromPost(string code, string filename)
+    {
+        await InvokeAsync(() =>
+        {
+            scriptEditor?.SetValue(code);
+            StateHasChanged();
+        });
+    }
+
+    [JSInvokable]
+    public async Task LoadScriptFromUrl(string code)
+    {
+        await InvokeAsync(() =>
+        {
+            scriptEditor?.SetValue(code);
+            StateHasChanged();
+        });
     }
 
     private void ExecuteScript(string script)
@@ -54,5 +85,6 @@
         EditorStateService.OnNewScript -= HandleNewScript;
         EditorStateService.OnLoadScript -= HandleLoadScript;
         EditorStateService.OnGetCurrentScript -= HandleGetCurrentScript;
+        objRef?.Dispose();
     }
 }
