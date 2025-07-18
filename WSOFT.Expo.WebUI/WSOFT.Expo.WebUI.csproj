@@ -9,6 +9,19 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.6" PrivateAssets="all" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+  </ItemGroup>
+   <ItemGroup>
+    <Reference Include="Losetta">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin/lib/Losetta.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Losetta.Runtime">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin/lib/Losetta.Runtime.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

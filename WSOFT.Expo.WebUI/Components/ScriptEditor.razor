@@ -1,0 +1,83 @@
+@inject IJSRuntime JSRuntime
+
+<div class="script-editor">
+    <div class="editor-header">
+        <h4>スクリプトエディタ</h4>
+        <div class="editor-actions">
+            <button class="btn btn-primary btn-sm" @onclick="ExecuteScript" disabled="@IsExecuting">
+                @if (IsExecuting)
+                {
+                    <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+                }
+                実行 (Ctrl+Enter)
+            </button>
+            <button class="btn btn-outline-secondary btn-sm" @onclick="ClearEditor">
+                クリア
+            </button>
+        </div>
+    </div>
+    
+    <div class="editor-container">
+        <textarea @ref="editorTextArea" 
+                  @bind="scriptContent" 
+                  @onkeydown="HandleKeyDown"
+                  class="form-control editor-textarea" 
+                  placeholder="AliceScriptのコードを入力してください..."
+                  spellcheck="false">
+        </textarea>
+    </div>
+</div>
+
+@code {
+    private ElementReference editorTextArea;
+    private string scriptContent = "// AliceScriptのコードを入力してください\nprint(\"Hello,World!\");";
+    private bool IsExecuting = false;
+
+    [Parameter] public EventCallback<string> OnExecuteScript { get; set; }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.CtrlKey && e.Key == "Enter")
+        {
+            await ExecuteScript();
+        }
+    }
+
+    private async Task ExecuteScript()
+    {
+        if (IsExecuting) return;
+
+        IsExecuting = true;
+        StateHasChanged();
+
+        try
+        {
+            await OnExecuteScript.InvokeAsync(scriptContent);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error executing script: {ex.Message}");
+        }
+        finally
+        {
+            IsExecuting = false;
+            StateHasChanged();
+        }
+    }
+
+    private void ClearEditor()
+    {
+        scriptContent = "";
+    }
+
+    public void SetValue(string value)
+    {
+        scriptContent = value;
+        StateHasChanged();
+    }
+
+    public string GetValue()
+    {
+        return scriptContent;
+    }
+}

@@ -1,0 +1,28 @@
+@page "/script-runner"
+@using WSOFT.Expo.WebUI.Components
+@using WSOFT.Expo.WebUI.Services
+@inject ScriptService ScriptService
+
+<PageTitle>スクリプトランナー</PageTitle>
+
+<div class="script-runner-container">
+    <div class="row h-100">
+        <div class="col-md-6">
+            <ScriptEditor OnExecuteScript="ExecuteScript" />
+        </div>
+        <div class="col-md-6">
+            <ConsolePanel />
+        </div>
+    </div>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+    }
+
+    private void ExecuteScript(string script)
+    {
+        ScriptService.ExecuteScript(script);
+    }
+}

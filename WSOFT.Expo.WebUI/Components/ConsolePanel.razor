@@ -1,0 +1,83 @@
+@using WSOFT.Expo.WebUI.Models
+@using WSOFT.Expo.WebUI.Services
+@inject ScriptService ScriptService
+@inject IJSRuntime JSRuntime
+@implements IDisposable
+
+<div class="console-panel">
+    <div class="console-header">
+        <h4>コンソール</h4>
+        <div class="console-actions">
+            <button class="btn btn-outline-secondary btn-sm" @onclick="ClearConsole">
+                <i class="bi bi-trash"></i> クリア
+            </button>
+        </div>
+    </div>
+
+    <div class="console-content" @ref="consoleContent">
+        @if (!ScriptService.Messages.Any())
+        {
+            <div class="console-empty">
+                コンソール出力がここに表示されます...
+            </div>
+        }
+        else
+        {
+            @foreach (var message in ScriptService.Messages)
+            {
+                <div class="console-message console-@(message.Type.ToString().ToLower())">
+                    <span class="console-timestamp">[@message.Timestamp.ToString("HH:mm:ss")]</span>
+                    <span class="console-text">@message.Message</span>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    private ElementReference consoleContent;
+
+    protected override void OnInitialized()
+    {
+        ScriptService.OnMessagesChanged += OnMessagesChanged;
+    }
+
+    private async void OnMessagesChanged()
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged();
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(10); // DOM更新を待つ
+                await ScrollToBottom();
+            });
+        });
+    }
+
+    private async Task ScrollToBottom()
+    {
+        try
+        {
+            await Task.Delay(50); // DOM更新を確実に待つ
+            if (consoleContent.Id != null)
+            {
+                await JSRuntime.InvokeVoidAsync("scrollToBottom", consoleContent);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Scroll error: {ex.Message}");
+        }
+    }
+
+    private void ClearConsole()
+    {
+        ScriptService.Clear();
+    }
+
+    public void Dispose()
+    {
+        ScriptService.OnMessagesChanged -= OnMessagesChanged;
+    }
+}
