@@ -1,0 +1,229 @@
+/* VSCode風メニューバーのスタイル */
+.vscode-menubar {
+    background-color: #2d2d30;
+    border-bottom: 1px solid #3e3e42;
+    height: 30px;
+    color: #cccccc;
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    user-select: none;
+    position: relative;
+    z-index: 1000;
+}
+
+.vscode-menu-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 12px;
+}
+
+.vscode-brand {
+    color: #cccccc;
+    font-weight: 600;
+    margin-right: 24px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+}
+
+.vscode-menu-items {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.vscode-menu-item {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.vscode-menu-title {
+    padding: 0 12px;
+    cursor: pointer;
+    color: #cccccc;
+    transition: background-color 0.1s ease;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 0;
+    background: none;
+    border: none;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+.vscode-menu-title:hover {
+    background-color: #37373d;
+    color: #cccccc;
+}
+
+.vscode-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #252526;
+    border: 1px solid #454545;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    min-width: 200px;
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+    transition: all 0.15s ease;
+    padding: 4px 0;
+    border-radius: 3px;
+}
+
+.vscode-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.vscode-dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    color: #cccccc;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.1s ease;
+    justify-content: flex-start;
+    font-family: inherit;
+    white-space: nowrap;
+    position: relative;
+}
+
+.vscode-dropdown-item:hover {
+    background-color: #094771;
+    color: #ffffff;
+}
+
+.vscode-dropdown-item:focus {
+    outline: none;
+    background-color: #094771;
+    color: #ffffff;
+}
+
+.vscode-dropdown-item i {
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-right: 8px;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.vscode-dropdown-item>span:first-of-type {
+    flex: 1;
+    min-width: 0;
+}
+
+.vscode-shortcut {
+    color: #969696;
+    font-size: 11px;
+    margin-left: 16px;
+    flex-shrink: 0;
+}
+
+.vscode-separator {
+    height: 1px;
+    background-color: #454545;
+    margin: 4px 8px;
+}
+
+/* 隠しファイル入力 */
+.vscode-menubar input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Bootstrap Icons のスタイル調整 */
+.vscode-dropdown-item .bi {
+    font-size: 14px;
+    line-height: 1;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .vscode-brand {
+        font-size: 12px;
+        margin-right: 12px;
+    }
+
+    .vscode-menu-title {
+        padding: 0 8px;
+        font-size: 12px;
+    }
+
+    .vscode-dropdown {
+        min-width: 180px;
+        left: -50px;
+    }
+
+    .vscode-shortcut {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .vscode-menu-container {
+        padding: 0 8px;
+    }
+
+    .vscode-brand {
+        display: none;
+    }
+
+    .vscode-menu-title {
+        padding: 0 6px;
+        font-size: 11px;
+    }
+}
+
+/* フォーカス時のアウトライン */
+.vscode-dropdown-item:focus-visible {
+    outline: 1px solid #007acc;
+    outline-offset: -1px;
+}
+
+/* アニメーション改善 */
+.vscode-menu-title {
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+.vscode-dropdown-item {
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+/* 高コントラストアクセシビリティ対応 */
+@media (prefers-contrast: high) {
+    .vscode-menubar {
+        background-color: #000000;
+        border-bottom: 2px solid #ffffff;
+    }
+
+    .vscode-dropdown {
+        background-color: #000000;
+        border: 2px solid #ffffff;
+    }
+
+    .vscode-dropdown-item:hover {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}

@@ -1,14 +1,17 @@
+@page "/"
 @page "/script-runner"
 @using WSOFT.Expo.WebUI.Components
 @using WSOFT.Expo.WebUI.Services
 @inject ScriptService ScriptService
+@inject EditorStateService EditorStateService
+@implements IDisposable
 
-<PageTitle>スクリプトランナー</PageTitle>
+<PageTitle>AliceScript WebRunner</PageTitle>
 
 <div class="script-runner-container">
     <div class="row h-100">
         <div class="col-md-6">
-            <ScriptEditor OnExecuteScript="ExecuteScript" />
+            <ScriptEditor @ref="scriptEditor" OnExecuteScript="ExecuteScript" />
         </div>
         <div class="col-md-6">
             <ConsolePanel />
@@ -17,12 +20,39 @@
 </div>
 
 @code {
+    private ScriptEditor? scriptEditor;
+
     protected override void OnInitialized()
     {
+        EditorStateService.OnNewScript += HandleNewScript;
+        EditorStateService.OnLoadScript += HandleLoadScript;
+        EditorStateService.OnGetCurrentScript += HandleGetCurrentScript;
     }
 
     private void ExecuteScript(string script)
     {
         ScriptService.ExecuteScript(script);
+    }
+
+    private void HandleNewScript(string content)
+    {
+        scriptEditor?.SetValue(content);
+    }
+
+    private void HandleLoadScript(string content)
+    {
+        scriptEditor?.SetValue(content);
+    }
+
+    private Task<string> HandleGetCurrentScript()
+    {
+        return Task.FromResult(scriptEditor?.GetValue() ?? "");
+    }
+
+    public void Dispose()
+    {
+        EditorStateService.OnNewScript -= HandleNewScript;
+        EditorStateService.OnLoadScript -= HandleLoadScript;
+        EditorStateService.OnGetCurrentScript -= HandleGetCurrentScript;
     }
 }

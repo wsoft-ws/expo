@@ -7,6 +7,7 @@ namespace WSOFT.Expo.WebUI.Services
     public class ScriptService
     {
         private readonly List<ConsoleMessage> _messages = new();
+
         public event Action? OnMessagesChanged;
         public IReadOnlyList<ConsoleMessage> Messages => _messages.AsReadOnly();
         public ParsingScript ParentScript { get; private set; }

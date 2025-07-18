@@ -1,11 +1,19 @@
+/* グローバルダークテーマ */
+body {
+    background-color: #1e1e1e !important;
+    color: #e0e0e0 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 /* スクリプトエディタのスタイル */
 .script-editor {
     height: 100%;
     display: flex;
     flex-direction: column;
-    border: 1px solid #ddd;
+    border: 1px solid #404040;
     border-radius: 8px;
-    background: #fff;
+    background: #2d2d2d;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .editor-header {
@@ -13,15 +21,16 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 16px;
-    background: #f8f9fa;
-    border-bottom: 1px solid #ddd;
+    background: #3c3c3c;
+    border-bottom: 1px solid #404040;
     border-radius: 8px 8px 0 0;
 }
 
 .editor-header h4 {
     margin: 0;
     font-size: 1.1rem;
-    color: #495057;
+    color: #e0e0e0;
+    font-weight: 600;
 }
 
 .editor-actions {
@@ -41,12 +50,13 @@
     border: none;
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.6;
     padding: 16px;
     resize: none;
     background: #1e1e1e;
     color: #d4d4d4;
     border-radius: 0 0 8px 8px;
+    outline: none;
 }
 
 .editor-textarea:focus {
@@ -59,9 +69,10 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    border: 1px solid #ddd;
+    border: 1px solid #404040;
     border-radius: 8px;
-    background: #fff;
+    background: #2d2d2d;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .console-header {
@@ -69,20 +80,83 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 16px;
-    background: #f8f9fa;
-    border-bottom: 1px solid #ddd;
+    background: #3c3c3c;
+    border-bottom: 1px solid #404040;
     border-radius: 8px 8px 0 0;
 }
 
 .console-header h4 {
     margin: 0;
     font-size: 1.1rem;
-    color: #495057;
+    color: #e0e0e0;
+    font-weight: 600;
 }
 
 .console-actions {
     display: flex;
     gap: 8px;
+    align-items: center;
+}
+
+.log-level-filters {
+    display: flex;
+    gap: 12px;
+    margin-right: 12px;
+    flex-wrap: wrap;
+}
+
+.log-filter-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    cursor: pointer;
+    font-size: 12px;
+    color: #d0d0d0;
+}
+
+.log-filter-checkbox input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+    accent-color: #0d6efd;
+}
+
+.log-filter-label {
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 500;
+    user-select: none;
+}
+
+.log-filter-debug {
+    background-color: #6f42c1;
+    color: white;
+}
+
+.log-filter-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.log-filter-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.log-filter-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.log-filter-error {
+    background-color: #dc3545;
+    color: white;
+}
+
+.log-filter-checkbox input[type="checkbox"]:not(:checked)+.log-filter-label {
+    opacity: 0.5;
+    background-color: #6c757d !important;
+    color: white !important;
 }
 
 .console-content {
@@ -169,6 +243,24 @@
     .console-content {
         max-height: 200px;
     }
+
+    .log-level-filters {
+        gap: 8px;
+    }
+
+    .log-filter-checkbox {
+        font-size: 11px;
+    }
+
+    .log-filter-label {
+        padding: 1px 4px;
+    }
+
+    .console-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
 }
 
 /* ダークモード対応 */
@@ -190,5 +282,9 @@
     .editor-header h4,
     .console-header h4 {
         color: #e1e4e8;
+    }
+
+    .log-filter-checkbox input[type="checkbox"]:not(:checked)+.log-filter-label {
+        background-color: #495057 !important;
     }
 }

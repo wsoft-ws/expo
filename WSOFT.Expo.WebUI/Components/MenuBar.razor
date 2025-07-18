@@ -1,0 +1,389 @@
+@using WSOFT.Expo.WebUI.Services
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.JSInterop
+@using System.Text.Json
+@inject ScriptService ScriptService
+@inject EditorStateService EditorStateService
+@inject IJSRuntime JSRuntime
+
+<!-- VSCode風のメニューバー -->
+<div class="vscode-menubar">
+    <div class="vscode-menu-container">
+        <div class="vscode-brand">
+            <i class="bi bi-code-square"></i>
+            AliceScript WebRunner
+        </div>
+        <div class="vscode-menu-items">
+            <!-- ファイルメニュー -->
+            <div class="vscode-menu-item" @onmouseenter="ShowFileMenu" @onmouseleave="HideMenus">
+                <button class="vscode-menu-title" type="button">ファイル</button>
+                <div class="vscode-dropdown @(isFileMenuVisible ? "show" : "")" id="fileMenu">
+                    <button class="vscode-dropdown-item" @onclick="NewScript" type="button">
+                        <i class="bi bi-file-earmark-plus"></i>
+                        <span>新規スクリプト</span>
+                        <span class="vscode-shortcut">Ctrl+N</span>
+                    </button>
+                    <button class="vscode-dropdown-item" @onclick="OpenFile" type="button">
+                        <i class="bi bi-folder-open"></i>
+                        <span>開く...</span>
+                        <span class="vscode-shortcut">Ctrl+O</span>
+                    </button>
+                    <div class="vscode-separator"></div>
+                    <button class="vscode-dropdown-item" @onclick="SaveAs" type="button">
+                        <i class="bi bi-floppy"></i>
+                        <span>名前を付けて保存...</span>
+                        <span class="vscode-shortcut">Ctrl+Shift+S</span>
+                    </button>
+                    <div class="vscode-separator"></div>
+                    <button class="vscode-dropdown-item" @onclick="LoadSampleScript" type="button">
+                        <i class="bi bi-file-code"></i>
+                        <span>サンプルスクリプト</span>
+                    </button>
+                    <div class="vscode-separator"></div>
+                    <button class="vscode-dropdown-item" @onclick="ExportResults" type="button">
+                        <i class="bi bi-download"></i>
+                        <span>結果をエクスポート</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 編集メニュー -->
+            <div class="vscode-menu-item" @onmouseenter="ShowEditMenu" @onmouseleave="HideMenus">
+                <button class="vscode-menu-title" type="button">編集</button>
+                <div class="vscode-dropdown @(isEditMenuVisible ? "show" : "")" id="editMenu">
+                    <button class="vscode-dropdown-item" @onclick="ClearEditor" type="button">
+                        <i class="bi bi-eraser"></i>
+                        <span>エディタをクリア</span>
+                        <span class="vscode-shortcut">Ctrl+Shift+K</span>
+                    </button>
+                    <button class="vscode-dropdown-item" @onclick="ClearConsole" type="button">
+                        <i class="bi bi-trash"></i>
+                        <span>コンソールをクリア</span>
+                        <span class="vscode-shortcut">Ctrl+L</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 表示メニュー -->
+            <div class="vscode-menu-item" @onmouseenter="ShowViewMenu" @onmouseleave="HideMenus">
+                <button class="vscode-menu-title" type="button">表示</button>
+                <div class="vscode-dropdown @(isViewMenuVisible ? "show" : "")" id="viewMenu">
+                    <button class="vscode-dropdown-item" @onclick="ToggleFullscreen" type="button">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                        <span>フルスクリーン</span>
+                        <span class="vscode-shortcut">F11</span>
+                    </button>
+                    <button class="vscode-dropdown-item" @onclick="ShowKeyboardShortcuts" type="button">
+                        <i class="bi bi-keyboard"></i>
+                        <span>キーボードショートカット</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ヘルプメニュー -->
+            <div class="vscode-menu-item" @onmouseenter="ShowHelpMenu" @onmouseleave="HideMenus">
+                <button class="vscode-menu-title" type="button">ヘルプ</button>
+                <div class="vscode-dropdown @(isHelpMenuVisible ? "show" : "")" id="helpMenu">
+                    <button class="vscode-dropdown-item" @onclick="ShowDocumentation" type="button">
+                        <i class="bi bi-book"></i>
+                        <span>AliceScript ドキュメント</span>
+                    </button>
+                    <button class="vscode-dropdown-item" @onclick="ShowSamples" type="button">
+                        <i class="bi bi-file-code"></i>
+                        <span>サンプル集</span>
+                    </button>
+                    <div class="vscode-separator"></div>
+                    <button class="vscode-dropdown-item" @onclick="ShowAbout" type="button">
+                        <i class="bi bi-info-circle"></i>
+                        <span>このアプリについて</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ファイル入力用の隠しinput -->
+<InputFile @ref="fileInputComponent" OnChange="OnFileSelected" accept=".alice,.txt,.js" style="display: none;" multiple="false" />
+
+@code {
+    private InputFile? fileInputComponent;
+    private bool isFileMenuVisible = false;
+    private bool isEditMenuVisible = false;
+    private bool isViewMenuVisible = false;
+    private bool isHelpMenuVisible = false;
+    private string currentFileName = "";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("setupKeyboardShortcuts");
+        }
+    }
+
+    // メニュー表示制御
+    private void ShowFileMenu() => isFileMenuVisible = true;
+    private void ShowEditMenu() => isEditMenuVisible = true;
+    private void ShowViewMenu() => isViewMenuVisible = true;
+    private void ShowHelpMenu() => isHelpMenuVisible = true;
+    
+    private void HideMenus()
+    {
+        // 即座に隠す（遅延なし）
+        isFileMenuVisible = false;
+        isEditMenuVisible = false;
+        isViewMenuVisible = false;
+        isHelpMenuVisible = false;
+        StateHasChanged();
+    }
+
+    private void HideMenusDelayed()
+    {
+        // マウスがメニュー外に出た時の遅延処理
+        Task.Delay(100).ContinueWith(t =>
+        {
+            InvokeAsync(() =>
+            {
+                isFileMenuVisible = false;
+                isEditMenuVisible = false;
+                isViewMenuVisible = false;
+                isHelpMenuVisible = false;
+                StateHasChanged();
+            });
+        });
+    }
+
+    // ファイル操作
+    private void NewScript()
+    {
+        currentFileName = "";
+        EditorStateService.TriggerNewScript("// 新規スクリプト\nprint(\"Hello, AliceScript!\");");
+    }
+
+    private async Task OpenFile()
+    {
+        if (fileInputComponent != null)
+        {
+            await JSRuntime.InvokeVoidAsync("triggerFileInputClick", fileInputComponent.Element);
+        }
+    }
+
+    private async Task OnFileSelected(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        if (file != null)
+        {
+            currentFileName = file.Name;
+            
+            try
+            {
+                using var stream = file.OpenReadStream(maxAllowedSize: 1024 * 1024); // 1MB制限
+                using var reader = new StreamReader(stream);
+                var content = await reader.ReadToEndAsync();
+                
+                EditorStateService.TriggerLoadScript(content);
+                ScriptService.AddMessage($"ファイルを読み込みました: {currentFileName}", WSOFT.Expo.WebUI.Models.MessageType.Success);
+            }
+            catch (Exception ex)
+            {
+                ScriptService.AddMessage($"ファイル読み込みエラー: {ex.Message}", WSOFT.Expo.WebUI.Models.MessageType.Error);
+            }
+        }
+    }
+
+    private async Task SaveAs()
+    {
+        try
+        {
+            var script = await EditorStateService.GetCurrentScript();
+            var defaultFileName = string.IsNullOrEmpty(currentFileName) ? "script.alice" : currentFileName;
+            
+            // File System Access APIを使ったファイル保存ダイアログを呼び出し
+            var result = await JSRuntime.InvokeAsync<dynamic>("saveFileWithDialog", script, defaultFileName);
+            
+            if (result != null)
+            {
+                bool success = result.GetProperty("success").GetBoolean();
+                string filename = result.GetProperty("filename").GetString() ?? defaultFileName;
+                string message = result.GetProperty("message").GetString() ?? "";
+                
+                if (success && !string.IsNullOrEmpty(filename))
+                {
+                    currentFileName = filename;
+                    ScriptService.AddMessage($"{message}: {filename}", WSOFT.Expo.WebUI.Models.MessageType.Success);
+                }
+                else if (!success)
+                {
+                    ScriptService.AddMessage(message, WSOFT.Expo.WebUI.Models.MessageType.Info);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // エラーの場合は従来の方法でフォールバック
+            try
+            {
+                var script = await EditorStateService.GetCurrentScript();
+                var fileName = string.IsNullOrEmpty(currentFileName) ? "script.alice" : currentFileName;
+                await JSRuntime.InvokeVoidAsync("downloadText", script, fileName);
+                ScriptService.AddMessage($"ファイルがダウンロードされました: {fileName}", WSOFT.Expo.WebUI.Models.MessageType.Success);
+            }
+            catch
+            {
+                ScriptService.AddMessage($"保存エラー: {ex.Message}", WSOFT.Expo.WebUI.Models.MessageType.Error);
+            }
+        }
+    }
+
+    private async Task<string> GetCurrentScript()
+    {
+        return await EditorStateService.GetCurrentScript();
+    }
+
+    // 編集操作
+    private void ClearEditor()
+    {
+        EditorStateService.TriggerNewScript("");
+    }
+
+    private void ClearConsole()
+    {
+        ScriptService.Clear();
+    }
+
+    // 表示操作
+    private async Task ToggleFullscreen()
+    {
+        await JSRuntime.InvokeVoidAsync("toggleFullscreen");
+    }
+
+    // サンプルとファイル操作
+    private void LoadSampleScript()
+    {
+        var sample = @"// AliceScript サンプル
+print(""Welcome to AliceScript WebRunner!"");
+
+// 変数の定義と使用
+var name = ""World"";
+var message = ""Hello, "" + name + ""!"";
+print(message);
+
+// 数値計算
+var a = 10;
+var b = 20;
+var sum = a + b;
+print(""計算結果: "" + a + "" + "" + b + "" = "" + sum);
+
+// ループ処理
+print(""カウントダウン:"");
+for(var i = 5; i >= 1; i--)
+{
+    print(i);
+}
+print(""完了!"");
+
+// 関数の定義と使用
+function factorial(n)
+{
+    if(n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+print(""5の階乗: "" + factorial(5));";
+
+        currentFileName = "sample.alice";
+        EditorStateService.TriggerLoadScript(sample);
+    }
+
+    private async Task ExportResults()
+    {
+        try
+        {
+            var messages = ScriptService.Messages;
+            var exportData = string.Join("\n", messages.Select(m => $"[{m.Timestamp:HH:mm:ss}] {m.Type}: {m.Message}"));
+            await JSRuntime.InvokeVoidAsync("downloadText", exportData, "script-results.txt");
+        }
+        catch
+        {
+            await JSRuntime.InvokeVoidAsync("alert", "エクスポート機能でエラーが発生しました。");
+        }
+    }
+
+    private async Task ShowKeyboardShortcuts()
+    {
+        var shortcuts = @"キーボードショートカット:
+
+ファイル操作:
+Ctrl + N: 新規スクリプト
+Ctrl + O: ファイルを開く
+Ctrl + Shift + S: 名前を付けて保存
+
+編集操作:
+Ctrl + Enter: スクリプトを実行
+Ctrl + L: コンソールをクリア
+Ctrl + Shift + K: エディタをクリア
+
+表示操作:
+F11: フルスクリーンモード切り替え
+
+エディタ内:
+Tab: インデント
+Shift + Tab: アンインデント
+Ctrl + A: 全選択
+Ctrl + Z: 元に戻す";
+
+        await JSRuntime.InvokeVoidAsync("alert", shortcuts);
+    }
+
+    private async Task ShowDocumentation()
+    {
+        await JSRuntime.InvokeVoidAsync("window.open", "https://docs.wsoft.ws/products/alice/", "_blank");
+    }
+
+    private async Task ShowSamples()
+    {
+        var samples = @"サンプルスクリプト:
+
+// 基本的な計算
+print(""Hello, AliceScript!"");
+var result = 10 + 20;
+print(result);
+
+// ループ処理
+for(var i = 1; i <= 5; i++)
+{
+    print(""カウント: "" + i);
+}
+
+// 関数定義
+function greet(name)
+{
+    return ""こんにちは、"" + name + ""さん!"";
+}
+print(greet(""世界""));";
+
+        await JSRuntime.InvokeVoidAsync("alert", samples);
+    }
+
+    private async Task ShowAbout()
+    {
+        var about = @"AliceScript WebRunner
+
+バージョン: 1.0.0
+開発: WSOFT
+
+このアプリケーションは、ブラウザ上でAliceScriptを実行できるWebベースの統合開発環境です。
+
+- Blazor WebAssembly による高速な実行
+- リアルタイムコンソール出力
+- シンタックスハイライト
+- エラーハンドリングとデバッグ支援
+- ファイルの読み込みと保存
+- VSCode風のメニューインターフェース
+
+© 2025 WSOFT. All rights reserved.";
+
+        await JSRuntime.InvokeVoidAsync("alert", about);
+    }
+}

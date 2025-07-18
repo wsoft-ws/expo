@@ -8,6 +8,18 @@
     <div class="console-header">
         <h4>コンソール</h4>
         <div class="console-actions">
+            <div class="log-level-filters">
+                @foreach (var messageType in Enum.GetValues<MessageType>())
+                {
+                    <label class="log-filter-checkbox">
+                        <input type="checkbox" checked="@IsMessageTypeEnabled(messageType)"
+                            @onchange="@(e => ToggleMessageType(messageType, (bool)e.Value!))" />
+                        <span class="log-filter-label log-filter-@(messageType.ToString().ToLower())">
+                            @messageType.ToString()
+                        </span>
+                    </label>
+                }
+            </div>
             <button class="btn btn-outline-secondary btn-sm" @onclick="ClearConsole">
                 <i class="bi bi-trash"></i> クリア
             </button>
@@ -15,7 +27,7 @@
     </div>
 
     <div class="console-content" @ref="consoleContent">
-        @if (!ScriptService.Messages.Any())
+        @if (!FilteredMessages.Any())
         {
             <div class="console-empty">
                 コンソール出力がここに表示されます...
@@ -23,7 +35,7 @@
         }
         else
         {
-            @foreach (var message in ScriptService.Messages)
+            @foreach (var message in FilteredMessages)
             {
                 <div class="console-message console-@(message.Type.ToString().ToLower())">
                     <span class="console-timestamp">[@message.Timestamp.ToString("HH:mm:ss")]</span>
@@ -36,6 +48,17 @@
 
 @code {
     private ElementReference consoleContent;
+    private readonly HashSet<MessageType> _enabledMessageTypes = new()
+{
+MessageType.Debug,
+MessageType.Info,
+MessageType.Success,
+MessageType.Warning,
+MessageType.Error
+};
+
+    private IEnumerable<ConsoleMessage> FilteredMessages =>
+    ScriptService.Messages.Where(m => _enabledMessageTypes.Contains(m.Type));
 
     protected override void OnInitialized()
     {
@@ -48,10 +71,10 @@
         {
             StateHasChanged();
             _ = Task.Run(async () =>
-            {
-                await Task.Delay(10); // DOM更新を待つ
-                await ScrollToBottom();
-            });
+    {
+            await Task.Delay(10); // DOM更新を待つ
+            await ScrollToBottom();
+        });
         });
     }
 
@@ -74,6 +97,24 @@
     private void ClearConsole()
     {
         ScriptService.Clear();
+    }
+
+    private void ToggleMessageType(MessageType messageType, bool enabled)
+    {
+        if (enabled)
+        {
+            _enabledMessageTypes.Add(messageType);
+        }
+        else
+        {
+            _enabledMessageTypes.Remove(messageType);
+        }
+        StateHasChanged();
+    }
+
+    private bool IsMessageTypeEnabled(MessageType messageType)
+    {
+        return _enabledMessageTypes.Contains(messageType);
     }
 
     public void Dispose()
