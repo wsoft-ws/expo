@@ -7,6 +7,22 @@
     <div class="editor-header">
         <h4>スクリプトエディタ</h4>
         <div class="editor-actions">
+            <div class="dropdown me-2">
+                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="sampleDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    サンプル
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="sampleDropdown">
+                    <li><a class="dropdown-item" href="#" @onclick='() => LoadSample("basic")'>基本図形</a></li>
+                    <li><a class="dropdown-item" href="#" @onclick='() => LoadSample("animation")'>アニメーション</a></li>
+                    <li><a class="dropdown-item" href="#" @onclick='() => LoadSample("pattern")'>パターン描画</a></li>
+                    <li><a class="dropdown-item" href="#" @onclick='() => LoadSample("interactive")'>インタラクティブ</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#" @onclick='() => LoadSample("snake")'>スネークゲーム</a></li>
+                    <li><a class="dropdown-item" href="#" @onclick='() => LoadSample("pong")'>ピンポンゲーム</a></li>
+                    <li><a class="dropdown-item" href="#" @onclick='() => LoadSample("mandelbrot")'>マンデルブロ集合</a></li>
+                    <li><a class="dropdown-item" href="#" @onclick='() => LoadSample("fireworks")'>花火シミュレーション</a></li>
+                </ul>
+            </div>
             <button class="btn btn-primary btn-sm" @onclick="ExecuteScript" disabled="@IsExecuting">
                 @if (IsExecuting)
                 {
@@ -142,6 +158,289 @@
             return await monacoEditor.GetValue();
         }
         return scriptContent;
+    }
+
+    private async Task LoadSample(string sampleType)
+    {
+        string sampleCode = sampleType switch
+        {
+            "basic" => @"// 基本図形の描画サンプル
+Canvas.Clear();
+Canvas.SetSize(600, 400);
+
+// 矩形を描く
+Canvas.DrawRect(50, 50, 100, 80, ""#ff0000"", false);
+Canvas.DrawRect(200, 50, 100, 80, ""#00ff00"", true);
+
+// 円を描く
+Canvas.DrawCircle(100, 200, 40, ""#0000ff"", false);
+Canvas.DrawCircle(250, 200, 40, ""#ff00ff"", true);
+
+// 線を描く
+Canvas.DrawLine(50, 300, 200, 320, ""#000000"", 3);
+
+// テキストを描く
+Canvas.DrawText(""Hello, AliceScript!"", 300, 100, ""#333333"", ""20px Arial"");",
+
+            "animation" => @"// アニメーション風の描画サンプル
+Canvas.Clear();
+Canvas.SetSize(600, 400);
+
+// 複数の円を描いてアニメーション風に
+for(var i = 0; i < 10; i++)
+{
+    var x = 50 + i * 50;
+    var y = 200 + Math.sin(i * 0.5) * 50;
+    var radius = 15 + i * 2;
+    var red = (i * 25) % 255;
+    var color = ""rgb("" + red + "",100,200)"";
+    
+    Canvas.DrawCircle(x, y, radius, color, true);
+}
+
+Canvas.DrawText(""動的な円のパターン"", 200, 50, ""#000000"", ""18px Arial"");",
+
+            "pattern" => @"// パターン描画サンプル
+Canvas.Clear();
+Canvas.SetSize(600, 400);
+
+// グリッドパターン
+for(var x = 0; x < 600; x += 40)
+{
+    Canvas.DrawLine(x, 0, x, 400, ""#cccccc"", 1);
+}
+for(var y = 0; y < 400; y += 40)
+{
+    Canvas.DrawLine(0, y, 600, y, ""#cccccc"", 1);
+}
+
+// チェッカーボードパターン
+for(var i = 0; i < 15; i++)
+{
+    for(var j = 0; j < 10; j++)
+    {
+        if((i + j) % 2 == 0)
+        {
+            Canvas.DrawRect(i * 40, j * 40, 40, 40, ""#333333"", true);
+        }
+    }
+}
+
+Canvas.DrawText(""チェッカーボードパターン"", 180, 20, ""#ff0000"", ""16px Arial"");",
+
+            "interactive" => @"// インタラクティブなデザイン
+Canvas.Clear();
+Canvas.SetSize(600, 400);
+
+// 中心から放射状に線を描く
+var centerX = 300;
+var centerY = 200;
+for(var angle = 0; angle < 360; angle += 30)
+{
+    var radian = angle * Math.PI / 180;
+    var endX = centerX + Math.cos(radian) * 150;
+    var endY = centerY + Math.sin(radian) * 150;
+    
+    Canvas.DrawLine(centerX, centerY, endX, endY, ""#4CAF50"", 2);
+}
+
+// 中心に円
+Canvas.DrawCircle(centerX, centerY, 20, ""#FF5722"", true);
+
+// 周囲に小さな円
+for(var angle = 0; angle < 360; angle += 45)
+{
+    var radian = angle * Math.PI / 180;
+    var x = centerX + Math.cos(radian) * 120;
+    var y = centerY + Math.sin(radian) * 120;
+    
+    Canvas.DrawCircle(x, y, 10, ""#2196F3"", true);
+}
+
+Canvas.DrawText(""放射状パターン"", 240, 50, ""#000000"", ""18px Arial"");",
+
+            "snake" => @"// シンプルなスネークゲーム風の描画
+Canvas.Clear();
+Canvas.SetSize(600, 400);
+
+// ゲームボードの背景
+Canvas.DrawGradientRect(0, 0, 600, 400, ""#1a5c2e"", ""#0f3319"", ""vertical"");
+
+// グリッドライン
+for(var i = 0; i <= 30; i++)
+{
+    var x = i * 20;
+    Canvas.DrawLine(x, 0, x, 400, ""#2a7c4e"", 1);
+}
+for(var j = 0; j <= 20; j++)
+{
+    var y = j * 20;
+    Canvas.DrawLine(0, y, 600, y, ""#2a7c4e"", 1);
+}
+
+// スネークの体
+var snakeX = 200;
+var snakeY = 200;
+for(var i = 0; i < 5; i++)
+{
+    Canvas.DrawRect(snakeX - i * 20, snakeY, 18, 18, ""#4CAF50"", true);
+    Canvas.DrawRect(snakeX - i * 20 + 1, snakeY + 1, 16, 16, ""#66BB6A"", true);
+}
+
+// スネークの頭
+Canvas.DrawRect(snakeX, snakeY, 18, 18, ""#2E7D32"", true);
+Canvas.DrawCircle(snakeX + 6, snakeY + 6, 2, ""#FFFFFF"", true);
+Canvas.DrawCircle(snakeX + 12, snakeY + 6, 2, ""#FFFFFF"", true);
+
+// 食べ物（リンゴ）
+Canvas.DrawCircle(340, 180, 8, ""#F44336"", true);
+Canvas.DrawEllipse(340, 175, 3, 5, ""#4CAF50"", true);
+
+// スコア表示
+Canvas.DrawText(""SCORE: 150"", 20, 30, ""#FFFFFF"", ""20px Arial"");
+Canvas.DrawText(""Snake Game Demo"", 450, 30, ""#FFFFFF"", ""16px Arial"");",
+
+            "pong" => @"// ピンポンゲーム風の描画
+Canvas.Clear();
+Canvas.SetSize(600, 400);
+
+// 背景
+Canvas.DrawRect(0, 0, 600, 400, ""#000000"", true);
+
+// 中央線
+for(var i = 0; i < 400; i += 20)
+{
+    Canvas.DrawRect(298, i, 4, 10, ""#FFFFFF"", true);
+}
+
+// 左のパドル
+Canvas.DrawRect(30, 160, 10, 80, ""#FFFFFF"", true);
+
+// 右のパドル
+Canvas.DrawRect(560, 120, 10, 80, ""#FFFFFF"", true);
+
+// ボール
+Canvas.DrawCircle(350, 200, 8, ""#FFFFFF"", true);
+
+// ボールの軌跡
+Canvas.DrawLine(280, 160, 350, 200, ""#444444"", 2);
+
+// スコア
+Canvas.DrawText(""3"", 250, 50, ""#FFFFFF"", ""48px Arial"");
+Canvas.DrawText(""7"", 350, 50, ""#FFFFFF"", ""48px Arial"");
+
+// タイトル
+Canvas.DrawText(""PONG"", 270, 380, ""#666666"", ""20px Arial"");",
+
+            "mandelbrot" => @"// マンデルブロ集合の可視化
+Canvas.Clear();
+Canvas.SetSize(600, 400);
+
+// カラフルなマンデルブロ集合風の描画
+for(var x = 0; x < 600; x += 4)
+{
+    for(var y = 0; y < 400; y += 4)
+    {
+        // 座標を複素平面にマップ
+        var real = (x - 300) / 150.0;
+        var imag = (y - 200) / 150.0;
+        
+        // 簡単な反復計算（本物のマンデルブロではないが似た効果）
+        var iterations = 0;
+        var zr = 0.0;
+        var zi = 0.0;
+        
+        for(var i = 0; i < 50; i++)
+        {
+            var temp = zr * zr - zi * zi + real;
+            zi = 2 * zr * zi + imag;
+            zr = temp;
+            
+            if(zr * zr + zi * zi > 4)
+            {
+                iterations = i;
+                break;
+            }
+        }
+        
+        // 色を計算
+        var red = (iterations * 8) % 256;
+        var green = (iterations * 16) % 256;
+        var blue = (iterations * 32) % 256;
+        var color = ""rgb("" + red + "","" + green + "","" + blue + "")"";
+        
+        Canvas.DrawRect(x, y, 4, 4, color, true);
+    }
+}
+
+Canvas.DrawText(""Mandelbrot-like Pattern"", 200, 30, ""#FFFFFF"", ""18px Arial"");",
+
+            "fireworks" => @"// 花火シミュレーション
+Canvas.Clear();
+Canvas.SetSize(600, 400);
+
+// 夜空の背景
+Canvas.DrawGradientRect(0, 0, 600, 400, ""#000428"", ""#004e92"", ""vertical"");
+
+// 星
+for(var i = 0; i < 50; i++)
+{
+    var x = (i * 97) % 600;
+    var y = (i * 73) % 200;
+    Canvas.DrawCircle(x, y, 1, ""#FFFFFF"", true);
+}
+
+// 花火1 - 赤い花火
+var centerX1 = 150;
+var centerY1 = 100;
+for(var angle = 0; angle < 360; angle += 20)
+{
+    var radian = angle * Math.PI / 180;
+    var length = 50 + (angle % 40);
+    var endX = centerX1 + Math.cos(radian) * length;
+    var endY = centerY1 + Math.sin(radian) * length;
+    
+    Canvas.DrawLine(centerX1, centerY1, endX, endY, ""#FF4444"", 3);
+    Canvas.DrawCircle(endX, endY, 3, ""#FFAAAA"", true);
+}
+
+// 花火2 - 青い花火
+var centerX2 = 450;
+var centerY2 = 150;
+for(var angle = 0; angle < 360; angle += 15)
+{
+    var radian = angle * Math.PI / 180;
+    var length = 60 + Math.sin(angle * 0.1) * 20;
+    var endX = centerX2 + Math.cos(radian) * length;
+    var endY = centerY2 + Math.sin(radian) * length;
+    
+    Canvas.DrawLine(centerX2, centerY2, endX, endY, ""#4444FF"", 2);
+    Canvas.DrawCircle(endX, endY, 2, ""#AAAAFF"", true);
+}
+
+// 花火3 - 金色の花火
+var centerX3 = 300;
+var centerY3 = 80;
+for(var angle = 0; angle < 360; angle += 12)
+{
+    var radian = angle * Math.PI / 180;
+    var length = 40 + Math.cos(angle * 0.2) * 15;
+    var endX = centerX3 + Math.cos(radian) * length;
+    var endY = centerY3 + Math.sin(radian) * length;
+    
+    Canvas.DrawLine(centerX3, centerY3, endX, endY, ""#FFD700"", 2);
+    Canvas.DrawCircle(endX, endY, 2, ""#FFFF88"", true);
+}
+
+// 地面のシルエット
+Canvas.DrawRect(0, 350, 600, 50, ""#1a1a1a"", true);
+
+Canvas.DrawText(""Fireworks Display"", 230, 380, ""#CCCCCC"", ""18px Arial"");",
+
+            _ => "// サンプルコードを選択してください\nCanvas.Clear();\nCanvas.DrawText(\"Hello, Canvas!\", 100, 100);"
+        };
+
+        await SetValue(sampleCode);
     }
 }
         

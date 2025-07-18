@@ -63,21 +63,24 @@ namespace WSOFT.Expo.WebUI.Services
             OnMessagesChanged?.Invoke();
         }
 
-        public void ExecuteScript(string code)
+        public async Task ExecuteScript(string code)
         {
-            AddMessage($"> {code}", MessageType.Info);
             var script = ParentScript.GetChildScript(code);
             AddMessage($"[OK] Script initialized.", MessageType.Debug);
             try
             {
-                var result = script.Process();
-                if (result is null || result.Type == Variable.VarType.VARIABLE) return; // resultがnullの場合は、何らか処理が中断しているので成功報告を出さない
-                if (result.Type == Variable.VarType.VOID || result.Type == Variable.VarType.UNDEFINED)
+                await Task.Run(() =>
                 {
-                    AddMessage("Script OK.", MessageType.Success);
-                    return;
-                }
-                AddMessage($"=> {result}", MessageType.Success);
+                    var result = script.Process();
+
+                    if (result is null || result.Type == Variable.VarType.VARIABLE) return; // resultがnullの場合は、何らか処理が中断しているので成功報告を出さない
+                    if (result.Type == Variable.VarType.VOID || result.Type == Variable.VarType.UNDEFINED)
+                    {
+                        AddMessage("Script OK.", MessageType.Success);
+                        return;
+                    }
+                    AddMessage($"=> {result}", MessageType.Success);
+                });
             }
             catch (Exception ex)
             {

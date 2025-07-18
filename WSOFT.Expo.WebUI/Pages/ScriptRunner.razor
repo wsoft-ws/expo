@@ -4,6 +4,7 @@
 @using WSOFT.Expo.WebUI.Services
 @inject ScriptService ScriptService
 @inject EditorStateService EditorStateService
+@inject CanvasService CanvasService
 @inject IJSRuntime JSRuntime
 @implements IDisposable
 
@@ -11,10 +12,13 @@
 
 <div class="script-runner-container">
     <div class="row h-100">
-        <div class="col-md-6">
+        <div class="col-lg-4 col-md-6">
             <ScriptEditor @ref="scriptEditor" OnExecuteScript="ExecuteScript" />
         </div>
-        <div class="col-md-6">
+        <div class="col-lg-4 col-md-6">
+            <CanvasPanel />
+        </div>
+        <div class="col-lg-4 col-md-12">
             <ConsolePanel />
         </div>
     </div>
@@ -66,9 +70,9 @@
         });
     }
 
-    private void ExecuteScript(string script)
+    private async Task ExecuteScript(string script)
     {
-        ScriptService.ExecuteScript(script);
+        await ScriptService.ExecuteScript(script);
     }
 
     private void HandleNewScript(string content)

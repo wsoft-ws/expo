@@ -1,0 +1,67 @@
+@using WSOFT.Expo.WebUI.Services
+@using WSOFT.Expo.WebUI.Models
+@inject CanvasService CanvasService
+@inject IJSRuntime JSRuntime
+@implements IDisposable
+
+<div class="canvas-panel">
+    <div class="canvas-header">
+        <h4>キャンバス</h4>
+        <div class="canvas-actions">
+            <button class="btn btn-sm btn-outline-secondary" @onclick="ClearCanvas">
+                クリア
+            </button>
+        </div>
+    </div>
+    <div class="canvas-container">
+        <canvas @ref="canvasElement" 
+                width="@CanvasService.Width" 
+                height="@CanvasService.Height"
+                class="drawing-canvas">
+        </canvas>
+    </div>
+</div>
+
+@code {
+    private ElementReference canvasElement;
+
+    protected override void OnInitialized()
+    {
+        CanvasService.OnShapesChanged += OnShapesChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await RedrawCanvas();
+        }
+    }
+
+    private async void OnShapesChanged()
+    {
+        await InvokeAsync(async () =>
+        {
+            await RedrawCanvas();
+            StateHasChanged();
+        });
+    }
+
+    private async Task RedrawCanvas()
+    {
+        if (canvasElement.Id != null)
+        {
+            await JSRuntime.InvokeVoidAsync("drawShapes", canvasElement, CanvasService.Shapes, CanvasService.Transforms, CanvasService.CurrentShadow);
+        }
+    }
+
+    private void ClearCanvas()
+    {
+        CanvasService.Clear();
+    }
+
+    public void Dispose()
+    {
+        CanvasService.OnShapesChanged -= OnShapesChanged;
+    }
+}
