@@ -1,4 +1,7 @@
 @inject IJSRuntime JSRuntime
+@using BlazorMonaco
+@using BlazorMonaco.Editor
+@using BlazorMonaco.Languages 
 
 <div class="script-editor">
     <div class="editor-header">
@@ -16,30 +19,74 @@
             </button>
         </div>
     </div>
-    
-    <div class="editor-container">
-        <textarea @ref="editorTextArea" 
-                  @bind="scriptContent" 
-                  @onkeydown="HandleKeyDown"
-                  class="form-control editor-textarea" 
-                  placeholder="AliceScriptのコードを入力してください..."
-                  spellcheck="false">
-        </textarea>
-    </div>
-</div>
 
+    <div class="editor-container">
+        <StandaloneCodeEditor @ref="monacoEditor" Id="script-editor" ConstructionOptions="EditorConstructionOptions"
+            OnDidInit="OnEditorInit" OnDidChangeModelContent="OnContentChanged" CssClass="monaco-editor-custom" />
+    </div>
+</div> 
+           
 @code {
-    private ElementReference editorTextArea;
+    private StandaloneCodeEditor? monacoEditor;
     private string scriptContent = "// AliceScriptのコードを入力してください\nprint(\"Hello,World!\");";
     private bool IsExecuting = false;
 
     [Parameter] public EventCallback<string> OnExecuteScript { get; set; }
 
-    private async Task HandleKeyDown(KeyboardEventArgs e)
+    private StandaloneEditorConstructionOptions EditorConstructionOptions(StandaloneCodeEditor editor)
     {
-        if (e.CtrlKey && e.Key == "Enter")
+        return new StandaloneEditorConstructionOptions
         {
-            await ExecuteScript();
+            Language = "csharp",
+            Theme = "vs-dark",
+            Value = scriptContent,
+            AutomaticLayout = true,
+            FontSize = 16,
+            WordWrap = "on",
+            LineNumbers = "on",
+            RoundedSelection = false,
+            ScrollBeyondLastLine = false,
+            ReadOnly = false,
+            OverviewRulerLanes = 2,
+            TabSize = 4,
+            InsertSpaces = true,
+            SelectOnLineNumbers = true,
+            GlyphMargin = false,
+            FoldingStrategy = "indentation",
+            ShowFoldingControls = "always",
+            MatchBrackets = "always",
+            AutoClosingBrackets = "always",
+            AutoClosingQuotes = "always",
+            AutoSurround = "languageDefined"
+        };
+    }
+
+    private async Task OnEditorInit()
+    {
+        if (monacoEditor != null)
+        {
+            // Ctrl+Enterキーバインドを追加
+            var actionDescriptor = new ActionDescriptor
+            {
+                Id = "execute-script",
+                Label = "実行",
+                Keybindings = new int[] { (int)KeyMod.CtrlCmd | (int)KeyCode.Enter },
+                ContextMenuGroupId = "navigation",
+                ContextMenuOrder = 1.5f,
+                Run = (editor) =>
+                {
+                    _ = ExecuteScript();
+                }
+            };
+            await monacoEditor.AddAction(actionDescriptor);
+        }
+    }
+
+    private async Task OnContentChanged(ModelContentChangedEvent e)
+    {
+        if (monacoEditor != null)
+        {
+            scriptContent = await monacoEditor.GetValue();
         }
     }
 
@@ -52,6 +99,10 @@
 
         try
         {
+            if (monacoEditor != null)
+            {
+                scriptContent = await monacoEditor.GetValue();
+            }
             await OnExecuteScript.InvokeAsync(scriptContent);
         }
         catch (Exception ex)
@@ -65,19 +116,32 @@
         }
     }
 
-    private void ClearEditor()
+    private async Task ClearEditor()
     {
         scriptContent = "";
+        if (monacoEditor != null)
+        {
+            await monacoEditor.SetValue("");
+        }
     }
 
-    public void SetValue(string value)
+    public async Task SetValue(string value)
     {
         scriptContent = value;
+        if (monacoEditor != null)
+        {
+            await monacoEditor.SetValue(value);
+        }
         StateHasChanged();
     }
 
-    public string GetValue()
+    public async Task<string> GetValue()
     {
+        if (monacoEditor != null)
+        {
+            return await monacoEditor.GetValue();
+        }
         return scriptContent;
     }
 }
+        

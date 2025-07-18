@@ -43,9 +43,12 @@
     [JSInvokable]
     public async Task LoadScriptFromPost(string code, string filename)
     {
-        await InvokeAsync(() =>
+        await InvokeAsync(async () =>
         {
-            scriptEditor?.SetValue(code);
+            if (scriptEditor != null)
+            {
+                await scriptEditor.SetValue(code);
+            }
             StateHasChanged();
         });
     }
@@ -53,9 +56,12 @@
     [JSInvokable]
     public async Task LoadScriptFromUrl(string code)
     {
-        await InvokeAsync(() =>
+        await InvokeAsync(async () =>
         {
-            scriptEditor?.SetValue(code);
+            if (scriptEditor != null)
+            {
+                await scriptEditor.SetValue(code);
+            }
             StateHasChanged();
         });
     }
@@ -67,17 +73,35 @@
 
     private void HandleNewScript(string content)
     {
-        scriptEditor?.SetValue(content);
+        _ = Task.Run(async () =>
+        {
+            if (scriptEditor != null)
+            {
+                await scriptEditor.SetValue(content);
+                await InvokeAsync(StateHasChanged);
+            }
+        });
     }
 
     private void HandleLoadScript(string content)
     {
-        scriptEditor?.SetValue(content);
+        _ = Task.Run(async () =>
+        {
+            if (scriptEditor != null)
+            {
+                await scriptEditor.SetValue(content);
+                await InvokeAsync(StateHasChanged);
+            }
+        });
     }
 
-    private Task<string> HandleGetCurrentScript()
+    private async Task<string> HandleGetCurrentScript()
     {
-        return Task.FromResult(scriptEditor?.GetValue() ?? "");
+        if (scriptEditor != null)
+        {
+            return await scriptEditor.GetValue();
+        }
+        return "";
     }
 
     public void Dispose()
@@ -88,4 +112,4 @@
         objRef?.Dispose();
     }
 }
-    
+}
