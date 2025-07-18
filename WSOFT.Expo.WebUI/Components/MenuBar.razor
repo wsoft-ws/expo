@@ -7,41 +7,75 @@
 @inject IJSRuntime JSRuntime
 
 <!-- VSCode風のメニューバー -->
-<div class="vscode-menubar">
+<div class="vscode-menubar" role="menubar" aria-label="メニューバー">
     <div class="vscode-menu-container">
         <div class="vscode-brand">
-            <i class="bi bi-code-square"></i>
+            <i class="bi bi-code-square" aria-hidden="true"></i>
             AliceScript WebRunner
         </div>
         <div class="vscode-menu-items">
             <!-- ファイルメニュー -->
             <div class="vscode-menu-item" @onmouseenter="ShowFileMenu" @onmouseleave="HideMenus">
-                <button class="vscode-menu-title" type="button">ファイル</button>
-                <div class="vscode-dropdown @(isFileMenuVisible ? "show" : "")" id="fileMenu">
-                    <button class="vscode-dropdown-item" @onclick="NewScript" type="button">
-                        <i class="bi bi-file-earmark-plus"></i>
+                <button class="vscode-menu-title" type="button" role="menuitem" aria-haspopup="true"
+                    aria-expanded="@isFileMenuVisible" aria-controls="fileMenu">ファイル</button>
+                <div class="vscode-dropdown @(isFileMenuVisible ? "show" : "")" id="fileMenu" role="menu"
+                    aria-label="ファイルメニュー">
+                    <button class="vscode-dropdown-item" @onclick="NewScript" type="button" role="menuitem"
+                        tabindex="-1">
+                        <i class="bi bi-file-earmark-plus" aria-hidden="true"></i>
                         <span>新規スクリプト</span>
                         <span class="vscode-shortcut">Ctrl+N</span>
                     </button>
-                    <button class="vscode-dropdown-item" @onclick="OpenFile" type="button">
-                        <i class="bi bi-folder-open"></i>
+                    <button class="vscode-dropdown-item" @onclick="OpenFile" type="button" role="menuitem"
+                        tabindex="-1">
+                        <i class="bi bi-folder-open" aria-hidden="true"></i>
                         <span>開く...</span>
                         <span class="vscode-shortcut">Ctrl+O</span>
                     </button>
-                    <div class="vscode-separator"></div>
-                    <button class="vscode-dropdown-item" @onclick="SaveAs" type="button">
-                        <i class="bi bi-floppy"></i>
+                    <div class="vscode-separator" role="separator"></div>
+                    <button class="vscode-dropdown-item" @onclick="SaveAs" type="button" role="menuitem" tabindex="-1">
+                        <i class="bi bi-floppy" aria-hidden="true"></i>
                         <span>名前を付けて保存...</span>
                         <span class="vscode-shortcut">Ctrl+Shift+S</span>
                     </button>
-                    <div class="vscode-separator"></div>
-                    <button class="vscode-dropdown-item" @onclick="LoadSampleScript" type="button">
-                        <i class="bi bi-file-code"></i>
-                        <span>サンプルスクリプト</span>
-                    </button>
-                    <div class="vscode-separator"></div>
-                    <button class="vscode-dropdown-item" @onclick="ExportResults" type="button">
-                        <i class="bi bi-download"></i>
+                    <div class="vscode-separator" role="separator"></div>
+                    <div class="vscode-menu-item vscode-submenu" @onmouseenter="ShowSampleMenu"
+                        @onmouseleave="HideSampleMenu">
+                        <button class="vscode-dropdown-item vscode-submenu-trigger" type="button" role="menuitem"
+                            aria-haspopup="true" aria-expanded="@isSampleMenuVisible" aria-controls="sampleMenu"
+                            tabindex="-1">
+                            <i class="bi bi-file-code" aria-hidden="true"></i>
+                            <span>サンプル</span>
+                            <i class="bi bi-chevron-right vscode-submenu-arrow" aria-hidden="true"></i>
+                        </button>
+                        <div class="vscode-dropdown vscode-submenu-dropdown @(isSampleMenuVisible ? "show" : "")"
+                            id="sampleMenu" role="menu" aria-label="サンプルメニュー">
+                            <button class="vscode-dropdown-item" @onclick="LoadBasicSample" type="button"
+                                role="menuitem" tabindex="-1">
+                                <i class="bi bi-play-circle" aria-hidden="true"></i>
+                                <span>基本的な例</span>
+                            </button>
+                            <button class="vscode-dropdown-item" @onclick="LoadCalculationSample" type="button"
+                                role="menuitem" tabindex="-1">
+                                <i class="bi bi-calculator" aria-hidden="true"></i>
+                                <span>計算とループ</span>
+                            </button>
+                            <button class="vscode-dropdown-item" @onclick="LoadFunctionSample" type="button"
+                                role="menuitem" tabindex="-1">
+                                <i class="bi bi-gear" aria-hidden="true"></i>
+                                <span>関数とアルゴリズム</span>
+                            </button>
+                            <button class="vscode-dropdown-item" @onclick="LoadCanvasSample" type="button"
+                                role="menuitem" tabindex="-1">
+                                <i class="bi bi-brush" aria-hidden="true"></i>
+                                <span>キャンバス描画</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="vscode-separator" role="separator"></div>
+                    <button class="vscode-dropdown-item" @onclick="ExportResults" type="button" role="menuitem"
+                        tabindex="-1">
+                        <i class="bi bi-download" aria-hidden="true"></i>
                         <span>結果をエクスポート</span>
                     </button>
                 </div>
@@ -49,15 +83,19 @@
 
             <!-- 編集メニュー -->
             <div class="vscode-menu-item" @onmouseenter="ShowEditMenu" @onmouseleave="HideMenus">
-                <button class="vscode-menu-title" type="button">編集</button>
-                <div class="vscode-dropdown @(isEditMenuVisible ? "show" : "")" id="editMenu">
-                    <button class="vscode-dropdown-item" @onclick="ClearEditor" type="button">
-                        <i class="bi bi-eraser"></i>
+                <button class="vscode-menu-title" type="button" role="menuitem" aria-haspopup="true"
+                    aria-expanded="@isEditMenuVisible" aria-controls="editMenu">編集</button>
+                <div class="vscode-dropdown @(isEditMenuVisible ? "show" : "")" id="editMenu" role="menu"
+                    aria-label="編集メニュー">
+                    <button class="vscode-dropdown-item" @onclick="ClearEditor" type="button" role="menuitem"
+                        tabindex="-1">
+                        <i class="bi bi-eraser" aria-hidden="true"></i>
                         <span>エディタをクリア</span>
                         <span class="vscode-shortcut">Ctrl+Shift+K</span>
                     </button>
-                    <button class="vscode-dropdown-item" @onclick="ClearConsole" type="button">
-                        <i class="bi bi-trash"></i>
+                    <button class="vscode-dropdown-item" @onclick="ClearConsole" type="button" role="menuitem"
+                        tabindex="-1">
+                        <i class="bi bi-trash" aria-hidden="true"></i>
                         <span>コンソールをクリア</span>
                         <span class="vscode-shortcut">Ctrl+L</span>
                     </button>
@@ -66,15 +104,19 @@
 
             <!-- 表示メニュー -->
             <div class="vscode-menu-item" @onmouseenter="ShowViewMenu" @onmouseleave="HideMenus">
-                <button class="vscode-menu-title" type="button">表示</button>
-                <div class="vscode-dropdown @(isViewMenuVisible ? "show" : "")" id="viewMenu">
-                    <button class="vscode-dropdown-item" @onclick="ToggleFullscreen" type="button">
-                        <i class="bi bi-arrows-fullscreen"></i>
+                <button class="vscode-menu-title" type="button" role="menuitem" aria-haspopup="true"
+                    aria-expanded="@isViewMenuVisible" aria-controls="viewMenu">表示</button>
+                <div class="vscode-dropdown @(isViewMenuVisible ? "show" : "")" id="viewMenu" role="menu"
+                    aria-label="表示メニュー">
+                    <button class="vscode-dropdown-item" @onclick="ToggleFullscreen" type="button" role="menuitem"
+                        tabindex="-1">
+                        <i class="bi bi-arrows-fullscreen" aria-hidden="true"></i>
                         <span>フルスクリーン</span>
                         <span class="vscode-shortcut">F11</span>
                     </button>
-                    <button class="vscode-dropdown-item" @onclick="ShowKeyboardShortcuts" type="button">
-                        <i class="bi bi-keyboard"></i>
+                    <button class="vscode-dropdown-item" @onclick="ShowKeyboardShortcuts" type="button" role="menuitem"
+                        tabindex="-1">
+                        <i class="bi bi-keyboard" aria-hidden="true"></i>
                         <span>キーボードショートカット</span>
                     </button>
                 </div>
@@ -82,19 +124,24 @@
 
             <!-- ヘルプメニュー -->
             <div class="vscode-menu-item" @onmouseenter="ShowHelpMenu" @onmouseleave="HideMenus">
-                <button class="vscode-menu-title" type="button">ヘルプ</button>
-                <div class="vscode-dropdown @(isHelpMenuVisible ? "show" : "")" id="helpMenu">
-                    <button class="vscode-dropdown-item" @onclick="ShowDocumentation" type="button">
-                        <i class="bi bi-book"></i>
+                <button class="vscode-menu-title" type="button" role="menuitem" aria-haspopup="true"
+                    aria-expanded="@isHelpMenuVisible" aria-controls="helpMenu">ヘルプ</button>
+                <div class="vscode-dropdown @(isHelpMenuVisible ? "show" : "")" id="helpMenu" role="menu"
+                    aria-label="ヘルプメニュー">
+                    <button class="vscode-dropdown-item" @onclick="ShowDocumentation" type="button" role="menuitem"
+                        tabindex="-1">
+                        <i class="bi bi-book" aria-hidden="true"></i>
                         <span>AliceScript ドキュメント</span>
                     </button>
-                    <button class="vscode-dropdown-item" @onclick="ShowSamples" type="button">
-                        <i class="bi bi-file-code"></i>
+                    <button class="vscode-dropdown-item" @onclick="ShowSamples" type="button" role="menuitem"
+                        tabindex="-1">
+                        <i class="bi bi-file-code" aria-hidden="true"></i>
                         <span>サンプル集</span>
                     </button>
-                    <div class="vscode-separator"></div>
-                    <button class="vscode-dropdown-item" @onclick="ShowAbout" type="button">
-                        <i class="bi bi-info-circle"></i>
+                    <div class="vscode-separator" role="separator"></div>
+                    <button class="vscode-dropdown-item" @onclick="ShowAbout" type="button" role="menuitem"
+                        tabindex="-1">
+                        <i class="bi bi-info-circle" aria-hidden="true"></i>
                         <span>このアプリについて</span>
                     </button>
                 </div>
@@ -113,6 +160,7 @@
     private bool isEditMenuVisible = false;
     private bool isViewMenuVisible = false;
     private bool isHelpMenuVisible = false;
+    private bool isSampleMenuVisible = false;
     private string currentFileName = "";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -128,6 +176,8 @@
     private void ShowEditMenu() => isEditMenuVisible = true;
     private void ShowViewMenu() => isViewMenuVisible = true;
     private void ShowHelpMenu() => isHelpMenuVisible = true;
+    private void ShowSampleMenu() => isSampleMenuVisible = true;
+    private void HideSampleMenu() => isSampleMenuVisible = false;
 
     private void HideMenus()
     {
@@ -136,6 +186,7 @@
         isEditMenuVisible = false;
         isViewMenuVisible = false;
         isHelpMenuVisible = false;
+        isSampleMenuVisible = false;
         StateHasChanged();
     }
 
@@ -150,6 +201,7 @@
             isEditMenuVisible = false;
             isViewMenuVisible = false;
             isHelpMenuVisible = false;
+            isSampleMenuVisible = false;
             StateHasChanged();
         });
         });
@@ -260,41 +312,154 @@
     }
 
     // サンプルとファイル操作
-    private void LoadSampleScript()
+    private void LoadBasicSample()
     {
-        var sample = @"// AliceScript サンプル
-print(""Welcome to AliceScript WebRunner!"");
+        var sample = @"// 基本的なAliceScript
+print(""Hello, AliceScript!"");
 
 // 変数の定義と使用
 var name = ""World"";
 var message = ""Hello, "" + name + ""!"";
 print(message);
 
-// 数値計算
+// 文字列操作
+var greeting = ""こんにちは、世界！"";
+print(greeting);
+print(""文字列の長さ: "" + greeting.length);";
+
+        currentFileName = "basic-sample.alice";
+        EditorStateService.TriggerLoadScript(sample);
+        HideMenus();
+    }
+
+    private void LoadCalculationSample()
+    {
+        var sample = @"// 計算とループのサンプル
+print(""=== 数値計算 ==="" );
+
+// 基本的な計算
 var a = 10;
 var b = 20;
 var sum = a + b;
-print(""計算結果: "" + a + "" + "" + b + "" = "" + sum);
+print(""足し算: "" + a + "" + "" + b + "" = "" + sum);
+
+var multiplication = a * b;
+print(""掛け算: "" + a + "" × "" + b + "" = "" + multiplication);
 
 // ループ処理
-print(""カウントダウン:"");
+print(""\\n=== カウントダウン ==="" );
 for(var i = 5; i >= 1; i--)
 {
-print(i);
+print(""カウント: "" + i);
 }
 print(""完了!"");
 
-// 関数の定義と使用
+// 配列の操作
+print(""\\n=== 配列処理 ==="" );
+var numbers = [1, 2, 3, 4, 5];
+var total = 0;
+for(var num in numbers)
+{
+total += num;
+print(""数値: "" + num + "", 累計: "" + total);
+}
+print(""合計: "" + total);";
+
+        currentFileName = "calculation-sample.alice";
+        EditorStateService.TriggerLoadScript(sample);
+        HideMenus();
+    }
+
+    private void LoadFunctionSample()
+    {
+        var sample = @"// 関数とアルゴリズムのサンプル
+print(""=== 関数の定義と使用 ==="" );
+
+// 階乗を計算する関数
 function factorial(n)
 {
 if(n <= 1) return 1;
 return n * factorial(n - 1);
 }
 
-print(""5の階乗: "" + factorial(5));";
+// フィボナッチ数列を計算する関数
+function fibonacci(n)
+{
+if(n <= 1) return n;
+return fibonacci(n - 1) + fibonacci(n - 2);
+}
 
-        currentFileName = "sample.alice";
+// 素数判定の関数
+function isPrime(n)
+{
+if(n < 2) return false;
+for(var i = 2; i * i <= n; i++)
+{
+if(n % i == 0) return false;
+}
+return true;
+}
+
+// 関数の実行
+print(""5の階乗: "" + factorial(5));
+print(""10番目のフィボナッチ数: "" + fibonacci(10));
+
+print(""\\n=== 素数判定 ==="" );
+for(var i = 2; i <= 20; i++)
+{
+if(isPrime(i))
+{
+print(i + "" は素数です"");
+}
+}";
+
+        currentFileName = "function-sample.alice";
         EditorStateService.TriggerLoadScript(sample);
+        HideMenus();
+    }
+
+    private void LoadCanvasSample()
+    {
+        var sample = @"// キャンバス描画のサンプル
+print(""=== キャンバス描画 ==="" );
+
+// キャンバスの準備
+canvas.clear();
+canvas.setSize(400, 300);
+
+// 基本図形の描画
+print(""基本図形を描画しています..."");
+
+// 矩形の描画
+canvas.setColor(255, 0, 0); // 赤色
+canvas.fillRect(50, 50, 100, 80);
+
+canvas.setColor(0, 255, 0); // 緑色
+canvas.drawRect(200, 50, 120, 80);
+
+// 円の描画
+canvas.setColor(0, 0, 255); // 青色
+canvas.fillCircle(100, 200, 40);
+
+canvas.setColor(255, 255, 0); // 黄色
+canvas.drawCircle(250, 200, 40);
+
+// 線の描画
+canvas.setColor(255, 0, 255); // マゼンタ
+canvas.setLineWidth(3);
+canvas.drawLine(20, 20, 380, 280);
+
+print(""描画が完了しました！"");";
+
+        currentFileName = "canvas-sample.alice";
+        EditorStateService.TriggerLoadScript(sample);
+        HideMenus();
+    }
+
+    // 既存のLoadSampleScriptは削除または基本サンプルとして残す
+    private void LoadSampleScript()
+    {
+        LoadBasicSample(); // 基本サンプルにリダイレクト
     }
 
     private async Task ExportResults()

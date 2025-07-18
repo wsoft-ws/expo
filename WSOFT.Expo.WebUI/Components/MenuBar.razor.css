@@ -201,13 +201,85 @@
     outline-offset: -1px;
 }
 
-/* アニメーション改善 */
-.vscode-menu-title {
-    transition: background-color 0.1s ease, color 0.1s ease;
+/* サブメニューのスタイル */
+.vscode-submenu {
+    position: relative;
 }
 
-.vscode-dropdown-item {
-    transition: background-color 0.1s ease, color 0.1s ease;
+.vscode-submenu-trigger {
+    position: relative;
+}
+
+.vscode-submenu-arrow {
+    margin-left: auto;
+    font-size: 10px;
+    opacity: 0.7;
+    transition: transform 0.15s ease;
+}
+
+.vscode-submenu:hover .vscode-submenu-arrow {
+    opacity: 1;
+}
+
+.vscode-submenu-dropdown {
+    left: 100%;
+    top: -5px;
+    margin-left: -1px;
+}
+
+.vscode-submenu-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* アクセシビリティの改善 */
+.vscode-dropdown-item:focus-visible {
+    outline: 2px solid #007acc;
+    outline-offset: -2px;
+}
+
+/* キーボードナビゲーション用のスタイル */
+.vscode-menu-title:focus-visible {
+    outline: 2px solid #007acc;
+    outline-offset: -2px;
+}
+
+/* レスポンシブ改善 - ボタンの枠からはみ出し防止 */
+@media (max-width: 768px) {
+    .vscode-dropdown-item {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .vscode-dropdown-item i {
+        width: 14px;
+        font-size: 12px;
+        margin-right: 6px;
+    }
+
+    .vscode-submenu-dropdown {
+        left: 0;
+        top: 100%;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .vscode-dropdown-item {
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+
+    .vscode-dropdown-item i {
+        width: 12px;
+        font-size: 10px;
+        margin-right: 4px;
+    }
+
+    .vscode-shortcut {
+        display: none;
+    }
 }
 
 /* 高コントラストアクセシビリティ対応 */

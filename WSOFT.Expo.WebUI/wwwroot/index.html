@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WSOFT.Expo.WebUI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="description" content="AliceScript WebRunner - ブラウザ上で動作するAliceScript統合開発環境" />
+    <meta name="keywords" content="AliceScript, WebRunner, IDE, プログラミング, スクリプト" />
+    <meta name="theme-color" content="#1e1e1e" />
+    <title>WSOFT.Expo.WebUI - AliceScript WebRunner</title>
     <base href="/" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
@@ -14,18 +17,19 @@
 </head>
 
 <body>
-    <div id="app">
-        <svg class="loading-progress">
+    <div id="app" role="application" aria-label="AliceScript WebRunner">
+        <svg class="loading-progress" aria-hidden="true">
             <circle r="40%" cx="50%" cy="50%" />
             <circle r="40%" cx="50%" cy="50%" />
         </svg>
-        <div class="loading-progress-text"></div>
+        <div class="loading-progress-text" aria-live="polite">読み込み中...</div>
     </div>
 
-    <div id="blazor-error-ui">
-        An unhandled error has occurred.
-        <a href="." class="reload">Reload</a>
-        <span class="dismiss">🗙</span>
+    <div id="blazor-error-ui" role="alert" aria-live="assertive">
+        エラーが発生しました。
+        <button class="reload" onclick="location.reload()">再読み込み</button>
+        <button class="dismiss" onclick="document.getElementById('blazor-error-ui').style.display='none'"
+            aria-label="エラーメッセージを閉じる">🗙</button>
     </div>
     <script src="js/script-runner.js"></script>
     <script src="js/canvas.js"></script>
