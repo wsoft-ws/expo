@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +12,14 @@
             margin: 0 auto;
             padding: 20px;
         }
+
         .container {
             background: #f5f5f5;
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 20px;
         }
+
         textarea {
             width: 100%;
             height: 200px;
@@ -25,6 +28,7 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+
         button {
             background: #007bff;
             color: white;
@@ -34,9 +38,11 @@
             cursor: pointer;
             margin: 5px;
         }
+
         button:hover {
             background: #0056b3;
         }
+
         input[type="text"] {
             width: 100%;
             padding: 8px;
@@ -46,9 +52,10 @@
         }
     </style>
 </head>
+
 <body>
     <h1>AliceScript WebRunner - コード送信テスト</h1>
-    
+
     <div class="container">
         <h2>1. PostMessage経由でコードを送信</h2>
         <textarea id="postMessageCode" placeholder="送信するAliceScriptコードを入力してください...">print("Hello from PostMessage!");
@@ -77,10 +84,10 @@ print("このコードはURLパラメーターから読み込まれました");<
         function sendViaPostMessage() {
             const code = document.getElementById('postMessageCode').value;
             const filename = document.getElementById('postMessageFilename').value;
-            
+
             // 新しいウィンドウでWebRunnerを開く
             const webRunnerWindow = window.open('/script-runner', 'webrunner');
-            
+
             // ウィンドウが読み込まれた後にメッセージを送信
             setTimeout(() => {
                 webRunnerWindow.postMessage({
@@ -112,7 +119,7 @@ print("このコードはURLパラメーターから読み込まれました");<
         // 現在のページがWebRunnerの場合、テスト用の関数を追加
         if (window.location.pathname === '/script-runner' || window.location.pathname === '/') {
             // テスト用の関数をウィンドウに追加
-            window.testLoadScript = function(code, filename = 'test.alice') {
+            window.testLoadScript = function (code, filename = 'test.alice') {
                 if (window.simulatePostRequest) {
                     window.simulatePostRequest(code, filename);
                 }
@@ -131,4 +138,5 @@ print("このコードはURLパラメーターから読み込まれました");<
         </ul>
     </div>
 </body>
+
 </html>

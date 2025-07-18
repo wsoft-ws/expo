@@ -217,10 +217,10 @@ document.addEventListener("DOMContentLoaded", function () {
       return new bootstrap.Dropdown(dropdownToggleEl);
     });
   }
-  
+
   // PostMessageリスナーをセットアップ
   window.setupPostMessageListener();
-  
+
   // URLパラメータからコードをチェック
   setTimeout(() => {
     window.checkForCodeInUrl();
@@ -230,35 +230,35 @@ document.addEventListener("DOMContentLoaded", function () {
 // URLパラメータからコードを取得
 window.getCodeFromUrl = () => {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('code') || '';
+  return urlParams.get("code") || "";
 };
 
 // Base64デコードされたコードを取得
 window.getCodeFromUrlBase64 = () => {
   const urlParams = new URLSearchParams(window.location.search);
-  const encodedCode = urlParams.get('code');
+  const encodedCode = urlParams.get("code");
   if (encodedCode) {
     try {
       return atob(encodedCode);
     } catch (e) {
-      console.error('Base64デコードエラー:', e);
-      return '';
+      console.error("Base64デコードエラー:", e);
+      return "";
     }
   }
-  return '';
+  return "";
 };
 
 // POSTリクエストでコードを受け取るためのイベントリスナー
 window.setupPostMessageListener = () => {
-  window.addEventListener('message', function(event) {
+  window.addEventListener("message", function (event) {
     // セキュリティのため、信頼できるオリジンからのメッセージのみ受け取る
     // 必要に応じて特定のオリジンを指定してください
-    if (event.data && event.data.type === 'loadScript' && event.data.code) {
-      const customEvent = new CustomEvent('loadScriptFromPost', {
+    if (event.data && event.data.type === "loadScript" && event.data.code) {
+      const customEvent = new CustomEvent("loadScriptFromPost", {
         detail: {
           code: event.data.code,
-          filename: event.data.filename || 'script.alice'
-        }
+          filename: event.data.filename || "script.alice",
+        },
       });
       document.dispatchEvent(customEvent);
     }
@@ -266,12 +266,12 @@ window.setupPostMessageListener = () => {
 };
 
 // Fetch APIを使ってPOSTリクエストをシミュレート（テスト用）
-window.simulatePostRequest = (code, filename = 'script.alice') => {
-  const event = new CustomEvent('loadScriptFromPost', {
+window.simulatePostRequest = (code, filename = "script.alice") => {
+  const event = new CustomEvent("loadScriptFromPost", {
     detail: {
       code: code,
-      filename: filename
-    }
+      filename: filename,
+    },
   });
   document.dispatchEvent(event);
 };
@@ -280,18 +280,18 @@ window.simulatePostRequest = (code, filename = 'script.alice') => {
 window.checkForCodeInUrl = () => {
   // まずは通常のURLパラメータをチェック
   let code = window.getCodeFromUrl();
-  
+
   // コードがない場合はBase64エンコードされたものをチェック
   if (!code) {
     code = window.getCodeFromUrlBase64();
   }
-  
+
   if (code) {
-    const event = new CustomEvent('loadScriptFromUrl', {
+    const event = new CustomEvent("loadScriptFromUrl", {
       detail: {
         code: code,
-        source: 'url'
-      }
+        source: "url",
+      },
     });
     document.dispatchEvent(event);
   }
@@ -306,25 +306,29 @@ window.setDotNetReference = (reference) => {
 };
 
 // カスタムイベントリスナーを設定
-document.addEventListener('loadScriptFromPost', async function(event) {
+document.addEventListener("loadScriptFromPost", async function (event) {
   if (dotNetReference && event.detail) {
     try {
-      await dotNetReference.invokeMethodAsync('LoadScriptFromPost', 
-        event.detail.code, 
-        event.detail.filename || 'script.alice'
+      await dotNetReference.invokeMethodAsync(
+        "LoadScriptFromPost",
+        event.detail.code,
+        event.detail.filename || "script.alice"
       );
     } catch (error) {
-      console.error('POSTからのスクリプトロードエラー:', error);
+      console.error("POSTからのスクリプトロードエラー:", error);
     }
   }
 });
 
-document.addEventListener('loadScriptFromUrl', async function(event) {
+document.addEventListener("loadScriptFromUrl", async function (event) {
   if (dotNetReference && event.detail) {
     try {
-      await dotNetReference.invokeMethodAsync('LoadScriptFromUrl', event.detail.code);
+      await dotNetReference.invokeMethodAsync(
+        "LoadScriptFromUrl",
+        event.detail.code
+      );
     } catch (error) {
-      console.error('URLからのスクリプトロードエラー:', error);
+      console.error("URLからのスクリプトロードエラー:", error);
     }
   }
 });
