@@ -65,21 +65,28 @@ namespace WSOFT.Expo.WebUI.Services
 
         public async Task ExecuteScript(string code)
         {
-            var script = ParentScript.GetChildScript(code);
-            AddMessage($"[OK] Script initialized.", MessageType.Debug);
             try
             {
+                AddMessage($"Script initializing...", MessageType.Debug);
+                var script = ParentScript.GetChildScript(code);
+                AddMessage($"[OK] Script initialized.", MessageType.Debug);
                 await Task.Run(() =>
                 {
-                    var result = script.Process();
-
-                    if (result is null || result.Type == Variable.VarType.VARIABLE) return; // resultがnullの場合は、何らか処理が中断しているので成功報告を出さない
-                    if (result.Type == Variable.VarType.VOID || result.Type == Variable.VarType.UNDEFINED)
+                    try
                     {
-                        AddMessage("Script OK.", MessageType.Success);
-                        return;
+                        var result = script.Process();
+                        if (result is null || result.Type == Variable.VarType.VARIABLE) return; // resultがnullの場合は、何らか処理が中断しているので成功報告を出さない
+                        if (result.Type == Variable.VarType.VOID || result.Type == Variable.VarType.UNDEFINED)
+                        {
+                            AddMessage("Script OK.", MessageType.Success);
+                            return;
+                        }
+                        AddMessage($"=> {result}", MessageType.Success);
                     }
-                    AddMessage($"=> {result}", MessageType.Success);
+                    catch (Exception ex)
+                    {
+                        AddMessage($"Error: {ex.Message}", MessageType.Error);
+                    }
                 });
             }
             catch (Exception ex)

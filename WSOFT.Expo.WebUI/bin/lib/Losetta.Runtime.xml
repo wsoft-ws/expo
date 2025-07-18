@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Losetta.Runtime</name>
+    </assembly>
+    <members>
+        <member name="M:AliceScript.NameSpaces.MathFunctions.Math_IsRelativelyClose(System.Double,System.Double,System.Double)">
+            <summary>
+            相対的にxとyが互いに近い場合trueを、それ以外の場合はfalseを返します
+            </summary>
+            <param name="x">比較する一方の値</param>
+            <param name="y">比較するもう一方の値</param>
+            <param name="tolerance">絶対値の大きいほうの値に対する許容される最大誤差
+            (例えば、5%の場合は0.05)</param>
+            <returns>相対的にxとyが互いに近い場合true、それ以外の場合はfalse</returns>
+            <exception cref="T:System.ArgumentException">引数`tolerance`は0より大きい値である必要があります</exception>
+        </member>
+        <member name="M:AliceScript.NameSpaces.MathFunctions.Math_IsAbsolutelyClose(System.Double,System.Double,System.Double)">
+            <summary>
+            xとyが互いに近い場合trueを、それ以外の場合はfalseを返します
+            </summary>
+            <param name="x">比較する一方の値</param>
+            <param name="y">比較するもう一方の値</param>
+            <param name="toabsolutely">許容される最大の誤差(絶対値)</param>
+            <returns>相対的にxとyが互いに近い場合true、それ以外の場合はfalse</returns>
+            <exception cref="T:System.ArgumentException">引数`toabsolutely`は0より大きい値である必要があります</exception>
+        </member>
+        <member name="M:AliceScript.NameSpaces.RegexFunctions.WildCardToRegex(System.String)">
+            <summary>
+            ワイルドカード文字列から正規表現文字列を作る
+            </summary>
+            <param name="wildCard"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AliceScript.NameSpaces.Core.CoreFunctions.Readonly(AliceScript.Parsing.ParsingScript,AliceScript.Variable[])">
+            <summary>
+            このブロック内で、指定された変数をすべて読み取り専用にします
+            </summary>
+            <param name="script">このブロックがあるスクリプト</param>
+            <param name="items">読み取り専用にしたい変数</param>
+            <returns>本文の実行結果</returns>
+        </member>
+        <member name="M:AliceScript.NameSpaces.Core.CoreFunctions.Lock(AliceScript.Parsing.ParsingScript,AliceScript.Variable)">
+            <summary>
+            このブロック内で、指定された変数への排他的なアクセスを保証します
+            </summary>
+            <param name="script">このブロックがあるスクリプト</param>
+            <param name="item">排他的ロックを行いたい変数</param>
+            <returns>本文の実行結果</returns>
+        </member>
+        <member name="M:AliceScript.NameSpaces.Core.CoreFunctions.Block(AliceScript.Parsing.ParsingScript)">
+            <summary>
+            ブロックの中の子スクリプトを実行します
+            </summary>
+            <param name="script">このブロックがあるスクリプト</param>
+            <returns>本文の実行結果</returns>
+        </member>
+        <member name="M:AliceScript.NameSpaces.Core.CoreFunctions.Using(AliceScript.Functions.FunctionBaseEventArgs)">
+            <summary>
+            指定した名前空間への参照を現在のスクリプトに追加します
+            </summary>
+            <param name="e">この関数の実行時情報</param>
+            <exception cref="T:AliceScript.ScriptException">usingを許可しない設定である場合にスローされる例外</exception>
+        </member>
+        <member name="M:AliceScript.NameSpaces.Core.CoreFunctions.If(AliceScript.Parsing.ParsingScript,AliceScript.Binding.BindFunction,System.Boolean)">
+            <summary>
+            指定された式が真と評価されたときに、本文を実行します
+            </summary>
+            <param name="script">このブロックがあるスクリプト</param>
+            <param name="func">この関数がバインドされるFunctionBase</param>
+            <param name="condition">本文を実行するかどうかを決める条件</param>
+            <returns>本文の実行結果</returns>
+        </member>
+        <member name="M:AliceScript.NameSpaces.Core.CoreFunctions.Switch(AliceScript.Parsing.ParsingScript,AliceScript.Variable)">
+            <summary>
+            指定した値に一致する文を実行します
+            </summary>
+            <param name="script">このブロックがあるスクリプト</param>
+            <param name="item">比較する値</param>
+            <returns>本文の実行結果</returns>
+            <exception cref="T:AliceScript.ScriptException">内包する文がbreakまたはreturnで抜けることができない場合に発生する例外</exception>
+        </member>
+        <member name="P:AliceScript.NameSpaces.Core.CoreFunctions.CatchData.ExceptionName">
+            <summary>
+            このオブジェクトがCatchで、かつ例外オブジェクトを受取るときその変数名
+            </summary>
+        </member>
+        <member name="P:AliceScript.NameSpaces.Core.CoreFunctions.CatchData.Filter">
+            <summary>
+            このオブジェクトがCatchで、かつWhenで条件フィルターがある場合条件式
+            </summary>
+        </member>
+        <member name="P:AliceScript.NameSpaces.Core.CoreFunctions.CatchData.Body">
+            <summary>
+            このブロックの本文
+            </summary>
+        </member>
+        <member name="M:AliceScript.NameSpaces.Core.CoreFunctions.Try(AliceScript.Parsing.ParsingScript,AliceScript.Binding.BindFunction)">
+            <summary>
+            例外が発生する可能性があるコードを検証するためのブロック
+            </summary>
+            <param name="script">このブロックがあるスクリプト</param>
+            <param name="func">呼び出し時の関数インスタンス</param>
+            <returns>本文の実行結果</returns>
+            <exception cref="T:AliceScript.ScriptException">catchブロックおよびfinallyブロックがありません</exception>
+        </member>
+        <member name="M:AliceScript.NameSpaces.Core.CoreFunctions.Delegate(AliceScript.Parsing.ParsingScript)">
+            <summary>
+            本文と引数の内容からデリゲートを生成します
+            </summary>
+            <param name="script">本文の実行結果</param>
+            <returns>生成されたデリゲート</returns>
+        </member>
+        <member name="M:AliceScript.NameSpaces.Core.CoreFunctions.MakeRef(AliceScript.Parsing.ParsingScript)">
+            <summary>
+            後続のオペランドの参照を作成します
+            </summary>
+            <param name="script">現在読み取っているスクリプト</param>
+            <returns>後続のオペランドの参照</returns>
+        </member>
+        <member name="M:AliceScript.NameSpaces.Core.CoreFunctions.UseRef(AliceScript.Parsing.ParsingScript,AliceScript.Binding.BindFunction)">
+            <summary>
+            後続のオペランドの参照を、その参照先の実態リテラルとして扱います
+            </summary>
+            <param name="script">現在読み取っているスクリプト</param>
+            <param name="func">この関数の情報</param>
+            <returns>後続のオペランドの参照先の値</returns>
+        </member>
+        <member name="M:AliceScript.NameSpaces.Core.CoreFunctions.StdDev(System.Double[],System.Boolean)">
+            <summary>
+            現在の配列内の数値の標準偏差を取得します。
+            </summary>
+            <param name="ary">取得する数値が格納された配列</param>
+            <param name="sample">不偏標準偏差(母集団の標本)に対して標準偏差を取得する場合はtrue、標準偏差を取得する場合はfalse。</param>
+            <returns>配列内の数値の標準偏差</returns>
+        </member>
+        <member name="P:AliceScript.Runtime.Args">
+            <summary>
+            Alice.Environmentで使用するコマンドライン引数
+            </summary>
+        </member>
+        <member name="M:AliceScript.Runtime.Init">
+            <summary>
+            Alice.Runtimeで使用できるすべてのAPIを読み込みます
+            </summary>
+        </member>
+        <member name="M:AliceScript.Runtime.InitBasicAPI">
+            <summary>
+            基本的なAPIのみを読み込みます
+            </summary>
+        </member>
+    </members>
+</doc>

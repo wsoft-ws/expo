@@ -1,0 +1,2830 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Losetta</name>
+    </assembly>
+    <members>
+        <member name="T:AliceScript.Alice">
+            <summary>
+            AliceScript
+            </summary>
+        </member>
+        <member name="M:AliceScript.Alice.Execute(System.String,System.String,System.Boolean)">
+            <summary>
+            AliceScriptのコードを実行します
+            </summary>
+            <param name="code">実行したいスクリプト</param>
+            <param name="filename">スクリプトのファイル名</param>
+            <param name="mainFile">メインファイルとして処理するか否か</param>
+            <returns>スクリプトから返される戻り値</returns>
+        </member>
+        <member name="M:AliceScript.Alice.ExecuteFile(System.String,System.Boolean)">
+            <summary>
+            このインタプリタで読み込み可能なファイルを読み込みます
+            </summary>
+            <param name="filename">ファイル名</param>
+            <param name="mainFile">メインファイルとして処理するか否か</param>
+            <returns>スクリプトから返される戻り値</returns>
+        </member>
+        <member name="M:AliceScript.Alice.ExecuteData(System.Byte[],System.String,System.Boolean)">
+            <summary>
+            このインタプリタで読み込み可能なデータを読み込みます
+            </summary>
+            <param name="data">データ</param>
+            <param name="filename">ファイル名</param>
+            <param name="mainFile">メインファイルとして処理するか否か</param>
+            <returns>スクリプトから返される戻り値</returns>
+        </member>
+        <member name="M:AliceScript.Alice.Execute``1(System.String,System.String,System.Boolean)">
+            <summary>
+            AliceScriptのコードを実行します
+            </summary>
+            <param name="code">実行したいスクリプト</param>
+            <param name="filename">スクリプトのファイル名</param>
+            <param name="mainFile">メインファイルとして処理するか否か</param>
+            <returns>スクリプトから返される戻り値</returns>
+        </member>
+        <member name="M:AliceScript.Alice.ExecuteFile``1(System.String,System.Boolean)">
+            <summary>
+            このインタプリタで読み込み可能なファイルを読み込みます
+            </summary>
+            <param name="filename">ファイル名</param>
+            <param name="mainFile">メインファイルとして処理するか否か</param>
+            <returns>スクリプトから返される戻り値</returns>
+        </member>
+        <member name="M:AliceScript.Alice.ExecuteData``1(System.Byte[],System.String,System.Boolean)">
+            <summary>
+            このインタプリタで読み込み可能なデータを読み込みます
+            </summary>
+            <param name="data">データ</param>
+            <param name="filename">ファイル名</param>
+            <param name="mainFile">メインファイルとして処理するか否か</param>
+            <returns>スクリプトから返される戻り値</returns>
+        </member>
+        <member name="M:AliceScript.Alice.ExecuteAsync(System.String,System.String,System.Boolean)">
+            <summary>
+            AliceScriptのコードを非同期で実行します
+            </summary>
+            <param name="code">実行したいスクリプト</param>
+            <param name="filename">スクリプトのファイル名</param>
+            <param name="mainFile">メインファイルとして処理するか否か</param>
+            <returns>スクリプトから返される戻り値</returns>
+        </member>
+        <member name="M:AliceScript.Alice.ExecuteFileAsync(System.String,System.Boolean)">
+            <summary>
+            AliceScriptファイルを非同期で実行します
+            </summary>
+            <param name="filename">スクリプトのファイル名</param>
+            <param name="mainFile">メインファイルとして処理するか否か</param>
+            <returns>スクリプトから返される戻り値</returns>
+        </member>
+        <member name="M:AliceScript.Alice.GetScript(System.String,System.String,System.Boolean)">
+            <summary>
+            AliceScriptのコードからスクリプトを生成します
+            </summary>
+            <param name="code">生成元のコード</param>
+            <param name="filename">スクリプトのファイル名</param>
+            <param name="mainFile">メインファイルとして処理するか否か</param>
+            <returns>生成されたスクリプト</returns>
+        </member>
+        <member name="M:AliceScript.Alice.RegisterFunctions``1(System.String)">
+            <summary>
+            クラス内の静的メソッドをAliceScriptで使用できるよう登録します
+            </summary>
+            <typeparam name="T">登録するクラス</typeparam>
+            <param name="name">登録する名前空間の名前。nullにすると自動選択されます。</param>
+        </member>
+        <member name="M:AliceScript.Alice.RegisterObject``1(System.String)">
+            <summary>
+            クラスをAliceScriptで使用できるように登録します
+            </summary>
+            <typeparam name="T">登録するクラス</typeparam>
+            <param name="name">登録する名前空間の名前。nullにすると自動選択されます。</param>
+        </member>
+        <member name="E:AliceScript.Alice.Exiting">
+            <summary>
+            プログラムが終了を求めているときに発生するイベントです
+            </summary>
+        </member>
+        <member name="M:AliceScript.Alice.OnExiting(System.Int32)">
+            <summary>
+            Exitingイベントを発生させます
+            </summary>
+            <param name="exitcode">終了の理由を表す終了コード</param>
+        </member>
+        <member name="P:AliceScript.Alice.Version">
+            <summary>
+            AliceScriptのバージョン
+            </summary>
+        </member>
+        <member name="P:AliceScript.Alice.ImplementationVersion">
+            <summary>
+            Losettaのバージョン
+            </summary>
+        </member>
+        <member name="P:AliceScript.Alice.ImplementationName">
+            <summary>
+            このインタプリタの名前
+            </summary>
+        </member>
+        <member name="P:AliceScript.Alice.ImplementationLocation">
+            <summary>
+            このインタプリタへのファイルパス
+            </summary>
+        </member>
+        <member name="P:AliceScript.Alice.AppName">
+            <summary>
+            このAliceScriptが実行されているアプリケーションの名前
+            </summary>
+        </member>
+        <member name="T:AliceScript.Exiting">
+            <summary>
+            スクリプトによって終了されようとしている場合に呼び出されるデリゲート
+            </summary>
+            <param name="sender">イベントの発生元</param>
+            <param name="e">スクリプトの終了に関する情報</param>
+        </member>
+        <member name="T:AliceScript.ExitingEventArgs">
+            <summary>
+            スクリプトによって終了されようとしているとき、情報を表すオブジェクト
+            </summary>
+        </member>
+        <member name="P:AliceScript.ExitingEventArgs.Cancel">
+            <summary>
+            キャンセルする場合は、True
+            </summary>
+        </member>
+        <member name="P:AliceScript.ExitingEventArgs.ExitCode">
+            <summary>
+            終了コードを表します
+            </summary>
+        </member>
+        <member name="T:AliceScript.Binding.AliceFunctionAttribute">
+            <summary>
+            AliceScriptで使用できる関数として公開するメソッド
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.AliceFunctionAttribute.Name">
+            <summary>
+            この関数の名前
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.AliceFunctionAttribute.Attribute">
+            <summary>
+            この関数に付与する属性
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.AliceFunctionAttribute.State">
+            <summary>
+            この関数をAliceScriptにバインドするか指定する値
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.AliceFunctionAttribute.MethodOnly">
+            <summary>
+            この関数が拡張メソッドとして使用可能なとき、この関数は拡張メソッドとしてのみ呼び出すことができます
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.AliceFunctionAttribute.Context">
+            <summary>
+            この関数が呼び出せるコンテキスト
+            </summary>
+        </member>
+        <member name="T:AliceScript.Binding.AliceBindState">
+            <summary>
+            メソッドまたはプロパティをAliceScriptで使用できるようにバインドするかどうかを表す値
+            </summary>
+        </member>
+        <member name="F:AliceScript.Binding.AliceBindState.Enabled">
+            <summary>
+            メソッドまたはプロパティをバインドします
+            </summary>
+        </member>
+        <member name="F:AliceScript.Binding.AliceBindState.Disabled">
+            <summary>
+            メソッドまたはプロパティをバインドしません
+            </summary>
+        </member>
+        <member name="T:AliceScript.Binding.AlicePropertyAttribute">
+            <summary>
+            AliceScriptで使用できるプロパティとして公開するプロパティ
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.AlicePropertyAttribute.Name">
+            <summary>
+            プロパティの名前
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.AlicePropertyAttribute.State">
+            <summary>
+            このプロパティをAliceScriptにバインドするか指定する値
+            </summary>
+        </member>
+        <member name="T:AliceScript.Binding.AliceObjectAttribute">
+            <summary>
+            AliceScriptで使用できるオブジェクトとして公開するクラス
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.AliceObjectAttribute.Name">
+            <summary>
+            オブジェクトの名前
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.AliceObjectAttribute.NameSpace">
+            <summary>
+            オブジェクトの所属する名前空間
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.AliceObjectAttribute.DefaultState">
+            <summary>
+            この関数を規定でAliceScriptにバインドするか指定する値
+            </summary>
+        </member>
+        <member name="T:AliceScript.Binding.AliceNameSpaceAttribute">
+            <summary>
+            AliceScriptの名前空間として公開するクラス
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.AliceNameSpaceAttribute.Name">
+            <summary>
+            この名前空間の名前
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.AliceNameSpaceAttribute.DefaultState">
+            <summary>
+            この関数を規定でAliceScriptにバインドするか指定する値
+            </summary>
+        </member>
+        <member name="T:AliceScript.Binding.AliceObjectOperatorAttribute">
+            <summary>
+            AliceScriptで使用できるプロパティとして公開するプロパティ
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.AliceObjectOperatorAttribute.Operator">
+            <summary>
+            演算子
+            </summary>
+        </member>
+        <member name="T:AliceScript.Binding.BindInfoAttribute">
+            <summary>
+            BindFunctionでバインド情報を取得するための引数
+            </summary>
+        </member>
+        <member name="T:AliceScript.Binding.RefAttribute">
+            <summary>
+            BindFunctionで参照渡しを行うための引数
+            </summary>
+        </member>
+        <member name="T:AliceScript.Binding.BindFunction">
+            <summary>
+            .NETのメソッドと対応するAliceScriptの関数
+            </summary>
+        </member>
+        <member name="M:AliceScript.Binding.BindFunction.#ctor">
+            <summary>
+            BindFunctionを初期化します
+            </summary>
+        </member>
+        <member name="M:AliceScript.Binding.BindFunction.CreateBindFunction(System.Collections.Generic.HashSet{System.Reflection.MethodInfo},System.Boolean)">
+            <summary>
+            メソッドからBindFunctionを生成します
+            </summary>
+            <param name="methodInfos">同じメソッド名のオーバーロード</param>
+            <param name="needBind">このメソッドをバインドするには属性が必要</param>
+            <returns>生成されたFunctionBase</returns>
+        </member>
+        <member name="M:AliceScript.Binding.BindFunction.CreateBindConstructor(System.Reflection.ConstructorInfo[],System.Boolean)">
+            <summary>
+            コンストラクタからBindFunctionを生成します
+            </summary>
+            <param name="constructors">同じクラスのコンストラクタ</param>
+            <param name="needBind">このメソッドをバインドするには属性が必要</param>
+            <returns>生成されたFunctionBase</returns>
+        </member>
+        <member name="P:AliceScript.Binding.BindFunction.Parent">
+            <summary>
+            この関数がBindObjectのメソッドの場合、そのオブジェクト
+            </summary>
+        </member>
+        <member name="T:AliceScript.Binding.BindingOverloadFunction">
+            <summary>
+            任意の静的メソッドのオーバーロードひとつを表すオブジェクト
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.BindingOverloadFunction.HasParams">
+            <summary>
+            パラメーターの最期がparamsの場合にtrue
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.BindingOverloadFunction.MinimumArgCounts">
+            <summary>
+            この関数に必要な引数の最小個数
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.BindingOverloadFunction.TrueParameters">
+            <summary>
+            このオーバーロードが持つ引数
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.BindingOverloadFunction.VoidFunc">
+            <summary>
+            このオーバーロードを表すAction
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.BindingOverloadFunction.ObjFunc">
+            <summary>
+            このオーバーロードを表すFunc
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.BindingOverloadFunction.InstanceVoidFunc">
+            <summary>
+            このインスタンスオーバーロードを表すAction
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.BindingOverloadFunction.InstanceObjFunc">
+            <summary>
+            このインスタンスオーバーロードを表すFunc
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.BindingOverloadFunction.IsVoidFunc">
+            <summary>
+            このオーバーロードがActionである場合はtrue、そうでない場合はfalse
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:AliceScript.Binding.BindingOverloadFunction.IsInstanceFunc">
+            <summary>
+            このオーバーロードがインスタンスに属する場合はtrue、そうでない場合はfalse
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:AliceScript.Binding.BindingOverloadFunction.IsMethod">
+            <summary>
+            このオーバーロードが拡張メソッドである場合はtrue、そうでない場合はfalse
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:AliceScript.Binding.BindingOverloadFunction.Priority">
+            <summary>
+            このオーバーロードの優先順位
+            </summary>
+        </member>
+        <member name="M:AliceScript.Binding.BindingOverloadFunction.CompareTo(AliceScript.Binding.BindingOverloadFunction)">
+            <summary>
+            このオーバーロードともう一方のオーバーロードのどちらが優先されるかを判断します。
+            </summary>
+            <param name="other">比較する一方のオーバーロードを表すオブジェクト</param>
+            <returns>より先に解決されるべき場合は1,より後に解決されるべき場合は-1</returns>
+        </member>
+        <member name="M:AliceScript.Binding.BindingOverloadFunction.TryConvertParameters(AliceScript.Functions.FunctionBaseEventArgs,AliceScript.Functions.FunctionBase,System.Object[]@)">
+            <summary>
+            AliceScriptの関数に渡された引数をこのメソッドで使用する引数に変換できるか試みます
+            </summary>
+            <param name="e">AliceScriptの関数の呼び出し情報</param>
+            <param name="parent">このメソッドを呼び出したAliceScriptの関数</param>
+            <param name="converted">変換された引数。ただし、返還できなかった場合はnull。</param>
+            <returns>変換できた場合はtrue,そうでない場合はfalse</returns>
+        </member>
+        <member name="T:AliceScript.Binding.BindObject">
+            <summary>
+            .NETのオブジェクトと対応するAliceScriptのオブジェクト
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.BindObject.Instance">
+            <summary>
+            .NETのオブジェクトインスタンス
+            </summary>
+        </member>
+        <member name="P:AliceScript.Binding.BindObject.Type">
+            <summary>
+            このオブジェクトがバインドしている型
+            </summary>
+        </member>
+        <member name="M:AliceScript.Binding.BindObject.Operator(AliceScript.Variable,AliceScript.Variable,System.String,AliceScript.Parsing.ParsingScript)">
+            <summary>
+            BindObjectに対する2項演算を処理
+            </summary>
+            <param name="left">2項演算の左辺値</param>
+            <param name="right">2項演算の右辺値</param>
+            <param name="action">演算子</param>
+            <param name="script">処理中のスクリプト</param>
+            <returns>この演算の戻り値</returns>
+        </member>
+        <member name="T:AliceScript.Binding.BindValueFunction">
+            <summary>
+            .NETのプロパティと対応するAliceScriptの関数
+            </summary>
+        </member>
+        <member name="M:AliceScript.Utils.BindToNameSpace(System.Type)">
+            <summary>
+            指定された型で公開されている静的メソッドとプロパティをバインドし、名前空間を返します。
+            </summary>
+            <param name="type">バインドの対象となる型</param>
+            <returns>バインド済み関数が所属する名前空間</returns>
+        </member>
+        <member name="M:AliceScript.Utils.CreateBindFunction(System.Collections.Generic.IEnumerable{System.Reflection.MethodInfo},System.Boolean)">
+            <summary>
+            指定されたオーバーライドを含むメソッドのリストをバインドし、関数を返します。
+            </summary>
+            <param name="methodInfos">オーバーライドを含むメソッドのリスト</param>
+            <param name="needBind">メソッドにAliceMethod属性が必要かを表す値</param>
+            <returns>バインドされた関数</returns>
+        </member>
+        <member name="M:AliceScript.Utils.CreateBindFunction(System.Reflection.MethodInfo,System.Boolean)">
+            <summary>
+            指定されたメソッドをバインドし、関数を返します。
+            </summary>
+            <param name="methodInfo">バインドしたいメソッド</param>
+            <param name="needBind">メソッドにAliceMethod属性が必要かを表す値</param>
+            <returns>バインドされた関数</returns>
+        </member>
+        <member name="M:AliceScript.Utils.CreateExternBindFunction(System.String,System.String,System.String,System.String[],System.String,System.Nullable{System.Boolean})">
+            <summary>
+            指定された情報に一致するC-Style関数をバインドし、AliceScriptの関数を返します。
+            </summary>
+            <param name="procName">関数の名前</param>
+            <param name="libraryFile">関数が定義されているファイル</param>
+            <param name="returnType">関数の戻り値の型を表す文字列</param>
+            <param name="parameterTypes">関数の引数の型を表す文字列のリスト</param>
+            <param name="entryPoint">関数があるエントリポイント</param>
+            <param name="useUnicode">呼び出しにUnicodeを使用する場合はtrue、ANSIを使用する場合はfalse、自動判別する場合はnull</param>
+            <returns>バインドされた関数</returns>
+            <exception cref="T:AliceScript.ScriptException">適切な関数が見つからなかった場合に発生する例外</exception>
+        </member>
+        <member name="M:AliceScript.Utils.CreateBindFunction(System.Reflection.PropertyInfo,System.Boolean,System.Boolean)">
+            <summary>
+            指定されたプロパティをバインドし、関数を返します。
+            </summary>
+            <param name="propertyInfo">バインドしたいプロパティ</param>
+            <param name="needBind">メソッドにAliceMethod属性が必要かを表す値</param>
+            <param name="staticOnly">静的メソッドのみをバインドする場合はtrue、通常のメソッドのみをバインドする場合はfalse</param>
+            <returns>バインドされた関数</returns>
+        </member>
+        <member name="M:AliceScript.Utils.CreateBindObject(System.Type)">
+            <summary>
+            指定された型にある関数やプロパティをバインドし、BindObjectを返します
+            </summary>
+            <param name="type">バインドしたい型</param>
+            <returns>型がバインドされたBindObject</returns>
+        </member>
+        <member name="M:AliceScript.Utils.CalcPriority(System.Reflection.ParameterInfo[])">
+            <summary>
+            引数リストからオーバーロードの優先順位を計算します
+            </summary>
+            <param name="parameters">オーバーロードの引数リスト</param>
+            <returns>優先順位</returns>
+        </member>
+        <member name="M:AliceScript.Utils.TryGetAttibutte``1(System.Reflection.MemberInfo,``0@,System.Boolean)">
+            <summary>
+            指定されたメンバーに属性があるかどうかを取得します
+            </summary>
+            <typeparam name="T">想定する属性</typeparam>
+            <param name="memberInfo">取得元のメンバー</param>
+            <param name="attribute">属性があった場合はそのインスタンス、ない場合は<paramref name="createNew"/>の動作による</param>
+            <param name="createNew">属性がない場合に新たに作成してtrueを返す場合はtrue、そうでない場合はfalse</param>
+            <returns>属性があるか作成した場合はtrue、そうでない場合はfalse</returns>
+        </member>
+        <member name="M:AliceScript.Utils.GetTrueParametor(System.Type)">
+            <summary>
+            ref引数の場合、refの中身の型を取得します
+            </summary>
+            <param name="t">ref引数になる可能性のある型</param>
+            <returns><paramref name="t"/>がref引数の場合はその中身の型、そうでない場合は<paramref name="t"/></returns>
+        </member>
+        <member name="M:AliceScript.Utils.CreateTypedAction(System.Type[],System.Action{System.Object[]})">
+            <summary>
+            各パラメータの型情報とActionの実装から、Action T1, T2...型にキャストできるデリゲートを生成します。パラメータは1~16個指定できます。
+            </summary>
+            <param name="parameterTypes">各ジェネリクスパラメータ</param>
+            <param name="actionImpl">Actionの実装</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:AliceScript.Utils.GetActionType(System.Type[])">
+            <summary>
+            指定されたパラメータ型に基づいてAction T1, T2, ... を取得します
+            </summary>
+        </member>
+        <member name="M:AliceScript.Utils.CheckArgs(System.Int32,System.Int32,System.String,System.Boolean)">
+            <summary>
+            引数の個数を確認し、不足していれば例外を発生させます
+            </summary>
+            <param name="args">実際の引数の個数</param>
+            <param name="expected">必要な引数の個数</param>
+            <param name="msg">関数名</param>
+            <param name="exactMatch">ぴったり同じである必要がある場合はtrue</param>
+            <exception cref="T:AliceScript.ScriptException">引数が不足している場合に発生する例外</exception>
+        </member>
+        <member name="M:AliceScript.Utils.CheckNumInRange(AliceScript.Variable,System.Boolean,System.Nullable{System.Double},System.Nullable{System.Double},AliceScript.Parsing.ParsingScript)">
+            <summary>
+            指定した変数が数値を表し、かつ特定範囲内にあるかどうかを確認し、条件を満たさない場合に例外を発生します。
+            </summary>
+            <param name="variable">確認する変数</param>
+            <param name="min">特定範囲より小さな値</param>
+            <param name="max">特定範囲より大きな値</param>
+            <param name="needInteger">整数かつInt32の範囲内である必要がある場合はtrue。この値は省略できます。</param>
+            <param name="script">確認元のスクリプト</param>
+        </member>
+        <member name="M:AliceScript.Utils.TestNumInRange(AliceScript.Variable,System.Boolean,System.Nullable{System.Double},System.Nullable{System.Double},AliceScript.Parsing.ParsingScript)">
+            <summary>
+            指定した変数が数値を表し、かつ特定範囲内にあるかどうかを表す値を取得します。
+            </summary>
+            <param name="variable">確認する変数</param>
+            <param name="min">特定範囲より小さな値</param>
+            <param name="max">特定範囲より大きな値</param>
+            <param name="needInteger">整数かつInt32の範囲内である必要がある場合はtrue。この値は省略できます。</param>
+            <param name="script">確認元のスクリプト</param>
+            <returns>指定した変数が数値を表し、かつ特定範囲内にある場合はtrue、それ以外の場合はfalse</returns>
+        </member>
+        <member name="M:AliceScript.Utils.CheckNumber(AliceScript.Variable,AliceScript.Parsing.ParsingScript,System.Boolean)">
+            <summary>
+            指定した変数が有効な数値であることを確認し、そうでない場合は例外をスローします。
+            </summary>
+            <param name="variable">確認する変数</param>
+            <param name="script">確認元のスクリプト</param>
+            <param name="acceptNaN">NaNを認める場合はtrue、それ以外の場合はfalse</param>
+        </member>
+        <member name="M:AliceScript.Utils.GetFileFromPackageOrLocal(System.String,System.Boolean,AliceScript.Parsing.ParsingScript)">
+            <summary>
+            現在のパッケージまたはローカルからファイルを取得します
+            </summary>
+            <param name="filename">ファイル名</param>
+            <param name="fromPackage">パッケージからのみファイルを取得する場合はTrue、それ以外の場合はFalse。</param>
+            <param name="script">現在のパッケージを表すスクリプト</param>
+            <returns></returns>
+        </member>
+        <member name="T:AliceScript.Constants">
+            <summary>
+            AliceScriptで使用される定数。この定義を変更することでカスタマイズ可能です。
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.LANGUAGE">
+            <summary>
+            このプログラミング言語の名前
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.PRE_SINGLE_SIZE_ACTIONS">
+            <summary>
+            単項前置演算子(1文字のもの)
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.PRE_DOUBLE_SIZE_ACTIONS">
+            <summary>
+            単項前置演算子(2文字のもの)
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.PACKAGE_MAGIC_NUMBER">
+            <summary>
+            ICEファイルのマーク(ASCIIでI,C,Eとバージョン(1))
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.DLL_MAGIC_NUMBER">
+            <summary>
+            DLLファイルのマーク(ASCIIでM,Z)
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.ZIP_MAGIC_NUMBER">
+            <summary>
+            ZIPファイルのマーク(ASCIIでP,K)
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.PACKAGE_MANIFEST_FILENAME">
+            <summary>
+            パッケージマニフェストファイルの名前
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.IGNORE_CHARS">
+            <summary>
+            ソースコード上では無視される文字
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.PARSING_NAMESPACE">
+            <summary>
+            パース中の言語構造が所属する名前空間
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.TOP_NAMESPACE">
+            <summary>
+            グローバルの名前空間名
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.TOP_API_NAMESPACE">
+            <summary>
+            APIが使用する最上位の名前空間
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.IDENTIFIER_PATTERN">
+            <summary>
+            変数・定数・関数名などの識別子がとるパターン
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.COMPOUND_ASSIGN_PATTERN">
+            <summary>
+            複合代入式がとるパターン
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.UTF16_LITERAL">
+            <summary>
+            UTF16表現がとるパターン
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.UTF16_VARIABLE_LITERAL">
+            <summary>
+            可変長UTF16表現がとるパターン
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.UTF32_LITERAL">
+            <summary>
+            UTF32表現がとるパターン
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.RETURN_PATTERN">
+            <summary>
+            return式がとるパターン
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.TYPE_MODIFER">
+            <summary>
+            型指定修飾子
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.KEYWORD">
+            <summary>
+            AliceScriptのキーワード
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.HELP_LINK">
+            <summary>
+            他にUrlがなかった場合のヘルプUrl
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.FUNCT_WITH_SPACE">
+            <summary>
+            関数呼び出し時に丸括弧が不要な関数の名前
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.FUNCT_WITH_SPACE_ONCE">
+            <summary>
+            関数呼び出し時に丸括弧が不要な関数。ただしこれらの関数の引数は一つのみである必要があります。
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.CONTROL_FLOW">
+            <summary>
+            言語構造の関数名
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.CAN_GET_ARRAYELEMENT_VARIABLE_TYPES">
+            <summary>
+            配列添え字演算子を使用できる変数の型
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.CONSTS">
+            <summary>
+            AliceScriptから参照できる定数
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.ARITHMETIC_EXPR">
+            <summary>
+            算術演算子
+            </summary>
+        </member>
+        <member name="F:AliceScript.Constants.ESCAPE_CHARS">
+            <summary>
+            文字列リテラルで使用できるエスケープ文字
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.NONE">
+            <summary>
+            既定のエラーコード
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_FIND_FUNCTION">
+            <summary>
+            関数が見つかりません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_FIND_ARRAY">
+            <summary>
+            配列が見つかりません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.BREAK_POINT">
+            <summary>
+            ブレークポイントに到達しました
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_FIND_VARIABLE">
+            <summary>
+            `identifier`は現在のコンテキストに存在しません。
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_FIND_ITEM">
+            <summary>
+            アイテムが配列内に見つかりません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_FIND_LABEL">
+            <summary>
+            指定されたラベルは存在しません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_FIND_LABEL_IN_FUNCTION">
+            <summary>
+            関数内に指定されたラベルは存在しません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_FIND_OPERATOR">
+            <summary>
+            演算子が見つかりません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.INVALID_OPERAND">
+            <summary>
+            無効な演算子です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.ITS_RESERVED_NAME">
+            <summary>
+            指定された名前は予約されています
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.ILLEGAL_IDENTIFIER">
+            <summary>
+            不正な識別名です。
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.INCOMPLETE_ARGUMENTS">
+            <summary>
+            引数が不完全です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.INCOMPLETE_FUNCTION_DEFINITION">
+            <summary>
+            関数の定義が不完全です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.OBJECT_DOESNT_EXIST">
+            <summary>
+            そのようなオブジェクトは存在しません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.PROPERTY_OR_METHOD_NOT_FOUND">
+            <summary>
+            変数または関数が存在しません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.INVALID_ARGUMENT">
+            <summary>
+            無効な引数です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.INVALID_ARGUMENT_FUNCTION">
+            <summary>
+            関数内の引数が不完全です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.EXPECTED_ARRRAY">
+            <summary>
+            配列が必要です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.NUMBER_OUT_OF_RANGE">
+            <summary>
+            数値は範囲外です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.TYPE_MISMATCH">
+            <summary>
+            型が一致しません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.INSUFFICIENT_ARGUMETS">
+            <summary>
+            引数が不足しています
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.BAD_PACKAGE">
+            <summary>
+            パッケージファイルが壊れています
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.NOT_EXISTS_INHERITANCE_BASE">
+            <summary>
+            継承元クラスが存在しません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.ARRAY_IS_DOESNT_HAVE_TUPLE">
+            <summary>
+            配列に要素がありません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.VARIABLE_IS_NULL">
+            <summary>
+            変数がNullです
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.USER_DEFINED">
+            <summary>
+            ユーザー定義の例外です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_ADD_PARAMETERS_AFTER_PARMS_KEYWORD">
+            <summary>
+            parmsキーワードより後にパラメータを追加することはできません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.FILE_NOT_FOUND">
+            <summary>
+            ファイルが見つかりません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.NAMESPACE_NOT_FOUND">
+            <summary>
+            名前空間が存在しません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.NAMESPACE_NOT_LOADED">
+            <summary>
+            名前空間が読み込まれていません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.TOO_MANY_REPETITIONS">
+            <summary>
+            繰り返しが多すぎます
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.TRY_BLOCK_MISSING_HANDLERS">
+            <summary>
+            Tryブロックにハンドラーがありません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_EXECUTE_BLOCK">
+            <summary>
+            ブロックを実行できませんでした
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.NEED_BRACKETS">
+            <summary>
+            括弧が必要です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.UNNEED_TO_BRACKETS">
+            <summary>
+            括弧は不要です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.WRONG_TYPE_VARIABLE">
+            <summary>
+            その型の変数は使用できません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_DEFINE_IN_CLASS">
+            <summary>
+            その項目をクラス内で定義することはできません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.INVALID_TOKEN">
+            <summary>
+            無効なトークンです
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.INVALID_SYNTAX">
+            <summary>
+            無効な構文です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.FUNCTION_IS_ALREADY_DEFINED">
+            <summary>
+            関数はすでに定義されています
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.INVALID_NUMERIC_REPRESENTATION">
+            <summary>
+            有効な数値表現ではありません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_ASSIGN_THIS_PROPERTY">
+            <summary>
+            このプロパティに代入することはできません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.CANT_ASSIGN_TO_READ_ONLY">
+            <summary>
+            読み取り専用の値には代入できません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.CANT_MIX_VALUE_AND_SET_GET">
+            <summary>
+            値を混合して取得/設定することはできません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.INDEX_OUT_OF_RANGE">
+            <summary>
+            インデックスが配列の境界外です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_PARSE">
+            <summary>
+            次の行を解析できません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_READ_FILE">
+            <summary>
+            ファイルを読み込めませんでした
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.NOT_IMPLEMENTED">
+            <summary>
+            実装されていません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_CONVERT_VARIABLE">
+            <summary>
+            その変数を変換することができませんでした
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.UNBALANCED_CURLY_BRACES">
+            <summary>
+            波括弧が不均等です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.UNBALANCED_SQUARE_BLACKETS">
+            <summary>
+            角括弧が不均等です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.UNBALANCED_PARENTHESES">
+            <summary>
+            括弧が不均等です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.UNBALANCED_QUOTES">
+            <summary>
+            クオーテーションが不均等です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_FIND_PACKAGE">
+            <summary>
+            パッケージが存在しません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.NOT_COMPATIBLE_PACKAGES">
+            <summary>
+            互換性のないパッケージです
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.VARIABLE_ALREADY_DEFINED">
+            <summary>
+            変数はすでに定義されています
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.FUNCTION_NOT_GLOBAL">
+            <summary>
+            その関数はグローバル関数ではありません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.LIBRARY_EXCEPTION">
+            <summary>
+            ライブラリで発生した例外です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.TOO_MANY_ARGUREMENTS">
+            <summary>
+            引数が要求された個数よりも多いです
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.FORBIDDEN_OPERATION">
+            <summary>
+            その操作は禁止されています
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.ARGUMENT_MUST_BE_PASSED_WITH_KEYWORD">
+            <summary>
+            この引数は特定のキーワードとともに渡す必要があります。
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.ARGUMENT_CANT_USE_WITH_KEYWORD">
+            <summary>
+            この引数に特定のキーワードを使用することはできません。
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.VARIABLE_CANT_USE_WITH_ARRAY_SUBSCRIPT">
+            <summary>
+            この変数で配列添え字演算子を使用することはできません。
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.INVALID_FUNCTION_SIGNATURE">
+            <summary>
+            関数のシグネチャが不正か、処理できませんでした。
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_EXTRACT_BASE_CLASSES">
+            <summary>
+            基底クラスを取得できませんでした。
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.NAMESPACE_CANT_BE_NESTED">
+            <summary>
+            名前空間はネストできません。
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.COULDNT_FIND_CLASS">
+            <summary>
+            クラスが見つかりません。
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.CASE_BLOCK_MISSING_BREAK">
+            <summary>
+            caseまたはdefaultブロックにbreakがありません。
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.UNKNOWN_ESCAPE_CHAR">
+            <summary>
+            不明なエスケープ文字です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.ASSERTION_ERROR">
+            <summary>
+            アサーションが失敗しました
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.AMBIGUOUS_IDENTIFIER">
+            <summary>
+            識別子間があいまいです
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.INVALID_KEYWORD_CONBINATION">
+            <summary>
+            無効なキーワードの組み合わせです
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.FUNCTION_IS_OBSOLETE">
+            <summary>
+            旧形式の関数を使用しようとしました
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.CANT_IMPLICITLY_CONVERT">
+            <summary>
+            暗黙的に型変換できませんでした
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.IDENTIFIER_NOT_FOUND">
+            <summary>
+            `identifier`は現在のコンテキストに存在しません。
+            </summary>
+        </member>
+        <member name="F:AliceScript.Exceptions.SPREAD_ONLY_FOR_ARRAYS">
+            <summary>
+            スプレッド構文は配列でのみ使用できます
+            </summary>
+        </member>
+        <member name="T:AliceScript.Extra.SafeReader">
+            <summary>
+            ReadJEncを使用することで安全なファイルの読み取りを提供するクラス
+            </summary>
+        </member>
+        <member name="M:AliceScript.Extra.SafeReader.ReadAllText(System.String,System.String@,System.Int32@)">
+            <summary>
+            ReadJEncを使用して、ファイルから文字列を取得します。
+            </summary>
+            <param name="filename">取得するファイル名</param>
+            <param name="charCode">判定された文字コード</param>
+            <param name="codePage">判定された文字コードの番号</param>
+            <returns>ファイル内の文字列</returns>
+            <exception cref="T:System.IO.FileNotFoundException">指定されたファイルが存在しません</exception>
+        </member>
+        <member name="M:AliceScript.Extra.SafeReader.ReadAllText(System.Byte[],System.String@,System.Int32@)">
+            <summary>
+            ReadJEncを使用して、バイト配列から文字列を取得します
+            </summary>
+            <param name="data">取得するデータ</param>
+            <param name="charCode">判定された文字コード</param>
+            <param name="codePage">判定された文字コードの番号</param>
+            <returns>データ内の文字列</returns>
+        </member>
+        <member name="T:AliceScript.Extra.CharCode">
+            <summary>
+            ReadJEnc 文字コード種類定義(Rev.20170821)
+            </summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.UTF8">
+            <summary>UTF8(BOMあり)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.UTF32">
+            <summary>UTF32(BOMありLittleEndian)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.UTF32B">
+            <summary>UTF32(BOMありBigEndian)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.UTF16">
+            <summary>UTF16(BOMありLittleEndian)</summary><remarks>Windows標準のUnicode</remarks>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.UTF16B">
+            <summary>UTF16(BOMありBigEndian)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.UTF16LE">
+            <summary>UTF16(BOM無しLittleEndian)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.UTF16BE">
+            <summary>UTF16(BOM無しBigEndian)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.UTF8N">
+            <summary>UTF8(BOM無し)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.ASCII">
+            <summary>Ascii</summary><remarks>デコードはUTF8Encodingを流用。Bom情報は転記しない</remarks>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.ANSI">
+            <summary>1252 ISO8859 西ヨーロッパ言語</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.JIS">
+            <summary>50221 iso-2022-jp 日本語 (JIS-Allow 1 byte Kana) ※MS版</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.JIS50222">
+            <summary>50222 iso-2022-jp 日本語 (JIS-Allow 1 byte Kana - SO/SI)</summary><remarks>SO/SIによるカナシフトのみのファイルもCP50222とみなす</remarks>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.JISH">
+            <summary>50221(MS版JIS) + 20932(JIS補助漢字を無理やりデコード)</summary><remarks>JIS補助漢字はデコードのみ対応、エンコードは未対応</remarks>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.JISNG">
+            <summary>JISのように見えるがデコード不能な箇所あり、実質非テキストファイル</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.ISOKR">
+            <summary>50225 iso-2022-kr 韓国語(ISO)</summary><remarks>SO/SIカナシフトファイルの判定ロジックに流れ込まないようにするため定義</remarks>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.SJIS">
+            <summary>932 shift_jis 日本語 (シフト JIS) ※MS独自</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.EUCH">
+            <summary>EUC補助漢字(0x8F)あり ※MS-CP20932を利用し強引にデコードする</summary><remarks>エンコードするとファイルが壊れるので注意</remarks>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.EUC">
+            <summary>51932 euc-jp 日本語 (EUC) ※MS版</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.BIG5TW">
+            <summary>950 big5 繁体字中国語 (BIG5)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.EUCTW">
+            <summary>20000 x-Chinese-CNS 繁体字中国語(EUC-TW)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.GB18030">
+            <summary>54936 GB18030 簡体字中国語 (GB2312/GBKの拡張)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.UHCKR">
+            <summary>949 ks_c_5601-1987 韓国語 (UHC=EUC-KRの拡張)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.CP1250">
+            <summary>Windows1250 中央ヨーロッパ言語(チェコ語等) iso-8859-2</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.CP1251">
+            <summary>Windows1251 キリル言語(ロシア語等) </summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.CP1253">
+            <summary>Windows1253 ギリシャ語 iso-8859-7</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.CP1254">
+            <summary>Windows1254 トルコ語 iso-8859-9</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.CP1255">
+            <summary>Windows1255 ヘブライ語 iso-8859-8</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.CP1256">
+            <summary>Windows1256 アラビア語 </summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.CP1257">
+            <summary>Windows1257 バルト言語 iso-8859-13</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.CP1258">
+            <summary>Windows1258 ベトナム語</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.TIS620">
+            <summary>TIS-620/Windows874 タイ語 iso-8859-11</summary>
+        </member>
+        <member name="M:AliceScript.Extra.CharCode.GetPreamble(System.Byte[],System.Int32)">
+            <summary>引数で指定されたbyte配列がBOMありUTFファイルと判定できる場合、その文字コードを返します。</summary>
+            <param name="bytes">判定対象のバイト配列</param>
+            <param name="read">バイト配列先頭の読み込み済バイト数（LEASTREADSIZEのバイト数以上読み込んでおくこと）</param>
+            <returns>BOMから判定できた文字コード種類、合致なしの場合null</returns>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.Name">
+            <summary>ファイル文字コード種類名</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.Bytes">
+            <summary>先頭バイト識別データ（BOM/マジックナンバー）</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.Encoding">
+            <summary>エンコーディング</summary>
+        </member>
+        <member name="F:AliceScript.Extra.CharCode.CodePage">
+            <summary>コードページ番号(Unicode以外のローカルなエンコーディングを使用するものについて設定あり。遅延初期化用の退避変数を兼ねる)</summary>
+        </member>
+        <member name="M:AliceScript.Extra.CharCode.#ctor(System.String,System.Int32,System.Byte[])">
+            <summary>基本コンストラクタ</summary>
+            <param name="Name">ファイル文字コード種類名を定義する</param>
+            <param name="CodePage">デコード時に使用するCodePageを指定(正値ならDecoderExceptionFallback、マイナス値ならDecoderReplacementFallBackを設定)</param>
+            <param name="Bytes">先頭バイト識別データを指定する</param>
+        </member>
+        <member name="M:AliceScript.Extra.CharCode.#ctor(System.String,System.Text.Encoding,System.Byte[])">
+            <summary>基本コンストラクタ</summary>
+            <param name="Name">ファイル文字コード種類名を定義する</param>
+            <param name="Encoding">デコード時に使用するEncodingを指定する</param>
+            <param name="Bytes">先頭バイト識別データを指定する</param>
+        </member>
+        <member name="M:AliceScript.Extra.CharCode.GetEncoding">
+            <summary>このファイル文字コード種類のEncodingオブジェクトを取得します。</summary>
+        </member>
+        <member name="M:AliceScript.Extra.CharCode.GetString(System.Byte[],System.Int32)">
+            <summary>引数のバイト配列から文字列を取り出します。失敗時はnullが返ります。</summary>
+            <param name="bytes">判定対象のバイト配列</param>
+            <param name="len">ファイルサイズ(バイト配列先頭からの先頭からのデコード対象バイト数)</param>
+        </member>
+        <member name="M:AliceScript.Extra.CharCode.ToString">
+            <summary>このファイル文字コード種類の名前を取得します。</summary>
+        </member>
+        <member name="M:AliceScript.Extra.CharCode.GetPreamble(System.Byte[],System.Int32,AliceScript.Extra.CharCode[])">
+            <summary>判定対象のファイル文字コード種類一覧から、BOM/マジックナンバーが一致するものを探索して返す</summary>
+            <param name="bytes">判定対象のバイト配列</param>
+            <param name="read">バイト配列先頭の読み込み済バイト数（LEASTREADSIZEのバイト数以上読み込んでおくこと）</param>
+            <param name="arr">判定対象とするファイル文字コード種類の一覧</param>
+            <returns>先頭バイトが一致したファイル文字コード種類、合致なしの場合null</returns>
+        </member>
+        <member name="T:AliceScript.Extra.CharCode.Text">
+            <summary>文字コード種類：テキスト
+            </summary>
+        </member>
+        <member name="T:AliceScript.Extra.CharCode.EucHText">
+            <summary>
+            EUC補助漢字特殊処理(MS版CP20932の特異なコード体系によりデコードする)
+            </summary>
+        </member>
+        <member name="T:AliceScript.Extra.CharCode.JisHText">
+            <summary>
+            JIS補助漢字特殊処理(MS版CP20932の特異なコード体系によりデコードする)
+            </summary>
+        </member>
+        <member name="T:AliceScript.Extra.FileReader">
+            <summary>
+            ReadJEnc ファイル読み出し＆ファイル文字コード種類自動判別(Rev.20170821)
+            </summary>
+        </member>
+        <member name="M:AliceScript.Extra.FileReader.#ctor(System.IO.FileInfo)">
+            <summary>単一ファイル読み出し用にファイルを指定して新しいインスタンスを初期化します。</summary>
+            <param name="file">読み出すファイル（このファイルのサイズどおりに読み出し領域バッファを確保する）</param>
+        </member>
+        <member name="M:AliceScript.Extra.FileReader.#ctor(System.Int32)">
+            <summary>複数ファイル連続読み出し用にバッファサイズを指定して新しいインスタンスを初期化します。</summary>
+            <param name="len">最大読み出しファイルサイズ（領域バッファ確保サイズ）</param>
+        </member>
+        <member name="M:AliceScript.Extra.FileReader.Dispose">
+            <summary>ファイル読み出し用のリソースを解放します。</summary>
+        </member>
+        <member name="M:AliceScript.Extra.FileReader.Dispose(System.Boolean)">
+            <summary>ファイル読み出し用のリソースを解放します。</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileReader.ReadJEnc">
+            <summary>文字コード自動判別対象言語指定（初期状態は日本語ShiftJIS）</summary>
+        </member>
+        <member name="M:AliceScript.Extra.FileReader.Read(System.IO.FileInfo)">
+            <summary>ファイルを読み出してファイル文字コード種類を取得します。</summary>
+            <param name="file">読み出すファイル</param>
+            <returns>ファイル文字コード種類の判定結果</returns>
+        </member>
+        <member name="P:AliceScript.Extra.FileReader.Text">
+            <summary>Readメソッド呼び出し時にファイルから読み出したテキスト文字列内容を取得します。</summary>
+            <remarks>ファイルからテキストが取り出せなかった場合はnullとなります。</remarks>
+        </member>
+        <member name="F:AliceScript.Extra.FileReader.Bytes">
+            <summary>ファイル内容の読み出し先領域</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileReader.Length">
+            <summary>現在読み出し済のファイルサイズ</summary><remarks>非読み出し時は0、分割読み出し時は読込済部分のサイズ</remarks>
+        </member>
+        <member name="F:AliceScript.Extra.FileReader.text">
+            <summary>ファイルから取り出したテキスト文字列</summary>
+        </member>
+        <member name="M:AliceScript.Extra.FileReader.GetPreamble(System.Int64)">
+            <summary>読み込んであるバイト配列のプリアンブル（BOMヘッダ／マジックナンバー）からファイル文字コード種類特定を試みる</summary>
+            <param name="len">ファイルサイズ(未読込部分も含む。読み込み済サイズはthis.Lengthを参照)</param>
+            <returns>確定した場合、ファイル文字コード種類。確定できなかった場合null</returns>
+        </member>
+        <member name="T:AliceScript.Extra.FileType">
+            <summary>
+            ReadJEnc ファイル種類定義(Rev.20170821)
+            </summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.READERROR">
+            <summary>読み込み失敗</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.EMPTYFILE">
+            <summary>空ファイル</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.HUGEFILE">
+            <summary>巨大ファイル</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.BINARY">
+            <summary>バイナリ</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.JAVABIN">
+            <summary>Javaバイナリ</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.WINBIN">
+            <summary>Windowsバイナリ</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.SHORTCUT">
+            <summary>Windowsショートカット</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.PDF">
+            <summary>PDF</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.ZIP">
+            <summary>Zip圧縮</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.GZIP">
+            <summary>GZip圧縮</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.SEVENZIP">
+            <summary>7zip圧縮</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.RAR">
+            <summary>Rar圧縮</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.CABINET">
+            <summary>Cab圧縮</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.BZIP2">
+            <summary>BZip2圧縮</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.ZLZW">
+            <summary>Z(compress)圧縮</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.BMP">
+            <summary>BMP画像</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.GIF">
+            <summary>GIF画像</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.JPEG">
+            <summary>JPEG画像</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.PNG">
+            <summary>PNG画像</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.TIFF">
+            <summary>TIFF画像</summary>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.IMGICON">
+            <summary>Windowsアイコン画像</summary><remarks>マジックナンバーのほか追加チェックあり</remarks>
+        </member>
+        <member name="F:AliceScript.Extra.FileType.GetBinaryType_LEASTREADSIZE">
+            <summary>BOM/マジックナンバー一致判定にあたり、最低限読み込みを済ませておく必要がある先頭バイト数です。</summary>
+        </member>
+        <member name="M:AliceScript.Extra.FileType.GetBinaryType(System.Byte[],System.Int32)">
+            <summary>引数で指定されたbyte配列についてバイナリファイルの種類を判定します。</summary>
+            <param name="bytes">判定対象のバイト配列</param>
+            <param name="read">バイト配列先頭の読み込み済バイト数（LEASTREADSIZEのバイト数以上読み込んでおくこと）</param>
+            <returns>バイナリファイル種類判定結果（どれにも該当しなければ一般バイナリと判定）</returns>
+        </member>
+        <member name="T:AliceScript.Extra.FileType.Bin">
+            <summary>ファイル文字コード種類：バイナリ
+            </summary>
+        </member>
+        <member name="T:AliceScript.Extra.FileType.ZipBinary">
+            <summary>ファイル文字コード種類：Zipバイナリ
+            </summary>
+        </member>
+        <member name="T:AliceScript.Extra.FileType.Image">
+            <summary>ファイル文字コード種類：画像
+            </summary>
+        </member>
+        <member name="T:AliceScript.Extra.ReadJEnc">
+            <summary>
+            ReadJEnc 文字コード自動判別ライブラリ・処理本体(Rev.20180421)
+            </summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.JP">
+            <summary>日本語文字コード判別(SJIS/EUCJP)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.ANSI">
+            <summary>ANSI文字コード判別(CP1252)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.TW">
+            <summary>繁体字中国語文字コード判別(BIG5/EUCTW)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.CN">
+            <summary>簡体字中国語文字コード判別(GB18030)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.KR">
+            <summary>ハングル文字コード判別(UHCKR)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.CP1250">
+            <summary>Windows1250(iso-8859-2) 中央ヨーロッパ言語(チェコ語等)判別 </summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.CP1251">
+            <summary>Windows1251 キリル言語(ロシア語等)＆ANSI判別 </summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.CP1253">
+            <summary>Windows1253(iso-8859-7) ギリシャ語＆ANSI判別 </summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.CP1254">
+            <summary>Windows1254(iso-8859-9) トルコ語判別 </summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.CP1255">
+            <summary>Windows1255(iso-8859-8) ヘブライ語＆ANSI判別 </summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.CP1256">
+            <summary>Windows1256 アラビア語＆ANSI判別 </summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.CP1257">
+            <summary>Windows1257(iso-8859-13) バルト言語判別 </summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.CP1258">
+            <summary>Windows1258 ベトナム語判別 </summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.TIS620">
+            <summary>TIS620/Windows874(iso-8859-11) タイ語＆ANSI判別 </summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.DEL">
+            <summary>バイナリと判定するDEL文字コード、兼、ASCII/非ASCIIの境界文字コード</summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.BINARY">
+            <summary>非テキストファイルと判定する制御文字コードの最大値</summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.CharCode">
+            <summary>このインスタンスでおもに判別対象とするデフォルト文字コード</summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.EUC">
+            <summary>EUCデコードで用いる文字コード（無指定null時はEUCの判別を行わない）</summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.CP125X">
+            <summary>CP1252系で判別対象とする文字コード（デフォルトはANSI=CP1252）</summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.NODEF">
+            <summary>CP1252系の判別にあたり、0x80-0x9Fのうち文字コード未定義の箇所をbitで表現した値</summary>
+            <remarks>
+            デフォルトの非CP1252チェック用定義値(0x2001A002)＝未定義の81,8D,8F,90,9Dに対応するビットがON
+                   FEDC BA98 7654 3210         FEDC BA98 7654 3210
+                   ---- ---- ---- ----         ---- ---- ---- ----
+            (0x9#) 0010 0000 0000 0001  (0x8#) 1010 0000 0000 0010
+            </remarks>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.#ctor(AliceScript.Extra.CharCode,AliceScript.Extra.CharCode)">
+            <summary>引数指定文字コード/CP1252/EUCを判別対象とする際のコンストラクタ</summary>
+            <param name="CharCode">このインスタンスで判別対象とするデフォルト文字コード</param>
+            <param name="EUC">EUCの文字コード</param>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.#ctor(AliceScript.Extra.CharCode,System.UInt32)">
+            <summary>CP1252系文字コードのみを判別対象とする際のコンストラクタ</summary>
+            <param name="CP125X">CP1252系の判別対象デフォルト文字コード(CP1252以外を指定)</param>
+            <param name="NODEF">0x80-0x9Fのうち文字コード未定義の箇所をbitで表現した値</param>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.ToString">
+            <summary>オブジェクト文字列表現として、自動判別デフォルト文字コードの名前を返す</summary>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.GetEncoding(System.Byte[],System.Int32,System.String@)">
+            <summary>バイト配列を全走査し、文字コードを自動判別する</summary>
+            <param name="bytes">判定対象のバイト配列</param>
+            <param name="len">ファイルサイズ(バイト配列先頭からのデコード対象バイト数)</param>
+            <param name="text">out 判別した文字コードにより取り出したテキスト文字列（非テキストならnull）</param>
+            <returns>文字コード判別結果（非テキストならnull）</returns>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.GetEncoding(System.Byte[],System.Int32,System.Int32)">
+            <summary>デフォルト文字コードの判定スコア算出（判定開始位置～ファイル末尾までの範囲を対象）</summary>
+            <param name="bytes">判定対象のバイト配列</param>
+            <param name="pos">判定開始位置(非ASCII文字コードが初めて登場した位置)</param>
+            <param name="len">ファイルサイズ(バイト配列先頭からのデコード対象バイト数)</param>
+            <returns>判定スコア算出結果</returns>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.SeemsUTF16N(System.Byte[],System.Int32)">
+            <summary>BOMなしUTF16の可能性があるか(先頭文字がASCIIか否かをもとに)判定</summary>
+            <param name="bytes">判定対象のバイト配列</param>
+            <param name="len">ファイルサイズ(バイト配列先頭からのデコード対象バイト数)</param>
+            <returns>UTF16Nと思われる場合はその文字コード、否ならnull</returns>
+        </member>
+        <member name="T:AliceScript.Extra.ReadJEnc.JIS">
+            <summary>
+            JIS判定関連処理クラス
+            </summary>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.JIS.hasSOSI(System.Byte[],System.Int32)">
+            <summary>SO/SI文字出現チェック</summary>
+            <param name="bytes">判定対象のバイト配列</param>
+            <param name="len">ファイルサイズ(バイト配列先頭からのデコード対象バイト数)</param>
+            <returns>出現していればtrue、否ならfalse</returns>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.JIS.JISH">
+            <summary>JIS補助漢字エスケープシーケンス有無(有ならtrue)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.JIS.ISOKR">
+            <summary>ISO-2022-KRエスケープシーケンス有無(有ならtrue)</summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.JIS.c">
+            <summary>JIS評価値(JISとしてデコードすべきなら正値、否ならマイナス値)</summary>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.JIS.#ctor(System.Byte[],System.Int32,System.Int32)">
+            <summary>JISエスケープシーケンス判定オブジェクト初期化（およびISO-2022-KR判定）</summary>
+            <param name="bytes">判定対象のバイト配列</param>
+            <param name="len">ファイルサイズ(バイト配列先頭からのデコード対象バイト数)</param>
+            <param name="pos">エスケープ(0x1B)出現位置</param>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.JIS.GetEncoding(System.Int32)">
+            <summary>JISエスケープシーケンス妥当性チェック</summary>
+            <param name="pos">エスケープ(0x1B)出現位置</param>
+            <returns>エスケープシーケンスとして妥当ならpos加算値、そうでなければゼロ</returns>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.JIS.GetEncoding(System.String@)">
+            <summary>JISと判定された場合の文字コードを確定する</summary>
+            <param name="text">out 判別した文字コードにより取り出したテキスト文字列（非テキストならnull）</param>
+            <returns>カナSO/SI有無やデコード不能箇所有無に応じたJIS文字コード種類</returns>
+        </member>
+        <member name="T:AliceScript.Extra.ReadJEnc.SJIS">
+            <summary>
+            SJIS評価クラス
+            </summary>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.SJIS.#ctor">
+            <summary>日本語ShiftJIS・EUCJP・CP1252を判別対象とする際のコンストラクタ</summary>
+        </member>
+        <member name="T:AliceScript.Extra.ReadJEnc.BIG5TW">
+            <summary>
+            BIG5TW評価クラス
+            </summary>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.BIG5TW.#ctor">
+            <summary>中国語繁体字・EUC-TW・CP1252を判別対象とする際のコンストラクタ</summary>
+        </member>
+        <member name="T:AliceScript.Extra.ReadJEnc.GB18030">
+            <summary>
+            GB18030評価クラス
+            </summary>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.GB18030.#ctor">
+            <summary>中国語簡体字・CP1252を判別対象とする際のコンストラクタ</summary>
+        </member>
+        <member name="T:AliceScript.Extra.ReadJEnc.UHCKR">
+            <summary>
+            UHCKR評価クラス
+            </summary>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.UHCKR.#ctor">
+            <summary>ハングルUHC・CP1252を判別対象とする際のコンストラクタ</summary>
+        </member>
+        <member name="T:AliceScript.Extra.ReadJEnc.SBCS">
+            <summary>
+            １バイト文字コード汎用評価クラス
+            タイ語ほかアルファベットと混在させない文字種の文字コード判別で共通仕様
+            </summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.SBCS.BOUND">
+            <summary>その文字コード体系固有のコードの開始位置</summary>
+        </member>
+        <member name="F:AliceScript.Extra.ReadJEnc.SBCS.NODEF">
+            <summary>0x80-0xFFの文字コード未定義の箇所をbitで表現した値</summary>
+        </member>
+        <member name="M:AliceScript.Extra.ReadJEnc.SBCS.#ctor(AliceScript.Extra.CharCode,System.Int32,System.UInt32[])">
+            <summary>引数指定文字コードとCP1252を判別対象とする際のコンストラクタ</summary>
+            <param name="CharCode">このインスタンスで判別対象とするデフォルト文字コード</param>
+            <param name="BOUND">通常文字／この文字コード固有の文字種範囲の境界</param>
+            <param name="NODEF">
+            文字コード未定義の箇所をbitで表現した値
+            <remarks>
+            [0]=0x80-0x9Fの未定義箇所
+            [1]=0xA0-0xBFの未定義箇所
+            [2]=0xC0-0xDFの未定義箇所
+            [3]=0xE0-0xFFの未定義箇所
+            </remarks></param>
+        </member>
+        <member name="T:AliceScript.Extra.XMLConfig">
+            <summary>
+            XMLファイルを管理するクラスです
+            </summary>
+        </member>
+        <member name="P:AliceScript.Extra.XMLConfig.FilePath">
+            <summary>
+            読み込み時のファイルパスです。Save()のパスを省略した時の保存先でもあります
+            </summary>
+        </member>
+        <member name="M:AliceScript.Extra.XMLConfig.#ctor(System.String)">
+            <summary>
+            指定されたファイルを使って読み込みます
+            </summary>
+            <param name="path">XMLファイルのパス</param>
+        </member>
+        <member name="M:AliceScript.Extra.XMLConfig.#ctor">
+            <summary>
+            規定のXMLを使って開始します
+            </summary>
+        </member>
+        <member name="M:AliceScript.Extra.XMLConfig.Save(System.String)">
+            <summary>
+            XMLファイルに保存します
+            </summary>
+            <param name="filepath">XMLファイルの保存先(省略すると、読み込み時のパスを使用します)</param>
+            <returns>成功した場合はTrue、失敗した場合はFalseを返します</returns>
+        </member>
+        <member name="P:AliceScript.Extra.XMLConfig.XMLText">
+            <summary>
+            現在のXMLファイルのテキストです
+            </summary>
+        </member>
+        <member name="M:AliceScript.Extra.XMLConfig.Read(System.String,System.String)">
+            <summary>
+            指定されたパスを読み込みます
+            </summary>
+            <param name="path">読み込みたいパス</param>
+            <param name="defaultText">読み込みに失敗した場合に返されるテキスト(省略可)</param>
+            <returns>指定されたパスに存在するテキスト</returns>
+        </member>
+        <member name="M:AliceScript.Extra.XMLConfig.ReadAttribute(System.String,System.String,System.String)">
+            <summary>
+            指定されたパスにある属性値を読み込みます
+            </summary>
+            <param name="path">読み込みたいパス</param>
+            <param name="name">読み込みたい属性の名前</param>
+            <param name="defaultText">読み込みに失敗した場合に返されるテキスト(省略可)</param>
+            <returns>指定されたパスに存在する属性値</returns>
+        </member>
+        <member name="M:AliceScript.Extra.XMLConfig.ExistsAttribute(System.String,System.String)">
+            <summary>
+            指定されたパスに指定された属性があるかどうかを確認します
+            </summary>
+            <param name="path">存在を確認したいパス</param>
+            <param name="name">存在を確認したい属性の名前</param>
+            <returns>存在している場合はTrue、存在していない場合はFalseを返します</returns>
+        </member>
+        <member name="M:AliceScript.Extra.XMLConfig.Exists(System.String)">
+            <summary>
+            指定されたパスが存在するかどうか確認します
+            </summary>
+            <param name="path">存在を確認したいパス</param>
+            <returns>存在している場合はTrue、存在していない場合はFalseを返します</returns>
+        </member>
+        <member name="F:AliceScript.Extra.XMLConfig.Writed">
+            <summary>
+            書き込まれたときに発生するイベントです
+            </summary>
+        </member>
+        <member name="M:AliceScript.Extra.XMLConfig.Write(System.String,System.String)">
+            <summary>
+            指定されたパスに書き込みます
+            </summary>
+            <param name="path">書き込みたいパス</param>
+            <param name="value">書き込みたい内容</param>
+            <returns>成功した場合はTrue、失敗した場合はFalseを返します</returns>
+        </member>
+        <member name="M:AliceScript.Extra.XMLConfig.Delete(System.String)">
+            <summary>
+            指定されたパスを削除します
+            </summary>
+            <param name="path">削除したいパス</param>
+            <returns>成功した場合はTrue、失敗した場合はFalseを返します</returns>
+        </member>
+        <member name="T:AliceScript.Extra.WritedEventArgs">
+            <summary>
+            設定の変更時に発生するイベントの引数
+            </summary>
+        </member>
+        <member name="P:AliceScript.Extra.WritedEventArgs.Path">
+            <summary>
+            変更された設定のパス
+            </summary>
+        </member>
+        <member name="P:AliceScript.Extra.WritedEventArgs.Value">
+            <summary>
+            変更された設定の中身(String)
+            </summary>
+        </member>
+        <member name="T:AliceScript.Extra.WritedEventHandler">
+            <summary>
+            設定の変更時に発生するイベントハンドラーです
+            </summary>
+        </member>
+        <member name="T:AliceScript.Functions.CustomFunction">
+            <summary>
+            ユーザー定義の関数またはデリゲートを表します
+            </summary>
+        </member>
+        <member name="M:AliceScript.Functions.CustomFunction.#ctor(System.String,System.String,System.String[],AliceScript.Parsing.ParsingScript,System.Boolean,AliceScript.Objects.TypeObject)">
+            <summary>
+            新しいユーザー定義関数を作成します
+            </summary>
+            <param name="funcName">関数の名前</param>
+            <param name="body">関数の本文</param>
+            <param name="args">引数の一覧</param>
+            <param name="script">この関数が定義されているスクリプト</param>
+            <param name="forceReturn">この関数が最後に評価した値を返す場合はtrue、そうでない場合はfalse</param>
+            <param name="returnType">戻り値の型</param>
+            <param name="nullable"></param>
+            <exception cref="T:AliceScript.ScriptException"></exception>
+        </member>
+        <member name="P:AliceScript.Functions.CustomFunction.ParentScript">
+            <summary>
+            この関数の定義元のスクリプト
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.CustomFunction.ParentOffset">
+            <summary>
+            この関数が定義されたときのオフセット
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.CustomFunction.Body">
+            <summary>
+            この関数の実行内容を表す本文
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.CustomFunction.ArgumentCount">
+            <summary>
+            この関数のとる引数の個数
+            </summary>
+        </member>
+        <member name="T:AliceScript.Functions.FunctionBase">
+            <summary>
+            AliceScriptで使用できる関数を表します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBase.MinimumArgCounts">
+            <summary>
+            この関数に必要な引数の最小個数
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBase.MaximumArgCounts">
+            <summary>
+            この関数に渡すことができる引数の最大個数
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBase.Attribute">
+            <summary>
+            この関数の属性を取得または設定します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBase.RequestType">
+            <summary>
+            この関数が変数のプロパティとして呼び出される場合、その変数の種類を取得または設定します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBase.RelatedNameSpace">
+            <summary>
+            この関数が所属する名前空間の名前を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBase.IsMethod">
+            <summary>
+            この関数を拡張メソッドとして呼び出し可能な場合はTrue、それ以外の場合はfalse。このプロパティは読み取り専用です。
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBase.MethodOnly">
+            <summary>
+            この関数が拡張メソッドとして使用可能なとき、この関数は拡張メソッドとしてのみ呼び出すことができる
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBase.Context">
+            <summary>
+            この関数が呼び出せるコンテキスト
+            </summary>
+        </member>
+        <member name="M:AliceScript.Functions.FunctionBase.Evaluate(System.Collections.Generic.List{AliceScript.Variable},AliceScript.Parsing.ParsingScript,AliceScript.Objects.AliceScriptClass.ClassInstance)">
+            <summary>
+            この関数を呼び出します
+            </summary>
+            <param name="args">呼び出しに使用する引数</param>
+            <param name="script">呼び出し元のスクリプト</param>
+            <param name="instance">呼び出し元のクラスインスタンス</param>
+            <returns>この関数の戻り値</returns>
+        </member>
+        <member name="M:AliceScript.Functions.FunctionBase.Execute(AliceScript.Parsing.ParsingScript)">
+            <summary>
+            この関数を呼び出し、結果を取得します
+            </summary>
+            <param name="script">呼び出し元のスクリプト</param>
+            <returns>この関数の戻り値</returns>
+            <exception cref="T:AliceScript.ScriptException">受け入れ範囲外の引数を受取ることはできません</exception>
+        </member>
+        <member name="M:AliceScript.Functions.FunctionBase.Evaluate(AliceScript.Parsing.ParsingScript)">
+            <summary>
+            この関数を呼び出します
+            </summary>
+            <param name="script">呼び出し元のスクリプト</param>
+            <returns>この関数の戻り値</returns>
+            <exception cref="T:AliceScript.ScriptException">受け入れ範囲外の引数を受取ることはできません</exception>
+        </member>
+        <member name="M:AliceScript.Functions.FunctionBase.Evaluate(AliceScript.Parsing.ParsingScript,AliceScript.Variable)">
+            <summary>
+            この拡張メソッドを呼び出します
+            </summary>
+            <param name="script">呼び出し元のスクリプト</param>
+            <param name="currentVariable">呼び出し元の変数</param>
+            <returns>この拡張メソッドの戻り値</returns>
+            <exception cref="T:AliceScript.ScriptException">この拡張メソッドが使用できない場合はエラー</exception>
+        </member>
+        <member name="E:AliceScript.Functions.FunctionBase.Run">
+            <summary>
+            この関数が呼び出されたときに発生するイベント
+            </summary>
+        </member>
+        <member name="T:AliceScript.Functions.FunctionAttribute">
+            <summary>
+            関数の機能の種類を表します
+            </summary>
+        </member>
+        <member name="F:AliceScript.Functions.FunctionAttribute.GENERAL">
+            <summary>
+            通常の関数です
+            </summary>
+        </member>
+        <member name="F:AliceScript.Functions.FunctionAttribute.FUNCT_WITH_SPACE">
+            <summary>
+            関数の引数に括弧を必要としません（すなわち、空白が使われます）
+            </summary>
+        </member>
+        <member name="F:AliceScript.Functions.FunctionAttribute.FUNCT_WITH_SPACE_ONC">
+            <summary>
+            関数の引数に括弧を必要としませんが、空白は唯一のものにする必要があります
+            </summary>
+        </member>
+        <member name="F:AliceScript.Functions.FunctionAttribute.CONTROL_FLOW">
+            <summary>
+            フロー関数です。これらの関数の戻り値には意味はありません
+            </summary>
+        </member>
+        <member name="F:AliceScript.Functions.FunctionAttribute.LANGUAGE_STRUCTURE">
+            <summary>
+            言語構造です。これらの関数では引数の自動チェックなどが実行されず、Script以外の要素はすべてNullになります
+            </summary>
+        </member>
+        <member name="F:AliceScript.Functions.FunctionAttribute.VIRTUAL">
+            <summary>
+            オーバーライド可能です。CanOverrideプロパティもしくはこの属性が定義のいずれかが定義されている場合、オーバーライド可能です。
+            </summary>
+        </member>
+        <member name="T:AliceScript.Functions.AccessModifier">
+            <summary>
+            関数に使用されるアクセス修飾子を表します
+            </summary>
+        </member>
+        <member name="F:AliceScript.Functions.AccessModifier.PRIVATE">
+            <summary>
+            スコープの範囲内からのみアクセスできます
+            </summary>
+        </member>
+        <member name="F:AliceScript.Functions.AccessModifier.PUBLIC">
+            <summary>
+            名前空間の外部からもアクセスできます
+            </summary>
+        </member>
+        <member name="F:AliceScript.Functions.AccessModifier.PROTECTED">
+            <summary>
+            同一名前空間の内部からのみアクセスできます
+            </summary>
+        </member>
+        <member name="T:AliceScript.Functions.FunctionBaseManager">
+            <summary>
+            関数を登録または登録解除する操作を提供します
+            </summary>
+        </member>
+        <member name="M:AliceScript.Functions.FunctionBaseManager.Add(AliceScript.Functions.FunctionBase,System.String,AliceScript.Parsing.ParsingScript,AliceScript.Functions.AccessModifier,System.Boolean,System.Char)">
+            <summary>
+            関数をインタプリタに登録し、必要に応じて属性を設定します
+            </summary>
+            <param name="func">登録される関数</param>
+            <param name="name">登録される関数の名前(この項目を省略するとfunc.Nameが使用されます)</param>
+            <param name="script">登録したいスクリプト(この項目を省略するとグローバルに登録されます)</param>
+            <param name="accessModifier">関数のアクセス修飾子</param>
+            <param name="byPassCheck">識別子のチェックをバイパスする場合はtrue、それ以外の場合はfalse</param>
+            <param name="prefix">識別子につけるプレフィックス(規定値は\0)</param>
+        </member>
+        <member name="M:AliceScript.Functions.FunctionBaseManager.Remove(AliceScript.Functions.FunctionBase,System.String,AliceScript.Parsing.ParsingScript)">
+            <summary>
+            関数をインタプリタから登録解除し、必要に応じて属性を解除します
+            </summary>
+            <param name="func">登録解除される関数</param>
+            <param name="name">登録解除される関数の名前(この項目を省略するとfunc.Nameが使用されます)</param>
+            <param name="script">登録解除される関数の場所(この項目を省略するとグローバルからのみ解除されます)</param>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBaseManager.Functions">
+            <summary>
+            現在インタプリタに登録されている関数の名前の一覧を取得します
+            </summary>
+        </member>
+        <member name="T:AliceScript.Functions.FunctionBaseEventHandler">
+            <summary>
+            FunctionBaseがイベントを伝えるためのハンドラ
+            </summary>
+            <param name="sender">送り主のオブジェクト</param>
+            <param name="e">イベントの情報</param>
+        </member>
+        <member name="T:AliceScript.Functions.FunctionBaseEventArgs">
+            <summary>
+            関数の呼び出し時の情報を提供します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBaseEventArgs.OriginalScript">
+            <summary>
+            呼び出し元のオリジナルなスクリプトを表します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBaseEventArgs.Return">
+            <summary>
+            現在の関数の戻り値を表します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBaseEventArgs.Args">
+            <summary>
+            現在の関数に対しての引数を表します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBaseEventArgs.UseObjectResult">
+            <summary>
+            ObjectResultを使用する場合はTrue、それ以外の場合はfalse
+            今後は、ObjectResulではなく関数バインドを使用してください
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBaseEventArgs.ObjectResult">
+            <summary>
+            オブジェクトをそのまま戻り値として返す場合に使用するプロパティ
+            今後は、ObjectResulではなく関数バインドを使用してください
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBaseEventArgs.Script">
+            <summary>
+            呼び出し内容を含むスクリプト本文を表します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBaseEventArgs.CurentVariable">
+            <summary>
+            (Variableオブジェクト内のみ)呼び出し元のオブジェクトを表します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBaseEventArgs.Keywords">
+            <summary>
+            この関数の呼び出し時に同時に指定されたキーワードを表します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBaseEventArgs.ClassInstance">
+            <summary>
+            呼び出し元が所属するクラスのインスタンス
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.FunctionBaseEventArgs.AttributeFunctions">
+            <summary>
+            直前に実行された属性を表す関数のリスト
+            </summary>
+        </member>
+        <member name="T:AliceScript.Functions.StatementFunction">
+            <summary>
+            (1+2)や、{;}などの空のステートメントを実行するための関数
+            </summary>
+        </member>
+        <member name="T:AliceScript.Functions.ParserFunction">
+            <summary>
+            AliceScriptの関数
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.ParserFunction.IsVirtual">
+            <summary>
+            オーバーライド可能かどうかを表す値
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.ValueFunction.HandleEvents">
+            <summary>
+            TrueにするとSettingイベントおよびGettingイベントが発生します
+            </summary>
+        </member>
+        <member name="E:AliceScript.Functions.ValueFunction.Setting">
+            <summary>
+            プロパティに変数が代入されるときに発生するイベント。このイベントはHandleEventsがTrueの場合のみ発生します
+            </summary>
+        </member>
+        <member name="E:AliceScript.Functions.ValueFunction.Getting">
+            <summary>
+            プロパティから変数が読みだされるときに発生するイベント。このイベントはHandleEventsがTrueの場合のみ発生します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.ValueFunction.CanSet">
+            <summary>
+            SetPropertyが使用可能かを表す値。デフォルトではTrueです。
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.ValueFunctionEventArgs.Value">
+            <summary>
+            プロパティの変数の内容
+            </summary>
+        </member>
+        <member name="P:AliceScript.Functions.ValueFunctionEventArgs.Parent">
+            <summary>
+            呼び出し元の変数。これはコアプロパティで使用します。
+            </summary>
+        </member>
+        <member name="T:AliceScript.Interop.ILibrary">
+            <summary>
+            AliceScriptのプラグインが継承するインターフェイス
+            </summary>
+        </member>
+        <member name="P:AliceScript.Interop.ILibrary.Name">
+            <summary>
+            プラグインの名前
+            </summary>
+        </member>
+        <member name="M:AliceScript.Interop.ILibrary.Main">
+            <summary>
+            プラグインのエントリポイント
+            </summary>
+        </member>
+        <member name="T:AliceScript.Interop.LibraryBase">
+            <summary>
+            ネイティブプラグインの基礎です。このクラスを継承してネイティブプラグインを作成します。
+            </summary>
+        </member>
+        <member name="M:AliceScript.Interop.LibraryBase.Main">
+            <summary>
+            プラグインのエントリポイント
+            </summary>
+        </member>
+        <member name="P:AliceScript.Interop.LibraryBase.Name">
+            <summary>
+            プラグインの名前
+            </summary>
+        </member>
+        <member name="P:AliceScript.Interpreter.GlobalNameSpace">
+            <summary>
+            グローバルの名前空間
+            </summary>
+        </member>
+        <member name="P:AliceScript.Interpreter.Name">
+            <summary>
+            このインタプリタの名前
+            </summary>
+        </member>
+        <member name="P:AliceScript.Interpreter.DebugMode">
+            <summary>
+            デバッグモードで実行する場合はtrue、それ以外の場合はfalse
+            </summary>
+        </member>
+        <member name="M:AliceScript.NameSpaces.NameSpaceManager.Contains(System.String)">
+            <summary>
+            指定した名前の名前空間が存在するかどうかを表す値を取得します。
+            </summary>
+            <param name="name">確認したい名前空間の名前</param>
+            <returns>nameと一致する名前空間が存在する場合はtrue、それ以外の場合はfalse。</returns>
+        </member>
+        <member name="M:AliceScript.NameSpaces.NameSpaceManager.Get(System.String)">
+            <summary>
+            指定した名前の名前空間オブジェクトを取得します
+            </summary>
+            <param name="name">取得したい名前空間の名前</param>
+            <returns>nameと一致する名前空間が存在する場合はそのオブジェクト、存在しない場合はnull。</returns>
+        </member>
+        <member name="M:AliceScript.NameSpaces.NameSpace.Merge(AliceScript.NameSpaces.NameSpace)">
+            <summary>
+            現在の名前空間にもう一方の名前空間をマージします。ただし、列挙体はマージされません。
+            </summary>
+            <param name="other">マージする名前空間</param>
+        </member>
+        <member name="T:AliceScript.Objects.AliceScriptClass">
+            <summary>
+            ユーザー定義のクラス
+            </summary>
+        </member>
+        <member name="P:AliceScript.Objects.AliceScriptClass.BaseClasses">
+            <summary>
+            このクラスの継承元を表します。ない場合はnullとなります。
+            </summary>
+        </member>
+        <member name="T:AliceScript.Objects.DelegateObject">
+            <summary>
+            デリゲート（匿名関数）
+            </summary>
+        </member>
+        <member name="T:AliceScript.Objects.EventBase">
+            <summary>
+            C#からAliceScriptにイベントを通知するためのプロパティベースです。
+            </summary>
+        </member>
+        <member name="M:AliceScript.Objects.EventBase.Invoke(System.Collections.Generic.List{AliceScript.Variable},AliceScript.Parsing.ParsingScript,AliceScript.Objects.AliceScriptClass.ClassInstance)">
+            <summary>
+            イベントを実行します
+            </summary>
+            <param name="args">実行の引数</param>
+            <param name="script">親スクリプト</param>
+            <param name="instance">実行元のクラスインスタンス</param>
+            <returns>実行結果</returns>
+        </member>
+        <member name="T:AliceScript.Objects.ExceptionObject">
+            <summary>
+            AliceScript内で発生した例外を表すオブジェクト
+            </summary>
+        </member>
+        <member name="P:AliceScript.Objects.ObjectBase.HandleOperator">
+            <summary>
+            Operator関数を上書きするかどうかを表す値
+            </summary>
+        </member>
+        <member name="M:AliceScript.Objects.TypeObject.Equals(AliceScript.Objects.TypeObject)">
+            <summary>
+            このオブジェクトの表す型がもう一方の型と等しいかどうかを表す値を取得します
+            </summary>
+            <param name="other">比較する型</param>
+            <returns>もう一方の型と等しければTrue、それ以外の場合はFalse</returns>
+        </member>
+        <member name="M:AliceScript.Objects.VariableCollection.CanAdd(AliceScript.Variable)">
+            <summary>
+            この配列にその項目を追加できるかを検証します
+            </summary>
+            <param name="item">対象の項目</param>
+            <returns>追加できればTrue、それ以外の場合はFalse。</returns>
+        </member>
+        <member name="T:AliceScript.Packaging.AlicePackage">
+            <summary>
+            パッケージング済みのAliceScriptとリソース
+            </summary>
+        </member>
+        <member name="T:AliceScript.Packaging.PackageManifest">
+            <summary>
+            AlicePackageの設定
+            </summary>
+        </member>
+        <member name="P:AliceScript.Packaging.PackageManifest.Name">
+            <summary>
+            パッケージの名前
+            </summary>
+        </member>
+        <member name="P:AliceScript.Packaging.PackageManifest.Version">
+            <summary>
+            パッケージのバージョン
+            </summary>
+        </member>
+        <member name="P:AliceScript.Packaging.PackageManifest.Description">
+            <summary>
+            パッケージの説明
+            </summary>
+        </member>
+        <member name="P:AliceScript.Packaging.PackageManifest.Publisher">
+            <summary>
+            パッケージの発行者
+            </summary>
+        </member>
+        <member name="P:AliceScript.Packaging.PackageManifest.Target">
+            <summary>
+            ターゲット
+            </summary>
+        </member>
+        <member name="P:AliceScript.Packaging.PackageManifest.Script">
+            <summary>
+            インラインスクリプトの場合。それ以外の場合はnull。
+            </summary>
+        </member>
+        <member name="P:AliceScript.Packaging.PackageManifest.ScriptPath">
+            <summary>
+            スクリプトファイルのパス
+            </summary>
+        </member>
+        <member name="P:AliceScript.Packaging.PackageManifest.UseInlineScript">
+            <summary>
+            インラインスクリプトを使用するかどうか
+            </summary>
+        </member>
+        <member name="P:AliceScript.Packaging.PackageManifest.TargetApp">
+            <summary>
+            ターゲットにするアプリケーション
+            </summary>
+        </member>
+        <member name="T:AliceScript.Parsing.Parser">
+            <summary>
+            スクリプトを解析します
+            </summary>
+        </member>
+        <member name="M:AliceScript.Parsing.Parser.AliceScript(AliceScript.Parsing.ParsingScript,System.Char[])">
+            <summary>
+            スクリプトを解析・実行し、実行結果を返します
+            </summary>
+            <param name="script">解析・実行するスクリプト</param>
+            <param name="to">式を終了させる文字</param>
+            <returns>スクリプトの実行結果</returns>
+            <exception cref="T:AliceScript.ScriptException">スクリプトを解析できない場合に発生する例外</exception>
+        </member>
+        <member name="T:AliceScript.Parsing.Parser.PreOperetors">
+            <summary>
+            前置演算子の種類
+            </summary>
+        </member>
+        <member name="F:AliceScript.Parsing.Parser.PreOperetors.Increment">
+            <summary>
+            前置インクリメント
+            </summary>
+        </member>
+        <member name="F:AliceScript.Parsing.Parser.PreOperetors.Decrement">
+            <summary>
+            前置デクリメント
+            </summary>
+        </member>
+        <member name="F:AliceScript.Parsing.Parser.PreOperetors.Minus">
+            <summary>
+            単項マイナス
+            </summary>
+        </member>
+        <member name="F:AliceScript.Parsing.Parser.PreOperetors.Range">
+            <summary>
+            前置Range
+            </summary>
+        </member>
+        <member name="F:AliceScript.Parsing.Parser.PreOperetors.BitwiseNot">
+            <summary>
+            ビット補数
+            </summary>
+        </member>
+        <member name="M:AliceScript.Parsing.Parser.ProcessUnaryPreOperation(AliceScript.Variable,AliceScript.Parsing.Parser.PreOperetors)">
+            <summary>
+            単項前置演算子を処理します
+            </summary>
+            <param name="current">演算対象の値</param>
+            <param name="action">前置演算子</param>
+            <returns>演算結果の値</returns>
+            <exception cref="T:AliceScript.ScriptException">不明な演算子の場合にスローされる例外</exception>
+        </member>
+        <member name="M:AliceScript.Parsing.Parser.ProcessUnaryPostOperation(AliceScript.Variable,System.String)">
+            <summary>
+            単項後置演算子を処理します。
+            単項後置演算子を追加したいときは、Constants.POST_UNARY_OPERATORSに追加してください。
+            </summary>
+            <param name="current">演算対象の値</param>
+            <param name="action">後置演算子</param>
+            <returns>演算結果の値</returns>
+            <exception cref="T:AliceScript.ScriptException">不明な演算子の場合にスローされる例外</exception>
+        </member>
+        <member name="M:AliceScript.Parsing.Parser.ProcessBinaryOperation(AliceScript.Variable,AliceScript.Variable,AliceScript.Parsing.ParsingScript)">
+            <summary>
+            2項演算子を処理します
+            </summary>
+            <param name="leftCell">演算対象の左辺の値</param>
+            <param name="rightCell">演算対象の右辺の値</param>
+            <param name="script">処理中のスクリプト</param>
+            <returns>演算結果の値</returns>
+        </member>
+        <member name="T:AliceScript.Parsing.ParsingScript">
+            <summary>
+            パース中のスクリプトを表します
+            </summary>
+        </member>
+        <member name="M:AliceScript.Parsing.ParsingScript.GetTopLevelScript(AliceScript.Parsing.ParsingScript)">
+            <summary>
+            最上位のスクリプトを取得します
+            </summary>
+            <param name="script">呼び出し元のスクリプト</param>
+            <returns>最上位のスクリプト</returns>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.Defines">
+            <summary>
+            このスクリプトで宣言されたシンボル
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.StackTrace">
+            <summary>
+            このスクリプトのCustomFunctionの呼び出し履歴
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.ProcessingFunction">
+            <summary>
+            現在実行中あるいは最後に実行された関数
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.UsingNamespaces">
+            <summary>
+            このスクリプトでusingされた名前空間の一覧
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.Tag">
+            <summary>
+            このスクリプトに関連付けられたオブジェクトです
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.Package">
+            <summary>
+            これが実行されているパッケージを表します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.Generation">
+            <summary>
+            現在のスクリプトの世代数を取得または設定します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.Pointer">
+            <summary>
+            現在のスクリプトのポインタを取得または設定します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.String">
+            <summary>
+            現在のスクリプト全体を取得または設定します
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.Variables">
+            <summary>
+            現在のスクリプト内で定義された変数
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.Functions">
+            <summary>
+            現在のスクリプト内で定義された関数
+            </summary>
+        </member>
+        <member name="E:AliceScript.Parsing.ParsingScript.ThrowError">
+            <summary>
+            このスクリプトで例外が発生したときに通知するイベントです
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.Rest">
+            <summary>
+            これから実行されるコード
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.Current">
+            <summary>
+            現在解析中の文字
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.Prev">
+            <summary>
+            ひとつ前に解析された文字
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.PrevPrev">
+            <summary>
+            ふたつ前に解析された文字
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.Next">
+            <summary>
+            ひとつ後に解析される文字
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.NextNext">
+            <summary>
+            二つ後に解析される文字
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.Settings">
+            <summary>
+            このスクリプトの設定
+            </summary>
+        </member>
+        <member name="T:AliceScript.Parsing.ParsingScript.ScriptSettings">
+            <summary>
+            スクリプトの設定
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.ScriptSettings.UnneedVarKeyword">
+            <summary>
+            このスクリプトでは変数が暗黙的に定義される
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.ScriptSettings.TypeInference">
+            <summary>
+            このスクリプトでは型推論が有効
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.ScriptSettings.FallThrough">
+            <summary>
+            このスクリプトではswitch文のフォールスルーが有効
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.ScriptSettings.CheckBreakWhenEndCaseBlock">
+            <summary>
+            このスクリプトではbreakのないcaseをエラーとして扱う
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.ScriptSettings.EnableUsing">
+            <summary>
+            このスクリプトは名前空間の参照を追加できる
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.ScriptSettings.EnableImport">
+            <summary>
+            このスクリプトでは、パッケージやライブラリを読み込める
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.ScriptSettings.EnableInclude">
+            <summary>
+            このスクリプトではスクリプトを読み込める
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.ScriptSettings.DenyAccessToTopLevelScript">
+            <summary>
+            このスクリプトはグローバルにアクセスできない
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.ScriptSettings.Nullable">
+            <summary>
+            このスクリプトで定義された変数はnullを許容する
+            </summary>
+        </member>
+        <member name="M:AliceScript.Parsing.ParsingScript.ScriptSettings.Union(AliceScript.Parsing.ParsingScript.ScriptSettings)">
+            <summary>
+            この設定ともう一方の設定を結合します。設定値がどちらにもある場合はotherを優先します。
+            </summary>
+            <param name="other">結合するもう一方の設定</param>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.UnneedVarKeyword">
+            <summary>
+            このスクリプトで変数宣言が不要の場合はTrue
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.TypeInference">
+            <summary>
+            定義時に型推論を行う場合はTrue
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.FallThrough">
+            <summary>
+            switch文でフォールスルーを認める場合True
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.CheckBreakWhenEndCaseBlock">
+            <summary>
+            caseまたはdefaultを抜けるのにbreakまたはreturnが必要
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.EnableUsing">
+            <summary>
+            このスクリプトでUsingステートメントを許可するか
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.EnableImport">
+            <summary>
+            このスクリプトでimportを許可するか
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.EnableInclude">
+            <summary>
+            このスクリプトでincludeを許可するか
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.TopInFile">
+            <summary>
+            このスクリプトがファイル内の一番外の場合True、それ以外の場合はFalse
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.ParentScript">
+            <summary>
+            このスクリプトの親
+            </summary>
+        </member>
+        <member name="M:AliceScript.Parsing.ParsingScript.Using(System.String,System.Boolean)">
+            <summary>
+            現在のスクリプトで名前空間を参照します
+            </summary>
+            <param name="name"></param>
+            <param name="whenPossible">名前空間が存在しない場合に例外を発生させない場合にtrue</param>
+        </member>
+        <member name="M:AliceScript.Parsing.ParsingScript.GetStackTrace">
+            <summary>
+            現在のスクリプトの呼び出し履歴を変数で返します。
+            </summary>
+            <returns>Delegate配列</returns>
+        </member>
+        <member name="M:AliceScript.Parsing.ParsingScript.TryGetVariable(System.String,AliceScript.Functions.ParserFunction@)">
+            <summary>
+            このスクリプトから変数を取得します。取得できない場合は親スクリプトも試みます。
+            </summary>
+            <param name="name">変数名</param>
+            <param name="function">取得した変数</param>
+            <returns>取得できた場合はtrue、それ以外の場合はfalse</returns>
+        </member>
+        <member name="M:AliceScript.Parsing.ParsingScript.TryGetFunction(System.String,AliceScript.Functions.ParserFunction@)">
+            <summary>
+            このスクリプトから関数を取得します。取得できない場合は親スクリプトも試みます。
+            </summary>
+            <param name="name">関数名</param>
+            <param name="function">取得した関数</param>
+            <returns>取得できた場合はtrue、それ以外の場合はfalse</returns>
+        </member>
+        <member name="M:AliceScript.Parsing.ParsingScript.TryGetLocal(System.String,AliceScript.Functions.ParserFunction@)">
+            <summary>
+            このスクリプトから任意の識別子をもつ関数を取得します。取得できない場合は親スクリプトも試みます。
+            </summary>
+            <param name="name">識別子</param>
+            <param name="function">取得した関数</param>
+            <returns>取得できた場合はtrue、それ以外の場合はfalse</returns>
+        </member>
+        <member name="M:AliceScript.Parsing.ParsingScript.ProcessBlock">
+            <summary>
+            波かっこで始まって終わるブロックを子スクリプトとして実行します
+            </summary>
+            <returns>ブロックの値</returns>
+        </member>
+        <member name="M:AliceScript.Parsing.ParsingScript.GetBlock">
+            <summary>
+            波かっこで始まって終わるブロックを取得します
+            </summary>
+            <returns>ブロックを表すスクリプト</returns>
+        </member>
+        <member name="M:AliceScript.Parsing.ParsingScript.GetTempScript(System.String,AliceScript.Functions.FunctionBase,System.Int32)">
+            <summary>
+            現在のスクリプトから、子スクリプトを作成します
+            スクリプトにユーザーのコードを使用しないでください
+            </summary>
+            <param name="str">スクリプト</param>
+            <param name="callFrom"></param>
+            <param name="startIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AliceScript.Parsing.ParsingScript.GetChildScript(System.String,AliceScript.Functions.FunctionBase,System.Int32)">
+            <summary>
+            ユーザーの入力から、子スクリプトを作成します。
+            </summary>
+            <param name="str">ユーザーのコード</param>
+            <param name="callFrom"></param>
+            <param name="startIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AliceScript.Parsing.ParsingScript.StackInfo">
+            <summary>
+            StackTraceで使用するひとつ当たりのスタック
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.StackInfo.Function">
+            <summary>
+            現在実行中の関数
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.StackInfo.Line">
+            <summary>
+            現在の行の文字列
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.StackInfo.LineNumber">
+            <summary>
+            現在の行番号
+            </summary>
+        </member>
+        <member name="P:AliceScript.Parsing.ParsingScript.StackInfo.FileName">
+            <summary>
+            ファイル名
+            </summary>
+        </member>
+        <member name="T:AliceScript.PreProcessing.PreProcessor">
+            <summary>
+            ユーザーが入力したソースコードを内部で使用できるスクリプトに変換します
+            </summary>
+        </member>
+        <member name="M:AliceScript.PreProcessing.PreProcessor.ConvertToScript(System.String,System.Collections.Generic.Dictionary{System.Int32,System.Int32}@,System.Collections.Generic.HashSet{System.String}@,AliceScript.Parsing.ParsingScript.ScriptSettings@,System.String)">
+            <summary>
+            ユーザーが入力したソースコードを内部で使用できるスクリプトに変換します
+            </summary>
+            <param name="source">ユーザーによるソースコード</param>
+            <param name="char2Line">行データ</param>
+            <param name="defines">ソースコードで定義されたシンボル</param>
+            <param name="settings">ソースコードで指定された設定</param>
+            <param name="filename">ソースコードのファイル名</param>
+            <returns>内部で使用できるスクリプト</returns>
+        </member>
+        <member name="M:AliceScript.PreProcessing.PreProcessor.GetMeaningChar(System.String,System.Int32,System.Int32@)">
+            <summary>
+            字句解析上意味のある最初の文字を取得します
+            </summary>
+            <param name="text">取得元の文字列</param>
+            <param name="startIndex">検索を開始する文字列上のインデックス</param>
+            <param name="foundIndex">見つかった最初の文字の文字列上のインデックス</param>
+            <returns>見つかった最初の文字</returns>
+        </member>
+        <member name="M:AliceScript.PreProcessing.PreProcessor.ConvertUnicodeLiteral(System.String)">
+            <summary>
+            Unicode文字リテラルが含まれた文字列をUnicode文字に直します
+            </summary>
+            <param name="input">Unicode文字リテラルが含まれた文字列</param>
+            <returns>Unicode文字を含む文字列</returns>
+        </member>
+        <member name="M:AliceScript.PreProcessing.PreProcessor.ConvertUnicodeToChar(System.String,System.Boolean)">
+            <summary>
+            Unicode文字列リテラルをUnicode文字に変換します
+            </summary>
+            <param name="charCode">Unicode文字列リテラルを表す文字列</param>
+            <param name="mode">UTF-32の文字を変換する場合はtrue、それ以外の場合はfalse</param>
+            <returns>Unicode文字を含む文字列</returns>
+        </member>
+        <member name="M:AliceScript.PreProcessing.PreProcessor.ConvertBool(System.String)">
+            <summary>
+            プラグマに含まれる肯定/否定表現をboolに変換します
+            </summary>
+            <param name="str">肯定/否定表現を含む文字列</param>
+            <returns>肯定表現の場合はtrue、否定表現の場合はfalse、それ以外の場合はnull</returns>
+        </member>
+        <member name="M:AliceScript.PreProcessing.PreProcessor.IsIgnoreCharEvenIfString(System.Char)">
+            <summary>
+            文字列リテラル中でも無視する文字を判定します
+            </summary>
+            <param name="ch">判定する文字</param>
+            <returns>無視する文字の場合はtrue、それ以外の場合はfalse</returns>
+        </member>
+        <member name="M:AliceScript.PreProcessing.PreProcessor.IsIgnoreChar(System.Char)">
+            <summary>
+            文字列リテラル以外で無視する文字を判定します
+            </summary>
+            <param name="ch">判定する文字</param>
+            <returns>無視する文字の場合はtrue、それ以外の場合はfalse</returns>
+        </member>
+        <member name="T:AliceScript.ThrowErrorEventArgs">
+            <summary>
+            スクリプトを実行中に発生した例外
+            </summary>
+        </member>
+        <member name="P:AliceScript.ThrowErrorEventArgs.Message">
+            <summary>
+            例外の状態を表すメッセージ
+            </summary>
+        </member>
+        <member name="P:AliceScript.ThrowErrorEventArgs.HelpLink">
+            <summary>
+            例外について説明するサイトへのリンク
+            </summary>
+        </member>
+        <member name="P:AliceScript.ThrowErrorEventArgs.Source">
+            <summary>
+            例外が発生した場所
+            </summary>
+        </member>
+        <member name="P:AliceScript.ThrowErrorEventArgs.Script">
+            <summary>
+            例外が発生したスクリプト
+            </summary>
+        </member>
+        <member name="P:AliceScript.ThrowErrorEventArgs.Exception">
+            <summary>
+            パース中の例外のとき、パーサーからの報告内容
+            </summary>
+        </member>
+        <member name="P:AliceScript.ThrowErrorEventArgs.ErrorCode">
+            <summary>
+            例外を表すエラーコード
+            </summary>
+        </member>
+        <member name="P:AliceScript.ThrowErrorEventArgs.Handled">
+            <summary>
+            例外が処理され場合はtrue
+            </summary>
+        </member>
+        <member name="P:AliceScript.ThrowErrorManager.NotCatch">
+            <summary>
+            スクリプトの実行時に生じた例外を、ThrowErrorManagerでキャッチせずそのままスローする場合はTrue、それ以外の場合はFalse。
+            </summary>
+        </member>
+        <member name="T:AliceScript.Variable">
+            <summary>
+            AliceScriptの変数を表すクラス
+            </summary>
+        </member>
+        <member name="M:AliceScript.Variable.Assign(AliceScript.Variable)">
+            <summary>
+            他の変数を使って、この変数に代入します
+            </summary>
+            <param name="v">代入する値</param>
+        </member>
+        <member name="M:AliceScript.Variable.IsNull">
+            <summary>
+            この変数またはそれが表す値がnullであるかどうかを取得します
+            </summary>
+            <returns>nullであればtrue、それ以外の場合はfalse</returns>
+        </member>
+        <member name="M:AliceScript.Variable.AssignNull">
+            <summary>
+            この変数をNullに設定します
+            </summary>
+        </member>
+        <member name="M:AliceScript.Variable.Convert(AliceScript.Variable.VarType,System.Boolean)">
+            <summary>
+            明示的キャスト(as)を実行する時に呼ばれます。この変換は最も広範囲の型変換をサポートします
+            </summary>
+            <param name="type">変換したい型</param>
+            <param name="throwError">変換に失敗した際に例外をスローするか</param>
+            <returns>変換された型</returns>
+        </member>
+        <member name="M:AliceScript.Variable.AsType">
+            <summary>
+            この変数の種類を表すTypeオブジェクトを返します
+            </summary>
+            <returns>この変数の種類を表すTypeオブジェクト</returns>
+        </member>
+        <member name="M:AliceScript.Variable.Equals(System.Object)">
+            <summary>
+            この変数と指定されたオブジェクトまたはVariableが等価かどうかを評価します
+            </summary>
+            <param name="obj">評価する対象のオブジェクト</param>
+            <returns>二つのオブジェクトが等しければTrue、それ以外の場合はFalse</returns>
+        </member>
+        <member name="M:AliceScript.Variable.GetHashCode">
+            <summary>
+            この変数のハッシュ値を求めます
+            </summary>
+            <returns>この変数のハッシュ値</returns>
+        </member>
+        <member name="M:AliceScript.Variable.ValueEquals(System.Object)">
+            <summary>
+            この変数と指定されたオブジェクトが等価かどうかを評価します
+            </summary>
+            <param name="obj">評価する対象のオブジェクト</param>
+            <returns>二つのオブジェクトが等しければTrue、それ以外の場合はFalse</returns>
+        </member>
+        <member name="M:AliceScript.Variable.CompareTo(AliceScript.Variable)">
+            <summary>
+            この変数と指定された変数を並べ替えるとき、どちらが前に来るかを比較します
+            </summary>
+            <param name="other">比較する変数</param>
+            <returns>より前にくる場合は負の値、後にくる場合は正の値、一致する場合は0</returns>
+        </member>
+        <member name="M:AliceScript.Variable.Equals(AliceScript.Variable)">
+            <summary>
+            この変数ともう一方の変数が等しいかどうかを判断します
+            </summary>
+            <param name="other">比較するもう一方の変数</param>
+            <returns>ふたつの変数が等しい場合はtrue、そうでない場合はfalse</returns>
+        </member>
+        <member name="M:AliceScript.Variable.As``1">
+            <summary>
+            この変数を指定した型に変換します
+            </summary>
+            <typeparam name="T">変換先の型</typeparam>
+            <returns>変換されたオブジェクト</returns>
+        </member>
+        <member name="M:AliceScript.Variable.Is``1(``0@)">
+            <summary>
+            この変数を指定した型に変換できるか試みます
+            </summary>
+            <param name="result">変換されたオブジェクト</param>
+            <returns>変換に成功した場合はTrue、それ以外の場合はfalse</returns>
+        </member>
+        <member name="M:AliceScript.Variable.Is(System.Type,System.Object@)">
+            <summary>
+            この変数を指定した型に変換できるか試みます
+            </summary>
+            <param name="result">変換されたオブジェクト</param>
+            <returns>変換に成功した場合はTrue、それ以外の場合はfalse</returns>
+        </member>
+        <member name="M:AliceScript.Variable.ConvertTo``1">
+            <summary>
+            この変数を指定した型に変換します
+            </summary>
+            <typeparam name="T">変換先の型</typeparam>
+            <returns>変換されたオブジェクト</returns>
+        </member>
+        <member name="M:AliceScript.Variable.ConvertTo(System.Type)">
+            <summary>
+            この変数を指定した型に変換します
+            </summary>
+            <param name="type">変換先の型</param>
+            <returns>変換されたオブジェクト</returns>
+            <exception cref="T:AliceScript.ScriptException">型の不一致により変換できない場合にスローされる例外</exception>
+        </member>
+        <member name="M:AliceScript.Variable.TryConvertTo``1(``0@)">
+            <summary>
+            この変数を指定した型に変換できるか試みます
+            </summary>
+            <typeparam name="T">変換先の型</typeparam>
+            <param name="result">変換されたオブジェクト</param>
+            <returns>変換に成功した場合はTrue、それ以外の場合はfalse</returns>
+        </member>
+        <member name="M:AliceScript.Variable.TryConvertTo(System.Type,System.Object@)">
+            <summary>
+            この変数を指定した型に変換できるか試みます
+            </summary>
+            <param name="type">変換先の型。nullを代入すると自動的に最適な型になります。</param>
+            <param name="result">変換されたオブジェクト</param>
+            <returns>変換に成功した場合はTrue、それ以外の場合はfalse</returns>
+        </member>
+        <member name="P:AliceScript.Variable.Type">
+            <summary>
+            この変数の型
+            </summary>
+        </member>
+        <member name="P:AliceScript.Variable.IsReturn">
+            <summary>
+            これが関数の戻り値などである場合はTrue
+            </summary>
+        </member>
+        <member name="P:AliceScript.Variable.TypeChecked">
+            <summary>
+            この変数が型検査を受ける場合はtrue
+            </summary>
+        </member>
+        <member name="P:AliceScript.Variable.Nullable">
+            <summary>
+            この変数がどのような型でもnullをとりうる場合はtrue
+            </summary>
+        </member>
+        <member name="P:AliceScript.Variable.Readonly">
+            <summary>
+            この変数が読み取り専用の場合はtrue。
+            </summary>
+        </member>
+        <member name="P:AliceScript.Variable.Tag">
+            <summary>
+            この変数にオプションで持てるタグ
+            </summary>
+        </member>
+        <member name="P:AliceScript.Variable.Keywords">
+            <summary>
+            この変数がキーワードを持って参照されているとき、そのキーワードのリスト
+            </summary>
+        </member>
+        <member name="P:AliceScript.Variable.Parent">
+            <summary>
+            この変数が定義された元のスクリプトを表します
+            </summary>
+        </member>
+    </members>
+</doc>
