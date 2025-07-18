@@ -7,6 +7,9 @@
     <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
     <IncludeStaticWebAssets>true</IncludeStaticWebAssets>
   </PropertyGroup>
+  <PropertyGroup>
+  <RunAOTCompilation>true</RunAOTCompilation>
+</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="BlazorMonaco" Version="3.3.0" />

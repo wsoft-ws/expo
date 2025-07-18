@@ -417,4 +417,5 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
+site/
 !WSOFT.Expo.WebUI/bin/lib
