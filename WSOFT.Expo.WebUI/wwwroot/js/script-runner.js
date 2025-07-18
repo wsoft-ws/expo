@@ -84,7 +84,8 @@ window.saveFileWithDialog = async (text, defaultFilename) => {
       return {
         success: true,
         filename: defaultFilename,
-        message: "ファイルがダウンロードされました（保存エラーのためフォールバック）",
+        message:
+          "ファイルがダウンロードされました（保存エラーのためフォールバック）",
       };
     }
   }

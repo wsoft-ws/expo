@@ -104,7 +104,8 @@
 </div>
 
 <!-- ファイル入力用の隠しinput -->
-<InputFile @ref="fileInputComponent" OnChange="OnFileSelected" accept=".alice,.txt,.js" style="display: none;" multiple="false" />
+<InputFile @ref="fileInputComponent" OnChange="OnFileSelected" accept=".alice,.txt,.js" style="display: none;"
+    multiple="false" />
 
 @code {
     private InputFile? fileInputComponent;
@@ -127,7 +128,7 @@
     private void ShowEditMenu() => isEditMenuVisible = true;
     private void ShowViewMenu() => isViewMenuVisible = true;
     private void ShowHelpMenu() => isHelpMenuVisible = true;
-    
+
     private void HideMenus()
     {
         // 即座に隠す（遅延なし）
@@ -144,13 +145,13 @@
         Task.Delay(100).ContinueWith(t =>
         {
             InvokeAsync(() =>
-            {
-                isFileMenuVisible = false;
-                isEditMenuVisible = false;
-                isViewMenuVisible = false;
-                isHelpMenuVisible = false;
-                StateHasChanged();
-            });
+    {
+            isFileMenuVisible = false;
+            isEditMenuVisible = false;
+            isViewMenuVisible = false;
+            isHelpMenuVisible = false;
+            StateHasChanged();
+        });
         });
     }
 
@@ -175,13 +176,13 @@
         if (file != null)
         {
             currentFileName = file.Name;
-            
+
             try
             {
                 using var stream = file.OpenReadStream(maxAllowedSize: 1024 * 1024); // 1MB制限
                 using var reader = new StreamReader(stream);
                 var content = await reader.ReadToEndAsync();
-                
+
                 EditorStateService.TriggerLoadScript(content);
                 ScriptService.AddMessage($"ファイルを読み込みました: {currentFileName}", WSOFT.Expo.WebUI.Models.MessageType.Success);
             }
@@ -198,16 +199,16 @@
         {
             var script = await EditorStateService.GetCurrentScript();
             var defaultFileName = string.IsNullOrEmpty(currentFileName) ? "script.alice" : currentFileName;
-            
+
             // File System Access APIを使ったファイル保存ダイアログを呼び出し
             var result = await JSRuntime.InvokeAsync<dynamic>("saveFileWithDialog", script, defaultFileName);
-            
+
             if (result != null)
             {
                 bool success = result.GetProperty("success").GetBoolean();
                 string filename = result.GetProperty("filename").GetString() ?? defaultFileName;
                 string message = result.GetProperty("message").GetString() ?? "";
-                
+
                 if (success && !string.IsNullOrEmpty(filename))
                 {
                     currentFileName = filename;
@@ -279,15 +280,15 @@ print(""計算結果: "" + a + "" + "" + b + "" = "" + sum);
 print(""カウントダウン:"");
 for(var i = 5; i >= 1; i--)
 {
-    print(i);
+print(i);
 }
 print(""完了!"");
 
 // 関数の定義と使用
 function factorial(n)
 {
-    if(n <= 1) return 1;
-    return n * factorial(n - 1);
+if(n <= 1) return 1;
+return n * factorial(n - 1);
 }
 
 print(""5の階乗: "" + factorial(5));";
@@ -353,13 +354,13 @@ print(result);
 // ループ処理
 for(var i = 1; i <= 5; i++)
 {
-    print(""カウント: "" + i);
+print(""カウント: "" + i);
 }
 
 // 関数定義
 function greet(name)
 {
-    return ""こんにちは、"" + name + ""さん!"";
+return ""こんにちは、"" + name + ""さん!"";
 }
 print(greet(""世界""));";
 
