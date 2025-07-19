@@ -441,8 +441,42 @@ Canvas.DrawCircle(endX, endY, 2, ""#FFFF88"", true);
 Canvas.DrawRect(0, 350, 600, 50, ""#1a1a1a"", true);
 
 Canvas.DrawText(""Fireworks Display"", 230, 380, ""#CCCCCC"", ""18px Arial"");",
+            "myakumyaku" => @"// ミヤクミヤクの描画サンプル
+using Alice.Math;
+using Alice.Random;
 
-            _ => "// サンプルコードを選択してください\nCanvas.Clear();\nCanvas.DrawText(\"Hello, Canvas!\", 100, 100);"
+const SCREEN_WIDTH = 600;
+const SCREEN_HEIGHT = 400;
+
+Canvas.Clear();
+Canvas.SetSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+void drawMyaku(number x, number y, number seed) {
+var interX = x + rand(-seed, seed);
+var interY = y + rand(-seed, seed);
+var size = rand(15, 40);
+Canvas.DrawCircle(x, y, size, ""#DC0010"", true);
+
+if(rand(0, 100) % 2 == 1) {
+Canvas.DrawCircle(interX, interY, size / 2, ""#FFFFFF"", true);
+Canvas.DrawCircle(interX + rand(-seed, seed), interY + rand(-seed, seed), size / 4, ""#0952A7"", true);
+}
+}
+
+Canvas.DrawCircle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 100, ""#0952A7"", true);
+
+var points = [];
+var radius = 100;
+for(var i = 0; i < 12; i++){
+var angle = 2 * math_pi * i / 12;
+var x = SCREEN_WIDTH / 2 + radius * math_cos(angle);
+var y = SCREEN_HEIGHT / 2 + radius * math_sin(angle);
+drawMyaku(x, y, 15);
+}
+// タイトル
+Canvas.DrawText(""ミャクミャク"", 250, 380, ""#666666"", ""20px Arial"");
+
+_ => "// サンプルコードを選択してください\nCanvas.Clear();\nCanvas.DrawText(\"Hello, Canvas!\", 100, 100);",
         };
 
         await SetValue(sampleCode);
