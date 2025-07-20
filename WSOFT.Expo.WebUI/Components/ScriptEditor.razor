@@ -163,16 +163,6 @@
         return scriptContent;
     }
 
-    // パネルリサイズ時にMonaco Editorのレイアウトを更新
-    public async Task NotifyResize()
-    {
-        if (monacoEditor != null)
-        {
-            await Task.Delay(50); // レイアウト変更の完了を待つ
-            await monacoEditor.Layout();
-        }
-    }
-
     private async Task LoadSample(string sampleType)
     {
         string sampleCode = sampleType switch

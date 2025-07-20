@@ -277,7 +277,6 @@ body {
     /* 上2/3 */
     display: flex;
     flex-direction: row;
-    position: relative;
 }
 
 .editor-section {
@@ -299,79 +298,14 @@ body {
     border-top: 1px solid #3e3e42;
 }
 
-/* リサイズハンドル */
-.horizontal-resizer {
-    width: 4px;
+.script-runner-container .row {
     height: 100%;
-    background-color: #3e3e42;
-    cursor: col-resize;
-    position: relative;
-    z-index: 10;
-    transition: background-color 0.2s ease;
+    margin: 0;
 }
 
-.horizontal-resizer:hover {
-    background-color: #007acc;
-}
-
-.vertical-resizer {
-    width: 100%;
-    height: 4px;
-    background-color: #3e3e42;
-    cursor: row-resize;
-    position: relative;
-    z-index: 10;
-    transition: background-color 0.2s ease;
-}
-
-.vertical-resizer:hover {
-    background-color: #007acc;
-}
-
-/* リサイズ中のスタイル */
-body.resizing {
-    user-select: none;
-}
-
-body.resizing .horizontal-resizer {
-    background-color: #007acc;
-}
-
-body.resizing .vertical-resizer {
-    background-color: #007acc;
-}
-
-/* リサイズハンドルのアクセシビリティ */
-.horizontal-resizer::before,
-.vertical-resizer::before {
-    content: '';
-    position: absolute;
-    background-color: #007acc;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-.horizontal-resizer::before {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 2px;
-    height: 20px;
-    border-radius: 1px;
-}
-
-.vertical-resizer::before {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 2px;
-    border-radius: 1px;
-}
-
-.horizontal-resizer:hover::before,
-.vertical-resizer:hover::before {
-    opacity: 1;
+.script-runner-container .col-md-6 {
+    height: 100%;
+    padding: 0;
 }
 
 /* ボタンのフラットスタイル - 枠からはみ出し防止 */
@@ -440,25 +374,15 @@ body.resizing .vertical-resizer {
     }
 
     .editor-section {
-        width: 100% !important;
-        height: 50% !important;
+        width: 100%;
+        height: 50%;
         border-right: none;
         border-bottom: 1px solid #3e3e42;
     }
 
     .canvas-section {
-        width: 100% !important;
-        height: 50% !important;
-    }
-
-    /* モバイルではリサイザーを非表示 */
-    .horizontal-resizer {
-        display: none;
-    }
-
-    /* 縦方向のリサイザーは残す */
-    .vertical-resizer {
-        display: block;
+        width: 100%;
+        height: 50%;
     }
 }
 
