@@ -303,6 +303,7 @@ let dotNetReference = null;
 // .NET参照を設定
 window.setDotNetReference = (reference) => {
   dotNetReference = reference;
+  window.dotNetReference = reference; // resize-panels.jsからアクセスできるようにする
 };
 
 // カスタムイベントリスナーを設定

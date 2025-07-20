@@ -34,6 +34,9 @@
         {
             objRef = DotNetObjectReference.Create(this);
             await JSRuntime.InvokeVoidAsync("window.setDotNetReference", objRef);
+
+            // パネルリサイザーの初期化
+            await JSRuntime.InvokeVoidAsync("window.initializePanelResizer");
         }
     }
 
@@ -70,7 +73,7 @@
         });
     }
 
-    private async Task ExecuteScript(string script)
+    private async void ExecuteScript(string script)
     {
         await ScriptService.ExecuteScript(script);
     }
@@ -108,6 +111,15 @@
         return "";
     }
 
+    [JSInvokable]
+    public async Task NotifyEditorResize()
+    {
+        if (scriptEditor != null)
+        {
+            await scriptEditor.NotifyResize();
+        }
+    }
+
     public void Dispose()
     {
         EditorStateService.OnNewScript -= HandleNewScript;
@@ -115,5 +127,4 @@
         EditorStateService.OnGetCurrentScript -= HandleGetCurrentScript;
         objRef?.Dispose();
     }
-}
 }
